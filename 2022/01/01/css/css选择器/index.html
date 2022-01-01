@@ -20,7 +20,7 @@ id选择器
 伪元素选择器（增加元素） ::before ::after
 
 id选择器id选择器,"> 
-    <meta name="author" content="John Doe"> 
+    <meta name="author" content="liu wei"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
     
@@ -172,6 +172,13 @@ id选择器id选择器,"/>
 <li>::first-letter 选择每个 <p> 元素的首字母。</li>
 <li>::first-line 选择每个 <p> 元素的首行。</li>
 <li>::selection 选择用户选择的元素部分。</li>
+</ol>
+<h4 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h4><ol>
+<li>[“def”]                     选择属性值为”defr”的元素</li>
+<li>[abc^=”def”]                选择 abc 属性值以 “def” 开头的所有元素</li>
+<li>[abc$=”def”]                选择 abc 属性值以 “def” 结尾的所有元素</li>
+<li>[abc*=”def”]                选择 abc 属性值中包含子串 “def” 的所有元素 </li>
+<li>[class<del>=”important”]        选择 class 属性中包含 important 的元素(“</del>=” 属性选择器能用于任何属性)</li>
 </ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
