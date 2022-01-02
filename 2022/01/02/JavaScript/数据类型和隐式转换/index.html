@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据类型和隐式转换 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="数据类型基本数据类型
+number
+string
+Boolean
+null
+undefined
+bigInt
+symbol
+
+引用数据类型object
+undefined和null的区别
+undef,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="数据类型和隐式转换 - Hexo"/>
+    <meta name="twitter:description" content="数据类型基本数据类型
+number
+string
+Boolean
+null
+undefined
+bigInt
+symbol
+
+引用数据类型object
+undefined和null的区别
+undef,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="数据类型和隐式转换 - Hexo"/>
+    <meta property="og:description" content="数据类型基本数据类型
+number
+string
+Boolean
+null
+undefined
+bigInt
+symbol
+
+引用数据类型object
+undefined和null的区别
+undef,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据类型和隐式转换</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数据类型和隐式转换</h1>
+        <div class="stuff">
+            <span>一月 02, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><h4 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h4><ol>
+<li>number</li>
+<li>string</li>
+<li>Boolean</li>
+<li>null</li>
+<li>undefined</li>
+<li>bigInt</li>
+<li>symbol</li>
+</ol>
+<h4 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h4><p>object</p>
+<h4 id="undefined和null的区别"><a href="#undefined和null的区别" class="headerlink" title="undefined和null的区别"></a>undefined和null的区别</h4><ol>
+<li>undefined是未定义，null是定义完没有值</li>
+<li>typeof undefined是undefined，typeof nyll是0</li>
+<li>转为数字时undefined是NaN，null是0</li>
+<li>null == undefined ，null !== undefined</li>
+</ol>
+<h3 id="判断数据类型"><a href="#判断数据类型" class="headerlink" title="判断数据类型"></a>判断数据类型</h3><h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><ol>
+<li>无法判断null、array</li>
+<li>NaN的数据类型未number</li>
+</ol>
+<h4 id="object-prototype-tostring-call"><a href="#object-prototype-tostring-call" class="headerlink" title="object.prototype.tostring.call()"></a>object.prototype.tostring.call()</h4><h4 id="Array-isArray"><a href="#Array-isArray" class="headerlink" title="Array.isArray"></a>Array.isArray</h4><h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><h4 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h4><h3 id="堆和栈"><a href="#堆和栈" class="headerlink" title="堆和栈"></a>堆和栈</h3><h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><ol>
+<li>引用数据类型存放地点</li>
+<li>占用空间大，大小不稳定</li>
+<li>指针指向堆中的地址</li>
+<li>优先队列</li>
+</ol>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><ol>
+<li>原始数据类型的存贮地点</li>
+<li>引用数据类型指针存放地点</li>
+<li>占用空间小，大小固定，属于被频繁使用的数据</li>
+<li>先进后出</li>
+<li>由编译器自动分配释放</li>
+</ol>
+<h3 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a>隐式转换</h3><h4 id="Boolean判断为false的值"><a href="#Boolean判断为false的值" class="headerlink" title="Boolean判断为false的值"></a>Boolean判断为false的值</h4><ol>
+<li>‘’</li>
+<li>null</li>
+<li>undefined</li>
+<li>0</li>
+<li>false</li>
+<li>NaN</li>
+</ol>
+<h4 id="的转化规则"><a href="#的转化规则" class="headerlink" title="==的转化规则"></a>==的转化规则</h4><ol>
+<li>一边为null，一边为undefined，则为false</li>
+<li>一边为数字，一边为字符串，先将字符串转化为数字再进行比较</li>
+<li>一边为true，则先转化为1再比较，其中一个为false，先转化为0再比较</li>
+<li>一个值为对象，老另一个值为数字或者字符串，将对象转化为原始值在比较</li>
+</ol>
+<h4 id="对象转化为原始类型"><a href="#对象转化为原始类型" class="headerlink" title="对象转化为原始类型"></a>对象转化为原始类型</h4><ol>
+<li>会调用ToPrimitive方法</li>
+<li>ToPrimitive内部会调用toString和valueOf方法</li>
+<li>目标对象为字符串先调用toString方法，其余先调用valueOf方法</li>
+</ol>
+<h4 id="的转化规则-1"><a href="#的转化规则-1" class="headerlink" title="+的转化规则"></a>+的转化规则</h4><ol>
+<li>其中一个为字符串，或者其中一个为对象，但取得的元素值为字符串，则视为字符串连接符</li>
+<li>两边都是number类型，或者两边都是出来string以外的基本类型，则视为加号</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
