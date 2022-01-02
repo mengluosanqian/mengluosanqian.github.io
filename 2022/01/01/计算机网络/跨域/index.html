@@ -142,6 +142,32 @@
 <li>无法访问网页中的dom</li>
 <li>无法发送网络请求</li>
 </ol>
+<h3 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h3><h4 id="什么是cors"><a href="#什么是cors" class="headerlink" title="什么是cors"></a>什么是cors</h4><p>跨域资源共享  cross-origin resource sharing</p>
+<h4 id="cors的作用"><a href="#cors的作用" class="headerlink" title="cors的作用"></a>cors的作用</h4><p>允许浏览器向跨源服务器发送XMLHttpRequest请求，从而客服ajax只能同源使用的限制</p>
+<h4 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h4><ol>
+<li><p>qq方式是以下三种方式之一</p>
+<ul>
+<li>HEAD</li>
+<li>GET</li>
+<li>POST</li>
+</ul>
+</li>
+<li><p>HTTP的头信息不超出一下几种字段</p>
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Last-Event-ID</li>
+<li>Content-Type 只限于application/x-www-form-urlencoded、multipart/form-data、text/plain</li>
+</ul>
+</li>
+<li><p>对于简单请求来说，浏览器之间发送cors请求，具体来说就是在头信息中，增加一个origin字段</p>
+<ul>
+<li>origin用于说明本次请求来自哪个源</li>
+<li>如果Origin指定的源不在允许范围之内,服务器就会返回一个正常的HTTP回应,然后浏览器发现头信息中没有包含Access-Control-Allow-Origin 字段,就知道出错啦,然后抛出错误,反之则会出现这个字段</li>
+</ul>
+</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
