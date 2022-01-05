@@ -87,10 +87,23 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">callback,delay</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span> </span><br><span class="line">    <span class="comment">// 函数里面return出函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timer !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">            <span class="comment">// 想要清除的是定时器，timer这个变量应该一直存在内存空间中</span></span><br><span class="line">            <span class="comment">// 一直要在内存中 内存的泄露 闭包</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span> &#123;</span><br><span class="line">            callback(value)</span><br><span class="line">        &#125;,delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><ol>
 <li>当持续触发事件的时候，保证一段时间内，只调用一次事件处理函数</li>
-<li>一段时间内，只作一件事<h3 id="节流应用场景"><a href="#节流应用场景" class="headerlink" title="节流应用场景"></a>节流应用场景</h3></li>
+<li>一段时间内，只作一件事</li>
+<li>Object.assign()</li>
+<li>扩展运算符</li>
+<li>Array.prototype.slice()<ul>
+<li>array.slice(start, end)，该方法不会改变原始数组</li>
+<li>该方法有两个参数，两个参数都可选，如果两个参数都不写，就可以实现一个数组的浅拷贝</li>
+</ul>
+</li>
+<li>Array.prototype.concat<ul>
+<li>此方法不会更改现有数组，而是返回一个新数组</li>
+<li>该方法有两个参数，两个参数都可选，如果两个参数都不写，就可以实现一个数组的浅拷贝<h3 id="节流应用场景"><a href="#节流应用场景" class="headerlink" title="节流应用场景"></a>节流应用场景</h3></li>
+</ul>
+</li>
 <li>鼠标拖拽或移动物返回其位置 例如drag事件</li>
 <li>鼠标不断点击触发，mousedown(单位时间内只触发一次)</li>
 <li>监听滚动事件 例如获取滚动位置 不需要触发那么快</li>
+<li>手写实现<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shallowCopy</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!val || <span class="keyword">typeof</span> val !== <span class="string">&#x27;object&#x27;</span>) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">let</span> result = <span class="built_in">Array</span>.isArray(val) ? [] : &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> val) &#123;</span><br><span class="line">        <span class="keyword">if</span> (val.hasOwnProperty(i)) &#123;</span><br><span class="line">            result[i] = val[i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
