@@ -99,7 +99,15 @@ expries是http,"/>
 <h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><ol>
 <li>让客户端和服务器之间能实现缓存文件是否更新的验证，提升缓存的复用率，将缓存信息中的etag和lastModified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存，出现from disk、from memory的策略是强缓存</li>
 </ol>
-<h3 id="强缓存优于协商缓存"><a href="#强缓存优于协商缓存" class="headerlink" title="强缓存优于协商缓存"></a>强缓存优于协商缓存</h3>
+<h3 id="强缓存优于协商缓存"><a href="#强缓存优于协商缓存" class="headerlink" title="强缓存优于协商缓存"></a>强缓存优于协商缓存</h3><h4 id="请求过程"><a href="#请求过程" class="headerlink" title="请求过程"></a>请求过程</h4><ol>
+<li>首先通过Cache-Control验证强缓存是否可用，如果强缓存可用，那么直接读取缓存</li>
+<li>如果不可以，那么进入协商缓存阶段，发起HTTP请求，服务器通过请求头上是否带有if-Modified-Since和If-None-Match这些条件请求字段检查资源是否更新<ul>
+<li>如果资源更新，那么返回资源和200状态码</li>
+<li>如果资源未更新，那么告诉浏览器直接使用缓存获取资源</li>
+</ul>
+</li>
+</ol>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">

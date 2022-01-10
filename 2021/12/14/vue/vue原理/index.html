@@ -145,6 +145,11 @@
 <li>保证性能下限</li>
 <li>无需手动操作DOM</li>
 </ol>
+<h4 id="vue中template编译的理解"><a href="#vue中template编译的理解" class="headerlink" title="vue中template编译的理解"></a>vue中template编译的理解</h4><ol>
+<li>先转换成AST树，再得到的render函数返回VNode（vue的虚拟DOM节点）</li>
+<li>首先，通过complie编译器把template编译成AST语法树（abstract synatx tree,即源代码的抽象语法结构的树状表现形式），compile是createCompiler的返回值，createCompiler是用以创建编译器的，另外compile还负责合并option。</li>
+<li>然后，AST会经过generate（将AST语法树转化成render function字符串的过程）得到render函数，render的返回值是VNode，VNode是vue的虚拟DOM节点，里面有（标签名、子节点、文本等等）</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
