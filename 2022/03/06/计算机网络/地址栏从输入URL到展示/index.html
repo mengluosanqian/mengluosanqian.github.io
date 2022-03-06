@@ -5,17 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>缓存 - liuwei</title>
+    <title>地址栏从输入URL到展示 - liuwei</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="强缓存
-服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行比较缓存策略
-
-cache-control（相对值）/ expries（绝对值）
-
-expries是http,"> 
+    <meta name="description" content="基本流程
+用户在地址栏输入URL后，浏览器会先检查是否有缓存，如果是https的话，先找service Worker，如果没有，在找浏览器的内存缓存，如果还没有找到，再找硬盘缓存（通常所说的强缓存和,"> 
     <meta name="author" content="liu wei"> 
     <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -23,26 +19,18 @@ expries是http,">
     
     
     <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:title" content="缓存 - liuwei"/>
-    <meta name="twitter:description" content="强缓存
-服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行比较缓存策略
-
-cache-control（相对值）/ expries（绝对值）
-
-expries是http,"/>
+    <meta name="twitter:title" content="地址栏从输入URL到展示 - liuwei"/>
+    <meta name="twitter:description" content="基本流程
+用户在地址栏输入URL后，浏览器会先检查是否有缓存，如果是https的话，先找service Worker，如果没有，在找浏览器的内存缓存，如果还没有找到，再找硬盘缓存（通常所说的强缓存和,"/>
     
     
     
     
     <meta property="og:site_name" content="liuwei"/>
     <meta property="og:type" content="object"/>
-    <meta property="og:title" content="缓存 - liuwei"/>
-    <meta property="og:description" content="强缓存
-服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行比较缓存策略
-
-cache-control（相对值）/ expries（绝对值）
-
-expries是http,"/>
+    <meta property="og:title" content="地址栏从输入URL到展示 - liuwei"/>
+    <meta property="og:description" content="基本流程
+用户在地址栏输入URL后，浏览器会先检查是否有缓存，如果是https的话，先找service Worker，如果没有，在找浏览器的内存缓存，如果还没有找到，再找硬盘缓存（通常所说的强缓存和,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -56,7 +44,7 @@ expries是http,"/>
     <div class="bar" style="width: 0;"></div>
     <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">缓存</h3>
+    <h3 class="subtitle">地址栏从输入URL到展示</h3>
     <div class="social">
         <div>
             <div class="share">
@@ -71,42 +59,27 @@ expries是http,"/>
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">缓存</h1>
+        <h1 class="title">地址栏从输入URL到展示</h1>
         <div class="stuff">
-            <span>一月 02, 2022</span>
+            <span>三月 06, 2022</span>
             
-  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
 
         </div>
         <div class="content markdown">
-            <h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><ol>
-<li><p>服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行比较缓存策略</p>
-</li>
-<li><p>cache-control（相对值）/ expries（绝对值）</p>
-</li>
-<li><p>expries是http1.0的标准</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> nowTime = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">nowTime.setTime(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime() + <span class="number">3600</span>*<span class="number">1000</span>)</span><br><span class="line">ctx.set(<span class="string">&quot;Expires&quot;</span>,nowTime.toUTCString())</span><br></pre></td></tr></table></figure></li>
-<li><p>到了http/1.1 expries已经被cache-control替代</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.set(<span class="string">&quot;cache-control&quot;</span>,<span class="string">&quot;max-age=3600&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>max-age 和 s-maxage<br>两者是 cache-control 的主要字段，它们是一个数字，表示资源过了多少秒之后变为无效。在浏览器中，max-age 和 s-maxage 都起作用，而且 s-maxage 的优先级高于 max-age。在代理服务器中，只有 s-maxage 起作用。 可以通过设置 max-age 为 0 表示立马过期来向服务器请求资源。</p>
-</li>
-<li><p>public 和 private<br>public 表示该资源可以被所有客户端和代理服务器缓存，而 private 表示该资源仅能客户端缓存。默认值是 private，当设置了 s-maxage 的时候表示允许代理服务器缓存，相当于 public。</p>
-</li>
-<li><p>no-cache 和 no-store<br>no-cache 表示的是不直接询问浏览器缓存情况，而是去向服务器验证当前资源是否更新（即协商缓存）。no-store 则更狠，完全不使用缓存策略，不缓存请求或响应的任何内容，直接向服务器请求最新。由于两者都不考虑缓存情况而是直接与服务器交互，所以当 no-cache 和 no-store 存在时会直接忽略 max-age 等</p>
-</li>
-</ol>
-<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><ol>
-<li>让客户端和服务器之间能实现缓存文件是否更新的验证，提升缓存的复用率，将缓存信息中的etag和lastModified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存，出现from disk、from memory的策略是强缓存</li>
-<li>控制协商缓存的字段分别有：Last-Modified / If-Modified-Since 和 Etag / If-None-Match，其中Etag / If-None-Match的优先级比Last-Modified / If-Modified-Since高。协商缓存主要有以下两种情况：<h3 id="强缓存优于协商缓存"><a href="#强缓存优于协商缓存" class="headerlink" title="强缓存优于协商缓存"></a>强缓存优于协商缓存</h3></li>
-</ol>
-<h4 id="请求过程"><a href="#请求过程" class="headerlink" title="请求过程"></a>请求过程</h4><ol>
-<li>首先通过Cache-Control验证强缓存是否可用，如果强缓存可用，那么直接读取缓存</li>
-<li>如果不可以，那么进入协商缓存阶段，发起HTTP请求，服务器通过请求头上是否带有if-Modified-Since和If-None-Match这些条件请求字段检查资源是否更新<ul>
-<li>如果资源更新，那么返回资源和200状态码</li>
-<li>如果资源未更新，那么告诉浏览器直接使用缓存获取资源</li>
+            <h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><ol>
+<li>用户在地址栏输入URL后，浏览器会先检查是否有缓存，如果是https的话，先找service Worker，如果没有，在找浏览器的内存缓存，如果还没有找到，再找硬盘缓存（通常所说的<code>强缓存</code>和<code>协商缓存</code>都属于硬盘缓存），如果还没有找到的话，再查找推送缓存</li>
+<li>如果缓存中没有找到或者缓存过期，则开始解析URL。把URL中所需要的协议、域名、端口、路径等信息提取出来，根据解析出的域名，进行DNS解析，查找出请求服务器的IP地址</li>
+<li>拿到IP地址后，根据拿到的IP地址，发起TCP请求，经过<code>三次握手</code>后建立TCP连接</li>
+<li>TCP连接建立之后，浏览器可以和服务器进行通信，即开始发送HTTP请求，需要携带请求行、请求头、请求体<ul>
+<li>请求行：请求方法 + 请求URI + HTTP版本协议</li>
+<li>请求头：里面包括了缓存相关信息，以及下面的信息</li>
+<li>请求体：请求体只有在POST方法下存在，常见的场景是表单提交<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/webp,image/apng,*<span class="comment">/*;q=0.8,application/signed-exchange;v=b3</span></span><br><span class="line"><span class="comment">Accept-Encoding: gzip, deflate, br</span></span><br><span class="line"><span class="comment">Accept-Language: zh-CN,zh;q=0.9</span></span><br><span class="line"><span class="comment">Cache-Control: no-cache</span></span><br><span class="line"><span class="comment">Connection: keep-alive</span></span><br><span class="line"><span class="comment">Cookie: /* 省略cookie信息 */</span></span><br><span class="line">Host: www.baidu.com</span><br><span class="line"><span class="attr">Pragma</span>: no-cache</span><br><span class="line">Upgrade-Insecure-Requests: <span class="number">1</span></span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span> (iPhone; CPU iPhone OS <span class="number">11_0</span> like Mac OS X) AppleWebKit/<span class="number">604.1</span><span class="number">.38</span> (KHTML, like Gecko) Version/<span class="number">11.0</span> Mobile/15A372 Safari/<span class="number">604.1</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
+<li>根据请求头中的信息，如果存在expries或者cache-control，则先进行强缓存的判断，如果强缓存过期，则携带协商缓存的标志（last-modified）发起请求，如果协商缓存没有过期，则返回304和资源信息，如果缓存已经过期，则向服务器发起请求，查找到资源后就返回200和资源信息。</li>
+<li>请求完成后，根据响应头中的connection:keep-alive判断是否建立持久连接，如果保持持久连接，之后请求统一站点的资源会复用这个连接，如果没有这个字段，则断开连接，tcp断开连接经过四次挥手。</li>
+<li>拿到请求数据后，开始解析数据，构建DOM树和CSSOM树，将这两个数渲染成render树</li>
+<li>根据生成的render树建立图层树，生成绘制列表，生成图块并栅格化，最后将内容在显示器上显示出来</li>
 </ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->

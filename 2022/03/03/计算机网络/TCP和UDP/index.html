@@ -111,6 +111,13 @@ UDP有不提供数,"/>
 <li>TCP协议全称是传输控制协议，是一种面向连接的、可靠的、基于字节流的传输层通信协议</li>
 <li>TCP是面向协议的、可靠的流协议</li>
 <li>TCP连接过程就是通常所说的三次握手过程</li>
+</ol>
+<ul>
+<li>第一次握手，建立连接时，客户端发送syn（<code>同步序列编号</code>，syn=j）包到服务器，并进入SYN_SENT状态，等待服务器确认</li>
+<li>第二次握手，服务器收到syn包并确认客户的SYN（ack=j+1），同时也发送一个自己的SYN包（syn=k），即syn+ack包，此时服务器进入SYN_RECV状态</li>
+<li>客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1），此包发送完毕，客户端和服务器进入ESTABLISHED（TCP连接成功）状态，完成三次握手。</li>
+</ul>
+<ol start="4">
 <li>TCP断开连接的过程就是通常所说的四次挥手过程</li>
 <li>TCP协议的特点：<ul>
 <li>面向连接<ul>
@@ -186,6 +193,14 @@ UDP有不提供数,"/>
 <td align="center"></td>
 </tr>
 </tbody></table>
+<h3 id="TCP-IP如何保证数据包传输的有序可靠"><a href="#TCP-IP如何保证数据包传输的有序可靠" class="headerlink" title="TCP/IP如何保证数据包传输的有序可靠"></a>TCP/IP如何保证数据包传输的有序可靠</h3><p>对于字节流分段并进行编号然后通过<code>ACK回复</code>和<code>超时重发</code>两个机制来保证</p>
+<ol>
+<li>为了保证数据包的可靠传输，发送方必须把已发送的数据包保留在缓存区</li>
+<li>并为每个已发送的数据包启动一个超时定时器</li>
+<li>如在定时器超时之前收到了对方发来的应答信息（可能是对本包的应答，也可以是对本包后续包的应答），则释放该数据包占据的缓存区</li>
+<li>否则，重传该数据包，直到接收到应答或者重传次数超过规定的最大次数为止</li>
+<li>接收方收到数据包后，先进性CRC（循环冗余校验）校验，如果正确把数据交给上层协议，然后给发送方发送一个累计应答包，表示该数据已收到，如果接收方正好也有数据要发给发送方，应答包也可在数据包中携带过去。</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
