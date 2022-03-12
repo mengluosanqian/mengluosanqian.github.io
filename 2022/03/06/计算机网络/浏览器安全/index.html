@@ -193,6 +193,16 @@ xss的本质是因为网站没有对恶意代,"/>
 <li><p>DNS劫持由于涉嫌违法，已经被监管起来，现在很少会有DNS劫持，⽽http劫持依然⾮常盛⾏，最有效的办法就是全站HTTPS，将HTTP加密，这使得运营商⽆法获取明⽂，就⽆法劫持你的响应内容。</p>
 </li>
 </ol>
+<h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><ol>
+<li>就是通过把sql命令插入到web表单提交或输入域名、页面请求的查询字符串，最终达到欺骗服务器执行恶意SQL命令</li>
+<li>防护：<ul>
+<li>永远不要信任用户的输入，要对用户的输入进行校验，可以通过正则表达式，或限制长度，对单引号和双“-”进行转换等</li>
+<li>永远不要动态拼装SQL,可以使用参数化的SQL或直接使用存储过程进行数据查询存储</li>
+<li>永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接</li>
+<li>不要把机密信息明文存放，请加密或者hash掉密码和敏感信息</li>
+</ul>
+</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
