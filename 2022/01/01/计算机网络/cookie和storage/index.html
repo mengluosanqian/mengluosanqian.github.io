@@ -14,8 +14,13 @@
 数据大小不能超过4k
 设置的cookie过期时间前一直有效，即使窗口或者浏览器关闭
 cookie的数据会自动传递到服务器，服务器也可以写cookie到客户端
+安全性
 
-sessionStor,"> 
+
+
+
+属性
+作,"> 
     <meta name="author" content="liu wei"> 
     <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -28,8 +33,13 @@ sessionStor,">
 数据大小不能超过4k
 设置的cookie过期时间前一直有效，即使窗口或者浏览器关闭
 cookie的数据会自动传递到服务器，服务器也可以写cookie到客户端
+安全性
 
-sessionStor,"/>
+
+
+
+属性
+作,"/>
     
     
     
@@ -41,8 +51,13 @@ sessionStor,"/>
 数据大小不能超过4k
 设置的cookie过期时间前一直有效，即使窗口或者浏览器关闭
 cookie的数据会自动传递到服务器，服务器也可以写cookie到客户端
+安全性
 
-sessionStor,"/>
+
+
+
+属性
+作,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -84,7 +99,32 @@ sessionStor,"/>
 <li>数据大小不能超过4k</li>
 <li>设置的cookie过期时间前一直有效，即使窗口或者浏览器关闭</li>
 <li>cookie的数据会自动传递到服务器，服务器也可以写cookie到客户端</li>
+<li>安全性</li>
 </ol>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">value</td>
+<td align="center">如果用于保存用户登录态，应该将该值加密，不能使用明文的用户标识</td>
+</tr>
+<tr>
+<td align="center">http-only</td>
+<td align="center">不能通过js访问cookie，减少XSS攻击</td>
+</tr>
+<tr>
+<td align="center">secure</td>
+<td align="center">只能在谢艺伟HTTPS的请求中携带</td>
+</tr>
+<tr>
+<td align="center">same-site</td>
+<td align="center">规定浏览器不能在跨域请求中携带cookie，减少CSRF攻击</td>
+</tr>
+</tbody></table>
 <h3 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage"></a>sessionStorage</h3><ol>
 <li>数据大小可以达到5M或更大</li>
 <li>当前浏览器窗口关闭后自动删除</li>
