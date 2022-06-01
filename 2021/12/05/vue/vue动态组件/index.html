@@ -81,7 +81,7 @@
 <li>动态的切换组件的显示或隐藏</li>
 <li><keep-alive>保持状态 ，可以把内部的组件进行缓存，而不是销毁组件</li>
 <li>当组件被缓存时，会自动触发组件的deactivated生命周期函数</li>
-<li>当组件被激活时，会自动触发组建的activated生命周期函数<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">componeent</span>&gt;</span><span class="tag">&lt;/<span class="name">componeent</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>当组件被激活时，会自动触发组建的activated生命周期函数<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">component</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 <li>当组件第一次创建时，即会执行created生命周期函数，也会执行activated生命周期函数</li>
 <li>当组件被激活时，只会触发activated生命周期函数，不会触发created，因为组件没有被重新创建</li>
 <li>include属性: 那些组件需要被缓存</li>

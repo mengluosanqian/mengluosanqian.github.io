@@ -85,18 +85,28 @@
 <h4 id="支持语言"><a href="#支持语言" class="headerlink" title="支持语言"></a>支持语言</h4><p>对于发送方而言，还有一个Content-Language字段，在需要实现国际化的方案当中，可以用来指定支持的语言，在接受方对应的字段为Accept-Language</p>
 <h4 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h4><p>最后是一个比较特殊的字段, 在接收端对应为Accept-Charset，指定可以接受的字符集，而在发送端并没有对应的Content-Charset, 而是直接放在了Content-Type中，以charset属性指定<br>HTTP请求处理表单数据的提交，体现在两种不同的Content-Type取值:application/x-www-form-urlencoded<br>multipart/form-data</p>
 <h3 id="HTTP版本"><a href="#HTTP版本" class="headerlink" title="HTTP版本"></a>HTTP版本</h3><p>HTTP传输是基于请求-应答的模式进行的，报文必须是一发一收，里面的任务被放在一个任务队列中串行执行，一旦队首的请求处理太慢，就会阻塞后面请求的处理。</p>
-<h4 id="1-0版本"><a href="#1-0版本" class="headerlink" title="1.0版本"></a>1.0版本</h4><p>最早的http只是使用在一些较为简单的网页上和网络请求上，所以比较简单，每次请求都打开一个新的TCP连接，收到响应后立即断开连接</p>
+<h4 id="1-0版本"><a href="#1-0版本" class="headerlink" title="1.0版本"></a>1.0版本</h4><ol>
+<li>最早的http只是使用在一些较为简单的网页上和网络请求上，所以比较简单，每次请求都打开一个新的TCP连接，收到响应后立即断开连接</li>
+<li>后面提供了一个非标准字段connection字段来实现长连接，但是由于非标准字段，所以不同实现的行为可能不一致</li>
+<li>支持发送的http请求方式有get、post、head</li>
+</ol>
 <h4 id="1-1版本"><a href="#1-1版本" class="headerlink" title="1.1版本"></a>1.1版本</h4><ol>
 <li>引入了更多的缓存控制策略，如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等</li>
 <li>允许范围请求，即在请求头中加入range头部</li>
 <li>请求消息和响应消息都必须包含Host头部，以区分同一个物理主机中的不同虚拟主机的域名</li>
 <li>默认开启持久连接，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟</li>
-<li>支持持久化连接Persistent Connection，并且默认使用persistent Connection，在同一个tcp的连接中可以传送多个HTTP请求和响应。多个请求和响应可以重叠。多个请求和响应可以同时进行</li>
+<li>支持持久化连接Persistent Connection，并且默认使用persistent，Connection，在同一个tcp的连接中可以传送多个HTTP请求和响应。多个请求和响应可以重叠。多个请求和响应可以同时进行</li>
 <li>Connection请求头的值为keep-alive时，客户端通知服务器返回本次请求结果后保持连接</li>
 <li>HTTP1.1还提供了与身份认证、状态管理和Cache缓存等机制相关的请求头和响应头</li>
-<li>HTTP1.1支持请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟</li>
+<li>HTTP1.1支持请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟，这种机制容易造成队头堵塞</li>
+<li>请求方式增加put、patch、options、delete等。</li>
 </ol>
-<h4 id="HTTP2-0"><a href="#HTTP2-0" class="headerlink" title="HTTP2.0"></a>HTTP2.0</h4><p>由于HTTPS在安全方面已经做得非常好了，HTTP改进的关注点放在了性能方面，对于HTTP/2而言，他对于性能的提升主要在于两点：头部压缩、多路复用</p>
+<h4 id="HTTP2-0"><a href="#HTTP2-0" class="headerlink" title="HTTP2.0"></a>HTTP2.0</h4><ol>
+<li>由于HTTPS在安全方面已经做得非常好了，HTTP改进的关注点放在了性能方面，对于HTTP/2而言，他对于性能的提升主要在于两点：头部压缩、多路复用</li>
+<li>增加双工模式，即不仅客户端能够同时发送多个请求，服务端也能同时处理多个请求，解决了队头堵塞的问题</li>
+<li>支持二进制帧的格式来传递报头和数据</li>
+<li>头信息压缩机制，头信息使用gzip或compress压缩后再发送</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
