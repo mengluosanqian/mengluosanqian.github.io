@@ -107,6 +107,21 @@
 <li>支持二进制帧的格式来传递报头和数据</li>
 <li>头信息压缩机制，头信息使用gzip或compress压缩后再发送</li>
 </ol>
+<h4 id="HTTP3-0"><a href="#HTTP3-0" class="headerlink" title="HTTP3.0"></a>HTTP3.0</h4><ol>
+<li>由于TCP和UDP两者在运输层存在一定差距，TCP的传递效率与UDP相比有天然劣势，于是google基于UDP开发出了新的协议QUIC（quick UDP internet Connections），希望取代TCP提高传输效率，后经过协商将QUIC更名为HTTP/3</li>
+<li>UDP比TCP相比效率更高但不具备传输可靠性。而quic便是根据UDP传输效率高这一特点，结合TCP、TLS、http2的优势，加以优化</li>
+<li>零RTT建立连接</li>
+</ol>
+<ul>
+<li>仅需一次 RTT(Round-TripTime:往返时延)即可传递数据，如果将其缓存，就可将RTT减少至0</li>
+<li>核心是DH秘钥交换算法</li>
+</ul>
+<ol start="4">
+<li>连接迁移</li>
+<li>HTTP/3基于UDP的传输，不保证连接可靠性，也就没有对头阻塞的后果。同样传输单元与加密单元为Packet，在TLS下也可避免对头阻塞的问题。</li>
+<li>拥塞控制：TCP对于拥塞控制在于传输层，quic可在应用层操作改变拥塞控制方法</li>
+<li>流量控制：TCP使用滑动窗口的方法对发送方的流量进行控制，而对接收方并无现在，在quic中补齐了这一短板</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
