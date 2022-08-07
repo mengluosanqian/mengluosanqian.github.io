@@ -71,12 +71,12 @@ flex-shrink     项目的缩小比例，默认为1，即如果空间不足，该
 
         </div>
         <div class="content markdown">
-            <h3 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h3><h4 id="flex-1-的三个值"><a href="#flex-1-的三个值" class="headerlink" title="flex:1 的三个值"></a>flex:1 的三个值</h4><ol>
+            <h1 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h1><h2 id="flex-1-的三个值"><a href="#flex-1-的三个值" class="headerlink" title="flex:1 的三个值"></a>flex:1 的三个值</h2><ol>
 <li>flex-grow       项目的放大比例，默认为0，空间充足，等比例补全</li>
 <li>flex-shrink     项目的缩小比例，默认为1，即如果空间不足，该项目将缩小</li>
 <li>flex-basis      主轴排列为宽度，交叉轴排列为高度，设置px，默认值auto  </li>
 </ol>
-<h4 id="flex-其他属性值"><a href="#flex-其他属性值" class="headerlink" title="flex 其他属性值"></a>flex 其他属性值</h4><ol>
+<h2 id="flex-其他属性值"><a href="#flex-其他属性值" class="headerlink" title="flex 其他属性值"></a>flex 其他属性值</h2><ol>
 <li>flex-direction  方向  <ul>
 <li>column</li>
 <li>row</li>
@@ -107,12 +107,12 @@ flex-shrink     项目的缩小比例，默认为1，即如果空间不足，该
 </ul>
 </li>
 </ol>
-<h4 id="子项flex属性-align-self"><a href="#子项flex属性-align-self" class="headerlink" title="子项flex属性 align-self"></a>子项flex属性 align-self</h4><ol>
+<h2 id="子项flex属性-align-self"><a href="#子项flex属性-align-self" class="headerlink" title="子项flex属性 align-self"></a>子项flex属性 align-self</h2><ol>
 <li>align-self 控制子项自己在侧轴上排列的方式</li>
 <li>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖 align-items属性。</li>
 <li>默认为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于 stretch</li>
 </ol>
-
+<h2 id="可能会出现的问题"><a href="#可能会出现的问题" class="headerlink" title="可能会出现的问题"></a>可能会出现的问题</h2><h3 id="第二行盒子不满且想要左对齐"><a href="#第二行盒子不满且想要左对齐" class="headerlink" title="第二行盒子不满且想要左对齐"></a>第二行盒子不满且想要左对齐</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">1000px</span>;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">1000px</span>;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ul</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">360px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ul</span> <span class="selector-tag">li</span><span class="selector-pseudo">:last-child</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>n + <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="built_in">calc</span>((<span class="number">100%</span> - <span class="number">200px</span>)/<span class="number">3</span>*<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ul</span> <span class="selector-tag">li</span><span class="selector-pseudo">:last-child</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>n + <span class="number">3</span>) &#123;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="built_in">calc</span>((<span class="number">100%</span> - <span class="number">200px</span>)/<span class="number">3</span>*<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
