@@ -54,7 +54,7 @@ initial-scale  初始的缩放比例
     <div id="single">
     <div id="top" style="display: block;">
     <div class="bar" style="width: 0;"></div>
-    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
     <h3 class="subtitle">移动端</h3>
     <div class="social">
@@ -270,7 +270,7 @@ initial-scale  初始的缩放比例
 <li>其他属性相对于自身的字体大小来说，如果自身没有，则寻找有字体大小的父级元素</li>
 </ol>
 <h4 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h4><ol>
-<li>相对于html元素字体大小来说的(通过修改html里面的文字大小来改变页面中元素的大小)</li>
+<li>相对于html元素字体大小来说的(通过修改html里面的文字大小来改变页面中元素的大小)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> setRem = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> deviceWidth = <span class="built_in">document</span>.documentElement.clientWidth;</span><br><span class="line">  <span class="comment">// 获取相对UI稿，屏幕的缩放比例</span></span><br><span class="line">  <span class="keyword">const</span> rem = (deviceWidth *<span class="number">100</span>) / <span class="number">750</span>;</span><br><span class="line">  <span class="comment">// 动态设置html的font-size</span></span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">&#x27;html&#x27;</span>).style.fontSize =  rem + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
