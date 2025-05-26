@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据库基础操作 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="常用数据库操作
+链接数据库：mysql -u root -p
+查看数据库：show databases
+创建数据库：create database dbname
+切换数据库：use dbname
+查,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="数据库基础操作 - Hexo"/>
+    <meta name="twitter:description" content="常用数据库操作
+链接数据库：mysql -u root -p
+查看数据库：show databases
+创建数据库：create database dbname
+切换数据库：use dbname
+查,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="数据库基础操作 - Hexo"/>
+    <meta property="og:description" content="常用数据库操作
+链接数据库：mysql -u root -p
+查看数据库：show databases
+创建数据库：create database dbname
+切换数据库：use dbname
+查,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据库基础操作</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数据库基础操作</h1>
+        <div class="stuff">
+            <span>四月 22, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="常用数据库操作"><a href="#常用数据库操作" class="headerlink" title="常用数据库操作"></a>常用数据库操作</h1><ol>
+<li>链接数据库：mysql -u root -p</li>
+<li>查看数据库：show databases</li>
+<li>创建数据库：create database dbname</li>
+<li>切换数据库：use dbname</li>
+<li>查看所有表：show tables</li>
+<li>修改数据库：alter database dbname character set utf8</li>
+<li>删除数据库：drop database dbname</li>
+</ol>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><ol>
+<li>int 整形</li>
+<li>double 浮点型，double(6,3),最长长度是6位，小数点后三位，999.999</li>
+<li>char 固定长度字符串类型，char(10)不足10位会不足10位</li>
+<li>varchar 可变长度字符串类型</li>
+<li>text 字符串，适用于大文本内容</li>
+<li>data 日期类型 yyyy-MM-dd</li>
+</ol>
+<h1 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h1><ol>
+<li>创建表：create table tbalename (id int,name varchar(20),sex char(1));</li>
+<li>查看表：desc tablename</li>
+<li>查询表信息： select * from tbname</li>
+<li>插入数据：insert into tbname value(1,’小明’,0)</li>
+<li>修改数据：update tbname set name &#x3D; ‘小明’,age&#x3D;2 where id &#x3D; 3</li>
+<li>删除数据：delete from tbname where id &#x3D; 3</li>
+<li>修改表： alter table tbname add achievement double(5,2) 增加表中字段</li>
+<li>修改表：alter table tbname change name username varchar(20) 修改表的字段名</li>
+<li>修改表：alter table tbname drop name 删除表的字段名</li>
+<li>删除表：drop table tbname</li>
+</ol>
+<h1 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h1><ol>
+<li>select * from tbname;</li>
+<li>select id,name,age from students;</li>
+<li>select name,age+18 as ‘18年以后’ from sttudents;</li>
+</ol>
+<h2 id="按条件查询"><a href="#按条件查询" class="headerlink" title="按条件查询"></a>按条件查询</h2><ol>
+<li>select name,age from students tests WHERE age &gt;12;</li>
+<li>select * from students where name &#x3D; ‘小明’ and age &#x3D; 18;</li>
+<li>select * from students where age &gt;&#x3D; 18 and age &lt;&#x3D;15;</li>
+<li>select * from students where age &gt;&#x3D; 18 or age &lt;&#x3D;15;</li>
+<li>select * from students where age between 3 and 15;</li>
+<li>select * from students where age in(3,5,18);</li>
+<li>select * from students where age like ‘%xxx%’;</li>
+</ol>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ol>
+<li>select * from students order by age DESC; 降序</li>
+<li>select * from students order by age ASC; 升序</li>
+</ol>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><ol>
+<li>select name,LOWER(name) from students; 小写 </li>
+<li>select name,UPPER(name) from students; 大写</li>
+<li>select name,SUBSTR(name) from students; 截取字符串</li>
+<li>select name,LENGTH(name) from students; 字符串长度</li>
+<li>select name,IFNULL(age,0) from students; 是否为null，如果为null转化为0</li>
+</ol>
+<h1 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h1><ol>
+<li>select SUM(age) from students; 总数</li>
+<li>select SUM(age) from students; 平均数</li>
+<li>select MAX(age) from students; 最大值</li>
+<li>select MIN(age) from students; 最小值</li>
+<li>select COUNT(*) from students; 查询学生总量</li>
+<li>select COUNT(age) from students; 查询年龄字段不为空学生总量</li>
+<li>select DISTINCT name from students 去除重复数据</li>
+<li>select COUNT(DISTINCT name) from students; 统计去重后的学生总量</li>
+<li>select sex,COUNT(*) from students GROUP BY sex; 查询不同性别的人数</li>
+<li>SELECT team_id,SUM(achievement) from students GROUP BY team_id HAVING SUM(achievement) &gt;100; 查询成绩大于100的小组</li>
+<li>select * from student LIMIT 2,5;从第三条开始查出前五条数据</li>
+</ol>
+<h1 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h1><ol>
+<li>非空约束 name VARCHAR(20) NOT NULL</li>
+<li>默认约束 name VARCHAR(20) DEFAULT ‘默认值’</li>
+<li>主键约束 id int primary key auto_increment</li>
+<li>外键约束 FOREIGN KEY(team_id) REFERENCES teams(id) 定义一对多的关系</li>
+</ol>
+<h1 id="表之间关系"><a href="#表之间关系" class="headerlink" title="表之间关系"></a>表之间关系</h1><ol>
+<li>一对多关系 — 通过主键和外键来建立</li>
+<li>多对多关系</li>
+<li>一对一关系</li>
+</ol>
+<h1 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h1><ol>
+<li>select s.name,t.name from student s,team t where s.team_id &#x3D; t,id;<br>（不推荐使用）</li>
+</ol>
+<h2 id="链接查询的分类"><a href="#链接查询的分类" class="headerlink" title="链接查询的分类"></a>链接查询的分类</h2><ol>
+<li>内连接：获取两个表交集的所有内容<ul>
+<li>select s.name,t.name from student s INNER JOIN team t ON s.team_id &#x3D; t,id;</li>
+</ul>
+</li>
+<li>左外连接：左表全部 + 右表对应内容<ul>
+<li>select s.name,t.name from student s LEFT JOIN team t ON s.team_id &#x3D; t,id;</li>
+</ul>
+</li>
+<li>右外连接：右表全部 + 左表对应内容<ul>
+<li>select s.name,t.name from student s RIGHT JOIN team t ON s.team_id &#x3D; t,id;</li>
+</ul>
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

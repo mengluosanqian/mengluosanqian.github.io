@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>浏览器兼容性问题 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="JavaScript兼容
+addEventListener 与 attachEvent 区别
+attachEvent ——兼容：IE7、IE8；不兼容firefox、chrome、IE9、IE10、,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="浏览器兼容性问题 - Hexo"/>
+    <meta name="twitter:description" content="JavaScript兼容
+addEventListener 与 attachEvent 区别
+attachEvent ——兼容：IE7、IE8；不兼容firefox、chrome、IE9、IE10、,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="浏览器兼容性问题 - Hexo"/>
+    <meta property="og:description" content="JavaScript兼容
+addEventListener 与 attachEvent 区别
+attachEvent ——兼容：IE7、IE8；不兼容firefox、chrome、IE9、IE10、,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">浏览器兼容性问题</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">浏览器兼容性问题</h1>
+        <div class="stuff">
+            <span>六月 16, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="JavaScript兼容"><a href="#JavaScript兼容" class="headerlink" title="JavaScript兼容"></a>JavaScript兼容</h1><ol>
+<li>addEventListener 与 attachEvent 区别<ul>
+<li>attachEvent ——兼容：IE7、IE8；不兼容firefox、chrome、IE9、IE10、IE11、safari、opera。</li>
+<li>addEventListener——兼容：firefox、chrome、IE、safari、opera；不兼容IE7、IE8</li>
+</ul>
+</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">addEvent</span>(<span class="params">elm, evType, fn, useCapture</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (elm.<span class="property">addEventListener</span>) &#123; <span class="comment">// W3C标准</span></span><br><span class="line">    elm.<span class="title function_">addEventListener</span>(evType, fn, useCapture);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (elm.<span class="property">attachEvent</span>) &#123; <span class="comment">// IE</span></span><br><span class="line">    <span class="keyword">var</span> r = elm.<span class="title function_">attachEvent</span>(<span class="string">&#x27;on&#x27;</span> + evType, fn); <span class="comment">// IE5+</span></span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    elm[<span class="string">&#x27;on&#x27;</span> + evType] = fn; <span class="comment">// DOM事件</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>const 问题<ul>
+<li>Firefox下，可以使用 const 关键字或 var 关键字来定义常量；IE下，只能使用 var 关键字来定义常量。</li>
+<li>使用babel</li>
+</ul>
+</li>
+<li>window.location.href 问题<ul>
+<li>IE或者Firefox2.0.x下，可以使用 window.location 或 window.location.href；Firefox1.5.x下，只能使用 window.location。</li>
+<li>使用 window.location 来代替 window.location.href 。当然也可以考虑使用 location.replace()方法</li>
+</ul>
+</li>
+<li>访问的父元素的区别<ul>
+<li>在IE下，使用 obj.parentElement 或 obj.parentNode  访问 obj 的父结点；在FireFox下，使用obj.parentNode 访问 obj 的父结点。</li>
+<li>因为FireFox与IE都支持DOM，因此统一使用 obj.parentNode 来访问 obj 的父结点</li>
+</ul>
+</li>
+<li>对象宽高赋值问题<ul>
+<li>FireFox中类似 <code>obj.style.height = imgObj.height</code> 的语句无效。</li>
+<li>统一使用<code>obj.style.height = imgObj.height + &quot;px&quot;</code>;</li>
+</ul>
+</li>
+<li>阻止事件冒泡  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">if</span> (e &amp;&amp; e.<span class="property">stopPropagation</span>) &#123;</span><br><span class="line">    e.<span class="title function_">stopPropagation</span>()</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">event</span>.<span class="property">cancelBubble</span> = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>阻止默认行为 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">if</span> (e &amp;&amp; e.<span class="property">stopPropagation</span>) &#123;</span><br><span class="line">  e.<span class="title function_">preventDefault</span>()</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">event</span>.<span class="property">returnValue</span> = <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="css兼容"><a href="#css兼容" class="headerlink" title="css兼容"></a>css兼容</h1><ol>
+<li>去除浮动  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Clear Fix */</span></span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&quot;.&quot;</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">clear</span>: both;</span><br><span class="line">    <span class="attribute">visibility</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.clearfix</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Hide from IE Mac \*/</span></span><br><span class="line"><span class="selector-class">.clearfix</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>:block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* End hide from IE Mac */</span></span><br><span class="line"><span class="comment">/* end of clearfix */</span></span><br></pre></td></tr></table></figure></li>
+<li>不同浏览器的标签默认margin 和 padding 不同<ul>
+<li><code> *&#123;margin: 0;padding:0;&#125;</code></li>
+</ul>
+</li>
+<li>opacity是css3里的属性，只有部分浏览器兼容 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//使用各个浏览器的私有属性以支持<span class="attribute">opacity</span></span><br><span class="line"><span class="attribute">filter</span>: <span class="built_in">alpha</span>(opacity=<span class="number">50</span>);<span class="comment">/*IE*/</span></span><br><span class="line">-moz-<span class="attribute">opacity</span>: <span class="number">0.5</span>;<span class="comment">/*老版Mozilla*/</span></span><br><span class="line">-khtml-<span class="attribute">opacity</span>: <span class="number">0.5</span>;<span class="comment">/*老版Safari*/</span> </span><br><span class="line"><span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="待补充…"><a href="#待补充…" class="headerlink" title="待补充…"></a>待补充…</h1>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

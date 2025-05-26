@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据结构篇——队列 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="队列
+队列是遵循FIFO（先进先出）的一组有序集合，队列在尾部添加元素，在顶部删除元素
+
+任务队列
+JavaScript是单线程，单线程任务被分为同步任务和异步任务
+同步任务在调用栈中等待主线程依次,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="数据结构篇——队列 - Hexo"/>
+    <meta name="twitter:description" content="队列
+队列是遵循FIFO（先进先出）的一组有序集合，队列在尾部添加元素，在顶部删除元素
+
+任务队列
+JavaScript是单线程，单线程任务被分为同步任务和异步任务
+同步任务在调用栈中等待主线程依次,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="数据结构篇——队列 - Hexo"/>
+    <meta property="og:description" content="队列
+队列是遵循FIFO（先进先出）的一组有序集合，队列在尾部添加元素，在顶部删除元素
+
+任务队列
+JavaScript是单线程，单线程任务被分为同步任务和异步任务
+同步任务在调用栈中等待主线程依次,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据结构篇——队列</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数据结构篇——队列</h1>
+        <div class="stuff">
+            <span>三月 24, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><ol>
+<li>队列是遵循FIFO（<code>先进先出</code>）的一组有序集合，队列在尾部添加元素，在顶部删除元素</li>
+</ol>
+<h2 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h2><ol>
+<li>JavaScript是单线程，单线程任务被分为同步任务和异步任务</li>
+<li>同步任务在调用栈中等待主线程依次执行，异步任务会在有了结果之后，将回调函数注册到任务队列，等待主线程空闲（调用栈为空），放入执行栈等待主线程执行</li>
+<li>执行栈在执行完同步任务之后，如果执行栈为空，就会去检查微任务（MicroTask）队列是否为空，如果为空的话，就会去执行宏任务队列（MacroTask）。否则就会一次性执行完所有的微任务队列。<br>每次一个宏任务执行完成之后，都会去检查微任务队列是否为空，如果不为空就会按照先进先出的方式执行完微任务队列。然后在执行下一个宏任务，如此循环执行。直到结束。</li>
+</ol>
+<h2 id="创建任务队列"><a href="#创建任务队列" class="headerlink" title="创建任务队列"></a>创建任务队列</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Queue</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> items = []</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">enqueue</span> = <span class="keyword">function</span>(<span class="params">el</span>) &#123; <span class="comment">// 添加元素</span></span><br><span class="line">        items.<span class="title function_">push</span>(el)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">dequeue</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="comment">// 删除元素</span></span><br><span class="line">        <span class="keyword">return</span> item.<span class="title function_">shift</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">front</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="comment">// 返回队列第一个元素</span></span><br><span class="line">        <span class="keyword">return</span> item[<span class="number">0</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isEmpty</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;   <span class="comment">// 判断队列是否为空</span></span><br><span class="line">        <span class="keyword">return</span> items.<span class="property">length</span> === <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">size</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="comment">// 返回队列长度</span></span><br><span class="line">        <span class="keyword">return</span> items.<span class="property">length</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用WeakMap来保存私有属性items,并用外层函数（闭包）来封装Queue类。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="title class_">Queue1</span> = (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> items = <span class="keyword">new</span> <span class="title class_">WeakMap</span>();</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Queue1</span> &#123;</span><br><span class="line">        <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">            items.<span class="title function_">set</span>(<span class="variable language_">this</span>, []);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 获取队列</span></span><br><span class="line">        <span class="title function_">getQueue</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> items.<span class="title function_">get</span>(<span class="variable language_">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 添加元素</span></span><br><span class="line">        <span class="title function_">enqueue</span> (element) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">getQueue</span>().<span class="title function_">push</span>(element);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 删除元素</span></span><br><span class="line">        <span class="title function_">dequeue</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">getQueue</span>().<span class="title function_">shift</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 返回队列第一个元素</span></span><br><span class="line">        <span class="title function_">front</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">getQueue</span>()[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 判断队列是否为空</span></span><br><span class="line">        <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">getQueue</span>().<span class="property">length</span> === <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 返回队列长度</span></span><br><span class="line">        <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">getQueue</span>().<span class="property">length</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Queue1</span>;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><p>元素的添加和删除基于优先级。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Queue</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> items = []</span><br><span class="line">    <span class="comment">// 创建元素和它的优先级（priority越大优先级越低）</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">QueueElement</span>(<span class="params">element, priority</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">element</span> = element;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">priority</span> = priority;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 添加元素（根据优先级添加）</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">enqueue</span> = <span class="keyword">function</span>(<span class="params">element, priority</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> queueElement = <span class="keyword">new</span> <span class="title class_">QueueElement</span>(element, priority);</span><br><span class="line">        <span class="comment">// 标记是否添加元素的优先级的值最大</span></span><br><span class="line">        <span class="keyword">let</span> added = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; items.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (queueElement.<span class="property">priority</span> &lt; items[i].<span class="property">priority</span>) &#123;</span><br><span class="line">                items.<span class="title function_">splice</span>(i, <span class="number">0</span>, queueElement);</span><br><span class="line">                added = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!added) &#123;</span><br><span class="line">            items.<span class="title function_">push</span>(queueElement);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">dequeue</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="comment">// 删除元素</span></span><br><span class="line">        <span class="keyword">return</span> item.<span class="title function_">shift</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">front</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="comment">// 返回队列第一个元素</span></span><br><span class="line">        <span class="keyword">return</span> item[<span class="number">0</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isEmpty</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;   <span class="comment">// 判断队列是否为空</span></span><br><span class="line">        <span class="keyword">return</span> items.<span class="property">length</span> === <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">size</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="comment">// 返回队列长度</span></span><br><span class="line">        <span class="keyword">return</span> items.<span class="property">length</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

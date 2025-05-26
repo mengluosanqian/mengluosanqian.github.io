@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>this指向 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="this指向
+绑定优先级：new绑定 &amp;gt; 显式绑定 &amp;gt; 隐式绑定 &amp;gt; 默认绑定
+
+默认绑定非严格模式下，this指向全局对象，严格模式下this会绑定为undefined
+隐式绑定,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="this指向 - Hexo"/>
+    <meta name="twitter:description" content="this指向
+绑定优先级：new绑定 &amp;gt; 显式绑定 &amp;gt; 隐式绑定 &amp;gt; 默认绑定
+
+默认绑定非严格模式下，this指向全局对象，严格模式下this会绑定为undefined
+隐式绑定,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="this指向 - Hexo"/>
+    <meta property="og:description" content="this指向
+绑定优先级：new绑定 &amp;gt; 显式绑定 &amp;gt; 隐式绑定 &amp;gt; 默认绑定
+
+默认绑定非严格模式下，this指向全局对象，严格模式下this会绑定为undefined
+隐式绑定,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">this指向</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">this指向</h1>
+        <div class="stuff">
+            <span>六月 09, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="this指向"><a href="#this指向" class="headerlink" title="this指向"></a>this指向</h1><ol>
+<li>绑定优先级：new绑定 &gt; 显式绑定 &gt; 隐式绑定 &gt; 默认绑定</li>
+</ol>
+<h2 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h2><p>非严格模式下，this指向全局对象，严格模式下this会绑定为undefined</p>
+<h2 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h2><ol>
+<li>满足XXX.fn()格式。fn的this指向XXX。</li>
+<li>如果存在链式调用，this永远指向最后调用它的那个对象  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="number">3</span>,</span><br><span class="line">    <span class="attr">fun</span>:<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> x = <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">x</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fun = obj.<span class="property">fun</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">fun</span>(), <span class="title function_">fun</span>());</span><br><span class="line"><span class="comment">// obj.fun()中的this指向调用者obj，而给obj.fun起别名后，隐式绑定丢失，指向window</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="隐式绑定丢失"><a href="#隐式绑定丢失" class="headerlink" title="隐式绑定丢失"></a>隐式绑定丢失</h2><ol>
+<li>起函数别名，通过别名运行</li>
+<li>函数作为参数会造成隐式绑定丢失  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">getAge</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">age</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> getAge = person.<span class="property">getAge</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getAge</span>())</span><br><span class="line"><span class="comment">// 隐式绑定丢失,返回undefined</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="显示绑定"><a href="#显示绑定" class="headerlink" title="显示绑定"></a>显示绑定</h2><ol>
+<li>通过call&#x2F;apply&#x2F;bind修改this指向  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fun</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f = fun.<span class="title function_">call</span>(&#123;<span class="attr">name</span>: <span class="string">&#x27;foo&#x27;</span>&#125;)</span><br><span class="line"><span class="keyword">var</span> t1 = f.<span class="title function_">call</span>(&#123;<span class="attr">name</span>: <span class="string">&#x27;bar&#x27;</span>&#125;)()()</span><br><span class="line"><span class="keyword">var</span> t2 = <span class="title function_">f</span>().<span class="title function_">call</span>(&#123;<span class="attr">name</span>: <span class="string">&#x27;baz&#x27;</span>&#125;)()</span><br><span class="line"><span class="keyword">var</span> t3 = <span class="title function_">f</span>()().<span class="title function_">call</span>(&#123;<span class="attr">name</span>: <span class="string">&#x27;qux&#x27;</span>&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h2><ol>
+<li>通过new来调用构造函数，会生成一个新对象，并把这个新对象绑定为调用函数的this<ul>
+<li>创建一个空的简单JavaScript对象，即（{}）</li>
+<li>为上一步新创建的对象添加属性__proto__</li>
+<li>将第一步新创建的对象作为this的上下文</li>
+<li>如果该函数没有返回对象，则返回this  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123; </span><br><span class="line">    a = <span class="number">0</span>; </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a); </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>); </span><br><span class="line">    <span class="keyword">var</span> a;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a); </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">new</span> <span class="title function_">test</span>();</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="箭头函数绑定"><a href="#箭头函数绑定" class="headerlink" title="箭头函数绑定"></a>箭头函数绑定</h2><ol>
+<li>箭头函数没有this，它的this是通过作用域链查到外层作用域的this，且指向函数定义时的this而非执行时的</li>
+<li>不能通过call、apply、bind来修改this指向，但可以通过修改外层作用域的this来达成间接修改</li>
+<li>JavaScript是静态作用域，即函数的作用域在函数定义的时候就决定了，而箭头函数的this 是通过作用域链查到的，因此箭头函数定义后，它的作用域链就定死了<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">foo</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// log1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1.<span class="title function_">foo</span>())</span><br><span class="line"><span class="keyword">const</span> obj2 = obj1.<span class="property">foo</span></span><br><span class="line"><span class="comment">// log2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">obj2</span>())</span><br><span class="line"></span><br><span class="line"><span class="comment">// obj1.foo 为箭头函数，obj1 为对象，无法提供外层作用域，因此 obj.foo 里面的 this 指向 window</span></span><br><span class="line"><span class="comment">// obj1.foo(): 箭头函数，this 指向 window，打印 undefined</span></span><br><span class="line"><span class="comment">// obj2 隐式绑定丢失: 打印 undefined</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;global&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;local&#x27;</span>,</span><br><span class="line">    <span class="attr">foo</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;foo&#x27;</span>;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">    &#125;.<span class="title function_">bind</span>(<span class="variable language_">window</span>)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> bar = <span class="keyword">new</span> obj.<span class="title function_">foo</span>();</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">name</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar.<span class="property">name</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> bar3 = bar2 = bar;</span><br><span class="line">bar2.<span class="property">name</span> = <span class="string">&#x27;foo2&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar3.<span class="property">name</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol>
+<li>obj.foo 将它的 this 通过 bind 显式的绑定为 window，但 bind 不会立即执行</li>
+<li>var bar &#x3D; new obj.foo(): new 绑定优先级大于 bind ，因此 bind 失效了，此时 this 指向 new 实例，因此 obj.foo 内部的 console 打印 foo</li>
+<li>bar 是 new obj.foo() 的实例，console.log(bar.name) 打印 foo</li>
+<li>bar3 &#x3D; bar2 &#x3D; bar，将 bar2，bar3，bar 的地址都指向 bar 所指向的空间。</li>
+<li>bar2.name &#x3D; ‘foo2’，修改地址指向堆内存的值</li>
+<li>console.log(bar3.name): 由于三个变量指向同一块地址，bar3 修改了 name ，bar3 也随之改变，打印 foo2</li>
+<li>setTimeout 的回调执行，打印 global</li>
+</ol>
+<h2 id="去除new绑定"><a href="#去除new绑定" class="headerlink" title="去除new绑定"></a>去除new绑定</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;global&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;local&#x27;</span>,</span><br><span class="line">    <span class="attr">foo</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;foo&#x27;</span>;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">    &#125;.<span class="title function_">bind</span>(<span class="variable language_">window</span>)</span><br><span class="line">&#125;;</span><br><span class="line">obj.<span class="title function_">foo</span>();</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br><span class="line"><span class="comment">// obj.foo 没有做修改，它的 this 通过 bind 显式的绑定为 window，但 bind 不会立即执行</span></span><br><span class="line"><span class="comment">// obj.foo的this通过bind修改为window</span></span><br><span class="line"><span class="comment">// obj.foo()执行，显示绑定优先级大于隐式绑定，因此此时foo函数的this变为了window</span></span><br><span class="line"><span class="comment">// this.name相对于window.name，修改了全局的name属性</span></span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

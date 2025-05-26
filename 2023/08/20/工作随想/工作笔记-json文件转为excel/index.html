@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>工作笔记--json文件转为excel - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="文件转为excel工作中有个需求，需要把txt文件转为excel输出，规定好txt文件内部的格式以及分隔符号
+vue3文件12345678910111213141516171819202122232,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="工作笔记--json文件转为excel - Hexo"/>
+    <meta name="twitter:description" content="文件转为excel工作中有个需求，需要把txt文件转为excel输出，规定好txt文件内部的格式以及分隔符号
+vue3文件12345678910111213141516171819202122232,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="工作笔记--json文件转为excel - Hexo"/>
+    <meta property="og:description" content="文件转为excel工作中有个需求，需要把txt文件转为excel输出，规定好txt文件内部的格式以及分隔符号
+vue3文件12345678910111213141516171819202122232,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">工作笔记--json文件转为excel</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">工作笔记--json文件转为excel</h1>
+        <div class="stuff">
+            <span>八月 20, 2023</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/" rel="tag">工作笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="文件转为excel"><a href="#文件转为excel" class="headerlink" title="文件转为excel"></a>文件转为excel</h2><p>工作中有个需求，需要把txt文件转为excel输出，规定好txt文件内部的格式以及分隔符号</p>
+<h3 id="vue3文件"><a href="#vue3文件" class="headerlink" title="vue3文件"></a>vue3文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;!-- 在这里点击执行 `return` 出来的方法 --&gt;</span><br><span class="line">  &lt;el-button @click=&quot;updateMsg&quot;&gt;导出Excel&lt;/el-button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; defineComponent, ref &#125; from &#x27;vue&#x27;</span><br><span class="line">import &#123; downloadXlsx &#125; from &quot;../../utils/xlsx&quot;;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  setup() &#123;</span><br><span class="line">    const tableData = ref([1,2,3])</span><br><span class="line">    // 这个要暴露给模板使用，必须 `return` 才可以使用</span><br><span class="line">    function updateMsg() &#123;</span><br><span class="line">      //this.tableData表格数据</span><br><span class="line">      if (!tableData.value || tableData.value.length == 0) &#123;</span><br><span class="line">        this.$message.error(&quot;当前没有需要导出的数据，请重新搜索后再打印！&quot;);</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">      let datalist = [];  //导出表格表头</span><br><span class="line">      datalist.push([</span><br><span class="line">        &quot;姓名&quot;,</span><br><span class="line">        &quot;性别&quot;,</span><br><span class="line">      ]);</span><br><span class="line">     </span><br><span class="line">      tableData.value.forEach((item) =&gt; &#123;</span><br><span class="line">        datalist.push([</span><br><span class="line">          item.patientName,</span><br><span class="line">          item.idcardNo,</span><br><span class="line">        ]);</span><br><span class="line">      &#125;);</span><br><span class="line">      //导出插件使用</span><br><span class="line">      downloadXlsx(datalist, &quot;机构费用汇总.xlsx&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return &#123;</span><br><span class="line">      updateMsg,</span><br><span class="line">      tableData</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式转化"><a href="#格式转化" class="headerlink" title="格式转化"></a>格式转化</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下载excel功能</span></span><br><span class="line"><span class="keyword">import</span> <span class="variable constant_">XLSX</span> <span class="keyword">from</span> <span class="string">&#x27;xlsx&#x27;</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> dataList 表格数据内容  array</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> fileName 文件标题。必须以 .xlsx结尾</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">downloadXlsx</span> = (<span class="params">dataList, fileName</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">stringToBuff</span> = str =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> buf = <span class="keyword">new</span> <span class="title class_">ArrayBuffer</span>(str.<span class="property">length</span>)</span><br><span class="line">        <span class="keyword">let</span> view = <span class="keyword">new</span> <span class="title class_">Uint8Array</span>(buf)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i !== str.<span class="property">length</span>; ++i) &#123;</span><br><span class="line">            view[i] = str.<span class="title function_">charCodeAt</span>(i) &amp; <span class="number">0xff</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> buf</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 创建表格</span></span><br><span class="line">    <span class="keyword">let</span> workbook = <span class="variable constant_">XLSX</span>.<span class="property">utils</span>.<span class="title function_">book_new</span>();</span><br><span class="line">    <span class="keyword">let</span> worksheet = <span class="variable constant_">XLSX</span>.<span class="property">utils</span>.<span class="title function_">aoa_to_sheet</span>(dataList);</span><br><span class="line">    <span class="variable constant_">XLSX</span>.<span class="property">utils</span>.<span class="title function_">book_append_sheet</span>(workbook, worksheet, <span class="string">&#x27;sheet1&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建二进制对象写入转换好的字节流</span></span><br><span class="line">    <span class="keyword">let</span> xlsxBlob = <span class="keyword">new</span> <span class="title class_">Blob</span>(</span><br><span class="line">        [</span><br><span class="line">            <span class="title function_">stringToBuff</span>(</span><br><span class="line">                <span class="variable constant_">XLSX</span>.<span class="title function_">write</span>(workbook, &#123;</span><br><span class="line">                    <span class="attr">bookType</span>: <span class="string">&#x27;xlsx&#x27;</span>,</span><br><span class="line">                    <span class="attr">bookSST</span>: <span class="literal">false</span>,</span><br><span class="line">                    <span class="attr">type</span>: <span class="string">&#x27;binary&#x27;</span></span><br><span class="line">                &#125;)</span><br><span class="line">            )</span><br><span class="line">        ],</span><br><span class="line">        &#123; <span class="attr">type</span>: <span class="string">&#x27;&#x27;</span> &#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> a = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">    <span class="comment">// 利用URL.createObjectURL()方法为a元素生成blob URL</span></span><br><span class="line">    a.<span class="property">href</span> = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(xlsxBlob) ;<span class="comment">// 创建对象超链接</span></span><br><span class="line">    a.<span class="property">download</span> = fileName</span><br><span class="line">    a.<span class="title function_">click</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

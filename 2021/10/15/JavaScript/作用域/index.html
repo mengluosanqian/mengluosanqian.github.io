@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>作用域 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="全局作用域
+全局作用域在页面打开时被创建，页面关闭时被销毁
+编写在script标签中的变量和函数，作用域为全局，在页面任何位置都可以访问到
+在全局作用域中有全局对象window，代表一个浏览器窗口，,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="作用域 - Hexo"/>
+    <meta name="twitter:description" content="全局作用域
+全局作用域在页面打开时被创建，页面关闭时被销毁
+编写在script标签中的变量和函数，作用域为全局，在页面任何位置都可以访问到
+在全局作用域中有全局对象window，代表一个浏览器窗口，,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="作用域 - Hexo"/>
+    <meta property="og:description" content="全局作用域
+全局作用域在页面打开时被创建，页面关闭时被销毁
+编写在script标签中的变量和函数，作用域为全局，在页面任何位置都可以访问到
+在全局作用域中有全局对象window，代表一个浏览器窗口，,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">作用域</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">作用域</h1>
+        <div class="stuff">
+            <span>十月 15, 2021</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h3><ol>
+<li>全局作用域在页面打开时被创建，页面关闭时被销毁</li>
+<li>编写在script标签中的变量和函数，作用域为全局，在页面任何位置都可以访问到</li>
+<li>在全局作用域中有全局对象window，代表一个浏览器窗口，由浏览器创建，可以直接调用</li>
+<li>全局作用域中声明的变量和函数，会作为window的属性和方法保存</li>
+</ol>
+<h3 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h3><ol>
+<li>调用函数时，函数作用域被创建，函数执行完毕，函数作用域被销毁</li>
+<li>每调用一次函数就会创建一个新的函数作用域，他们之间是相互独立的</li>
+<li>在函数作用域中可以访问到全局作用域的变量，在函数外无法访问到函数作用域内的变量</li>
+<li>在函数作用域中访问变量、函数时，会先在自身作用域中寻找，若没有找到，则会到函数上一级作用域中寻找，一直到全局作用域</li>
+</ol>
+<h3 id="执行期上下文"><a href="#执行期上下文" class="headerlink" title="执行期上下文"></a>执行期上下文</h3><ol>
+<li>当函数代码执行的前期，会创建一个执行期的上下文的内部对象 AO（作用域）</li>
+<li>这个内部对象是预编译时候创建出来的，因为当函数调用的时候，会先进行预编译</li>
+<li>在全局代码执行的前期会创建一个执行期的上下文的对象GO</li>
+</ol>
+<h3 id="函数作用域的预编译"><a href="#函数作用域的预编译" class="headerlink" title="函数作用域的预编译"></a>函数作用域的预编译</h3><ol>
+<li>创建ao对象 AO{}</li>
+<li>找形参和变量声明，将变量和形参名当做ao对象的属性名，值为undefined</li>
+<li>实参形参相统一</li>
+<li>在函数体里面找函数声明，值赋予函数体</li>
+</ol>
+<h3 id="全局作用域的预编译"><a href="#全局作用域的预编译" class="headerlink" title="全局作用域的预编译"></a>全局作用域的预编译</h3><ol>
+<li>创建go对象 GO{}</li>
+<li>找变量声明，将变量名当做go对象的属性名，值为undefined</li>
+<li>找函数声明，值赋予函数体</li>
+</ol>
+<h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="keyword">function</span>(<span class="params"></span>) &#123;&#125;  <span class="comment">//这样的不叫函数声明，叫函数的表达式</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123; &#125; <span class="comment">// 函数声明</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a, c</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">// function a () &#123;&#125;</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">123</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">// 123 </span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(c)  <span class="comment">// function c() &#123;&#125;</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">a</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> d = <span class="number">678</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(d) <span class="comment">// undefined</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(b) <span class="comment">// function () &#123;&#125;</span></span><br><span class="line">    <span class="keyword">var</span> b = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(b)</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">c</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn</span> (<span class="number">1</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>理解：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">AO</span> &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="function"><span class="params">undefined</span> =&gt;</span> <span class="number">1</span> =&gt; <span class="keyword">function</span> <span class="title function_">a</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">    <span class="attr">c</span>: <span class="function"><span class="params">undefined</span> =&gt;</span> <span class="number">1</span> =&gt; <span class="keyword">function</span> <span class="title function_">c</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">    <span class="attr">d</span>: <span class="function"><span class="params">undefined</span> =&gt;</span> </span><br><span class="line">    <span class="attr">b</span>: <span class="function"><span class="params">undefined</span> =&gt;</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数内部变量"><a href="#函数内部变量" class="headerlink" title="函数内部变量"></a>函数内部变量</h3><p>在JavaScript中, 只有两种作用域: 全局和局部, 在函数内任意语句中使用var声明的变量, 不管所在的语句块实际是否会执行, 都等价于在函数开头声明</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

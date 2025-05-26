@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>vue原理篇——初次渲染原理 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="初次渲染原理组件挂载入口
+继上篇文章模板渲染原理之后，模板渲染之后，将当前组件实例挂载到真实的el节点上面,mountComponent是组件实例挂载的入口函数
+这个方法放在源码的 lifecycl,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="vue原理篇——初次渲染原理 - Hexo"/>
+    <meta name="twitter:description" content="初次渲染原理组件挂载入口
+继上篇文章模板渲染原理之后，模板渲染之后，将当前组件实例挂载到真实的el节点上面,mountComponent是组件实例挂载的入口函数
+这个方法放在源码的 lifecycl,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="vue原理篇——初次渲染原理 - Hexo"/>
+    <meta property="og:description" content="初次渲染原理组件挂载入口
+继上篇文章模板渲染原理之后，模板渲染之后，将当前组件实例挂载到真实的el节点上面,mountComponent是组件实例挂载的入口函数
+这个方法放在源码的 lifecycl,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">vue原理篇——初次渲染原理</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">vue原理篇——初次渲染原理</h1>
+        <div class="stuff">
+            <span>五月 10, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8E%9F%E7%90%86/" rel="tag">原理</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="初次渲染原理"><a href="#初次渲染原理" class="headerlink" title="初次渲染原理"></a>初次渲染原理</h1><h2 id="组件挂载入口"><a href="#组件挂载入口" class="headerlink" title="组件挂载入口"></a>组件挂载入口</h2><ol>
+<li>继上篇文章<a target="_blank" rel="noopener" href="https://www.lwstruggle.cn/2022/05/09/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">模板渲染原理</a>之后，模板渲染之后，将当前组件实例挂载到真实的el节点上面,<code>mountComponent</code>是组件实例挂载的入口函数</li>
+<li>这个方法放在源码的 lifecycle 文件里面 代表了与生命周期相关 因为我们组件初始渲染前后对应有 beforeMount 和 mounted 生命周期钩子<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/init.js</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$mount</span> = <span class="keyword">function</span> (<span class="params">el</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> vm = <span class="variable language_">this</span>;</span><br><span class="line">  <span class="keyword">const</span> options = vm.<span class="property">$options</span>;</span><br><span class="line">  el = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(el);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果不存在render属性</span></span><br><span class="line">  <span class="keyword">if</span> (!options.<span class="property">render</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果存在template属性</span></span><br><span class="line">    <span class="keyword">let</span> template = options.<span class="property">template</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!template &amp;&amp; el) &#123;</span><br><span class="line">      <span class="comment">// 如果不存在render和template 但是存在el属性 直接将模板赋值到el所在的外层html结构（就是el本身 并不是父元素）</span></span><br><span class="line">      template = el.<span class="property">outerHTML</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 最终需要把tempalte模板转化成render函数</span></span><br><span class="line">    <span class="keyword">if</span> (template) &#123;</span><br><span class="line">      <span class="keyword">const</span> render = <span class="title function_">compileToFunctions</span>(template);</span><br><span class="line">      options.<span class="property">render</span> = render;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将当前组件实例挂载到真实的el节点上面</span></span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">mountComponent</span>(vm, el);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="组件挂载"><a href="#组件挂载" class="headerlink" title="组件挂载"></a>组件挂载</h2><p>使用_update方法进行实例挂载，传入_update的是虚拟dom，在_render()进行render函数的虚拟化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/lifecycle.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">mountComponent</span>(<span class="params">vm, el</span>) &#123;</span><br><span class="line">  <span class="comment">// 上一步模板编译解析生成了render函数</span></span><br><span class="line">  <span class="comment">// 下一步就是执行vm._render()方法 调用生成的render函数 生成虚拟dom</span></span><br><span class="line">  <span class="comment">// 最后使用vm._update()方法把虚拟dom渲染到页面</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 真实的el选项赋值给实例的$el属性 为之后虚拟dom产生的新的dom替换老的dom做铺垫</span></span><br><span class="line">  vm.<span class="property">$el</span> = el;</span><br><span class="line">  <span class="comment">//   _update和._render方法都是挂载在Vue原型的方法  类似_init</span></span><br><span class="line">  vm.<span class="title function_">_update</span>(vm.<span class="title function_">_render</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="组件虚拟化"><a href="#组件虚拟化" class="headerlink" title="组件虚拟化"></a>组件虚拟化</h2><ol>
+<li>在vue的原型上定义了一个_render方法，获取到模板编译生成的render方法，即创建vue实例时传入的render函数或者经过编译，处理el或者template生成的render函数</li>
+<li>同时在vue的原型上定义_c、_v、_s方法，用来创建虚拟DOM元素，虚拟DOM文本和处理模板中的对象<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/render.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createElement, createTextNode &#125; <span class="keyword">from</span> <span class="string">&quot;./vdom/index&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">renderMixin</span>(<span class="params">Vue</span>) &#123;</span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_render</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> vm = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="comment">// 获取模板编译生成的render方法</span></span><br><span class="line">    <span class="keyword">const</span> &#123; render &#125; = vm.<span class="property">$options</span>;</span><br><span class="line">    <span class="comment">// 生成vnode--虚拟dom</span></span><br><span class="line">    <span class="keyword">const</span> vnode = render.<span class="title function_">call</span>(vm);</span><br><span class="line">    <span class="keyword">return</span> vnode;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// render函数里面有_c _v _s方法需要定义</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_c</span> = <span class="keyword">function</span> (<span class="params">...args</span>) &#123;</span><br><span class="line">    <span class="comment">// 创建虚拟dom元素</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">createElement</span>(...args);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_v</span> = <span class="keyword">function</span> (<span class="params">text</span>) &#123;</span><br><span class="line">    <span class="comment">// 创建虚拟dom文本</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">createTextNode</span>(text);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_s</span> = <span class="keyword">function</span> (<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="comment">// 如果模板里面的是一个对象  需要JSON.stringify</span></span><br><span class="line">    <span class="keyword">return</span> val == <span class="literal">null</span></span><br><span class="line">      ? <span class="string">&quot;&quot;</span></span><br><span class="line">      : <span class="keyword">typeof</span> val === <span class="string">&quot;object&quot;</span></span><br><span class="line">      ? <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(val)</span><br><span class="line">      : val;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+新建vnode类，定义reateElement 和 createTextNode 方法最后都返回 vnode<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/vdom/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义Vnode类</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">Vnode</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">tag, data, key, children, text</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">tag</span> = tag;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">data</span> = data;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">key</span> = key;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">children</span> = children;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">text</span> = text;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建元素vnode 等于render函数里面的 h=&gt;h(App)</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createElement</span>(<span class="params">tag, data = &#123;&#125;, ...children</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> key = data.<span class="property">key</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Vnode</span>(tag, data, key, children);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建文本vnode</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createTextNode</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Vnode</span>(<span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, text);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="虚拟DOM转化为真实DOM"><a href="#虚拟DOM转化为真实DOM" class="headerlink" title="虚拟DOM转化为真实DOM"></a>虚拟DOM转化为真实DOM</h2><ol>
+<li>主要方法是patch方法，用来渲染和更新视图<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/lifecycle.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; patch &#125; <span class="keyword">from</span> <span class="string">&quot;./vdom/patch&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">lifecycleMixin</span>(<span class="params">Vue</span>) &#123;</span><br><span class="line">  <span class="comment">// 把_update挂载在Vue的原型</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">_update</span> = <span class="keyword">function</span> (<span class="params">vnode</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> vm = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="comment">// patch是渲染vnode为真实dom核心</span></span><br><span class="line">    <span class="title function_">patch</span>(vm.<span class="property">$el</span>, vnode);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 初始渲染和后续更新都是共用这一个方法 只是传入的第一个参数不同 初始渲染总体思路就是根据虚拟 dom(vnode) 调用原生 js 方法创建真实 dom 节点并替换掉 el 选项的位置<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/vdom/patch.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// patch用来渲染和更新视图 今天只介绍初次渲染的逻辑</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">patch</span>(<span class="params">oldVnode, vnode</span>) &#123;</span><br><span class="line">  <span class="comment">// 判断传入的oldVnode是否是一个真实元素</span></span><br><span class="line">  <span class="comment">// 这里很关键  初次渲染 传入的vm.$el就是咱们传入的el选项  所以是真实dom</span></span><br><span class="line">  <span class="comment">// 如果不是初始渲染而是视图更新的时候  vm.$el就被替换成了更新之前的老的虚拟dom</span></span><br><span class="line">  <span class="keyword">const</span> isRealElement = oldVnode.<span class="property">nodeType</span>;</span><br><span class="line">  <span class="keyword">if</span> (isRealElement) &#123;</span><br><span class="line">    <span class="comment">// 这里是初次渲染的逻辑</span></span><br><span class="line">    <span class="keyword">const</span> oldElm = oldVnode;</span><br><span class="line">    <span class="keyword">const</span> parentElm = oldElm.<span class="property">parentNode</span>;</span><br><span class="line">    <span class="comment">// 将虚拟dom转化成真实dom节点</span></span><br><span class="line">    <span class="keyword">let</span> el = <span class="title function_">createElm</span>(vnode);</span><br><span class="line">    <span class="comment">// 插入到 老的el节点下一个节点的前面 就相当于插入到老的el节点的后面</span></span><br><span class="line">    <span class="comment">// 这里不直接使用父元素appendChild是为了不破坏替换的位置</span></span><br><span class="line">    parentElm.<span class="title function_">insertBefore</span>(el, oldElm.<span class="property">nextSibling</span>);</span><br><span class="line">    <span class="comment">// 删除老的el节点</span></span><br><span class="line">    parentElm.<span class="title function_">removeChild</span>(oldVnode);</span><br><span class="line">    <span class="keyword">return</span> el;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 虚拟dom转成真实dom 就是调用原生方法生成dom树</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createElm</span>(<span class="params">vnode</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> &#123; tag, data, key, children, text &#125; = vnode;</span><br><span class="line">  <span class="comment">//   判断虚拟dom 是元素节点还是文本节点</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> tag === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">    <span class="comment">//   虚拟dom的el属性指向真实dom</span></span><br><span class="line">    vnode.<span class="property">el</span> = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(tag);</span><br><span class="line">    <span class="comment">// 解析虚拟dom属性</span></span><br><span class="line">    <span class="title function_">updateProperties</span>(vnode);</span><br><span class="line">    <span class="comment">// 如果有子节点就递归插入到父节点里面</span></span><br><span class="line">    children.<span class="title function_">forEach</span>(<span class="function">(<span class="params">child</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> vnode.<span class="property">el</span>.<span class="title function_">appendChild</span>(<span class="title function_">createElm</span>(child));</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//   文本节点</span></span><br><span class="line">    vnode.<span class="property">el</span> = <span class="variable language_">document</span>.<span class="title function_">createTextNode</span>(text);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> vnode.<span class="property">el</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析vnode的data属性 映射到真实dom上</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">updateProperties</span>(<span class="params">vnode</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> newProps = vnode.<span class="property">data</span> || &#123;&#125;;</span><br><span class="line">  <span class="keyword">let</span> el = vnode.<span class="property">el</span>; <span class="comment">//真实节点</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> newProps) &#123;</span><br><span class="line">    <span class="comment">// style需要特殊处理下</span></span><br><span class="line">    <span class="keyword">if</span> (key === <span class="string">&quot;style&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> styleName <span class="keyword">in</span> newProps.<span class="property">style</span>) &#123;</span><br><span class="line">        el.<span class="property">style</span>[styleName] = newProps.<span class="property">style</span>[styleName];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key === <span class="string">&quot;class&quot;</span>) &#123;</span><br><span class="line">      el.<span class="property">className</span> = newProps.<span class="property">class</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 给这个元素添加属性 值就是对应的值</span></span><br><span class="line">      el.<span class="title function_">setAttribute</span>(key, newProps[key]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="render-和-update-原型方法的混入"><a href="#render-和-update-原型方法的混入" class="headerlink" title="_render 和_update 原型方法的混入"></a>_render 和_update 原型方法的混入</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; initMixin &#125; <span class="keyword">from</span> <span class="string">&quot;./init.js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; lifecycleMixin &#125; <span class="keyword">from</span> <span class="string">&quot;./lifecycle&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; renderMixin &#125; <span class="keyword">from</span> <span class="string">&quot;./render&quot;</span>;</span><br><span class="line"><span class="comment">// Vue就是一个构造函数 通过new关键字进行实例化</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Vue</span>(<span class="params">options</span>) &#123;</span><br><span class="line">  <span class="comment">// 这里开始进行Vue初始化工作</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">_init</span>(options);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// _init方法是挂载在Vue原型的方法 通过引入文件的方式进行原型挂载需要传入Vue</span></span><br><span class="line"><span class="comment">// 此做法有利于代码分割</span></span><br><span class="line"><span class="title function_">initMixin</span>(<span class="title class_">Vue</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 混入_render</span></span><br><span class="line"><span class="title function_">renderMixin</span>(<span class="title class_">Vue</span>);</span><br><span class="line"><span class="comment">// 混入_update</span></span><br><span class="line"><span class="title function_">lifecycleMixin</span>(<span class="title class_">Vue</span>);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Vue</span>;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

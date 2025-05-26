@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>websocket - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="websocketwebsocket是什么
+websocket是HTML5新增的协议，诞生的目的就是在浏览器和服务器之间建立一个不受限的双向通信的通道
+客户端  –&amp;gt;  服务端  服务端 –&amp;,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="websocket - Hexo"/>
+    <meta name="twitter:description" content="websocketwebsocket是什么
+websocket是HTML5新增的协议，诞生的目的就是在浏览器和服务器之间建立一个不受限的双向通信的通道
+客户端  –&amp;gt;  服务端  服务端 –&amp;,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="websocket - Hexo"/>
+    <meta property="og:description" content="websocketwebsocket是什么
+websocket是HTML5新增的协议，诞生的目的就是在浏览器和服务器之间建立一个不受限的双向通信的通道
+客户端  –&amp;gt;  服务端  服务端 –&amp;,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">websocket</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">websocket</h1>
+        <div class="stuff">
+            <span>一月 18, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="websocket"><a href="#websocket" class="headerlink" title="websocket"></a>websocket</h3><h4 id="websocket是什么"><a href="#websocket是什么" class="headerlink" title="websocket是什么"></a>websocket是什么</h4><ol>
+<li>websocket是HTML5新增的协议，诞生的目的就是在浏览器和服务器之间建立一个不受限的双向通信的通道</li>
+<li>客户端  –&gt;  服务端  服务端 –&gt; 客户端</li>
+<li>为什么传统的http协议不能做到websocket实现的功能？<ul>
+<li>因为http协议是一个请求-响应协议，请求必须先由浏览器发送给服务器，服务器才能进行响应。</li>
+<li>http协议是无状态的，服务器只会响应来自客户端的请求，但是它与客户端之间不具备持续连接，无法轻松实现实时应用。</li>
+<li>轮询的实时性不够，频繁请求会给服务器带来很大的压力</li>
+</ul>
+</li>
+</ol>
+<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><table>
+<thead>
+<tr>
+<th align="left">事件</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">open</td>
+<td align="left">连接建立时触发</td>
+</tr>
+<tr>
+<td align="left">message</td>
+<td align="left">客户端接收服务端数据时触发</td>
+</tr>
+<tr>
+<td align="left">error</td>
+<td align="left">通信发生错误时触发</td>
+</tr>
+<tr>
+<td align="left">close</td>
+<td align="left">连接关闭时触发</td>
+</tr>
+</tbody></table>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Socket.send()</td>
+<td align="left">使用连接发送数据</td>
+</tr>
+<tr>
+<td align="left">Socket.close()</td>
+<td align="left">关闭连接</td>
+</tr>
+</tbody></table>
+<h4 id="客户端简易代码"><a href="#客户端简易代码" class="headerlink" title="客户端简易代码"></a>客户端简易代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&#x27;ws://localhost:5000&#x27;</span>)</span><br><span class="line"><span class="comment">// 连接成功后</span></span><br><span class="line">ws.<span class="property">onopen</span> = <span class="keyword">function</span> (<span class="params">evt</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;连接开启&#x27;</span>);</span><br><span class="line">    ws.<span class="title function_">send</span>(<span class="string">&#x27;这是客户端信息&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//   传递和接收服务器数据的方法</span></span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="keyword">function</span> (<span class="params">evt</span>) &#123;</span><br><span class="line">    ws.<span class="title function_">send</span>(<span class="string">&#x27;这是客户端发送的第二条信息&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="服务端简易代码"><a href="#服务端简易代码" class="headerlink" title="服务端简易代码"></a>服务端简易代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入websocket模块</span></span><br><span class="line"><span class="keyword">const</span> websocket = <span class="built_in">require</span>(<span class="string">&#x27;ws&#x27;</span>)</span><br><span class="line"><span class="comment">// 引入Server类并且实例化，定义服务器的端口</span></span><br><span class="line"><span class="keyword">const</span> wss = <span class="keyword">new</span> websocket.<span class="title class_">Server</span>(&#123;<span class="attr">port</span>:<span class="number">5000</span>&#125;)</span><br><span class="line">wss.<span class="title function_">on</span>(<span class="string">&#x27;connection&#x27;</span>,<span class="keyword">function</span>(<span class="params">ws</span>) &#123;</span><br><span class="line">    ws.<span class="title function_">on</span>(<span class="string">&#x27;message&#x27;</span>, <span class="keyword">function</span> (<span class="params">message</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;客户端发送过来的信息是&#x27;</span>+ message);</span><br><span class="line">        ws.<span class="title function_">send</span>(<span class="string">&#x27;这是服务端，接收到了信息&#x27;</span>)</span><br><span class="line">        ws.<span class="title function_">close</span>()</span><br><span class="line">      &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

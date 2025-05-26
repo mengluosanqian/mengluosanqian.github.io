@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>vue3对比vue2的改变 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="vue2和vue3对比生命周期
+beforeCreate &amp;#x3D;&amp;#x3D;&amp;gt;  setup()
+created &amp;#x3D;&amp;#x3D;&amp;gt; setup()
+beforeMount,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="vue3对比vue2的改变 - Hexo"/>
+    <meta name="twitter:description" content="vue2和vue3对比生命周期
+beforeCreate &amp;#x3D;&amp;#x3D;&amp;gt;  setup()
+created &amp;#x3D;&amp;#x3D;&amp;gt; setup()
+beforeMount,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="vue3对比vue2的改变 - Hexo"/>
+    <meta property="og:description" content="vue2和vue3对比生命周期
+beforeCreate &amp;#x3D;&amp;#x3D;&amp;gt;  setup()
+created &amp;#x3D;&amp;#x3D;&amp;gt; setup()
+beforeMount,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">vue3对比vue2的改变</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">vue3对比vue2的改变</h1>
+        <div class="stuff">
+            <span>十二月 15, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="vue2和vue3对比"><a href="#vue2和vue3对比" class="headerlink" title="vue2和vue3对比"></a>vue2和vue3对比</h1><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ol>
+<li>beforeCreate &#x3D;&#x3D;&gt;  setup()</li>
+<li>created &#x3D;&#x3D;&gt; setup()</li>
+<li>beforeMount &#x3D;&#x3D;&gt; onBeforeMount</li>
+<li>mounted &#x3D;&#x3D;&gt; onMounted</li>
+<li>beforeUpdate &#x3D;&#x3D;&gt; onBeforeUpdate</li>
+<li>updated &#x3D;&#x3D;&gt; onUpdated</li>
+<li>beforeUnmount &#x3D;&#x3D;&gt; onBeforeUnmount</li>
+<li>unmounted &#x3D;&#x3D;&gt; onUnmounted</li>
+</ol>
+<h2 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入的不再是vue构造函数，引入的是一个名为createApp的工厂函数</span></span><br><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建应用实例对象-app（类似于之前vue2中的vm）</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>)</span><br><span class="line">app.<span class="title function_">use</span>(router)</span><br><span class="line"><span class="comment">// 挂载</span></span><br><span class="line">app.<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// vue2写法</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">import Vue from &#x27;vue&#x27;</span></span><br><span class="line"><span class="comment">import App from &#x27;./App.vue&#x27;</span></span><br><span class="line"><span class="comment">const vm = new Vue(&#123;</span></span><br><span class="line"><span class="comment">    render:(h) =&gt; h(App),</span></span><br><span class="line"><span class="comment">&#125;)</span></span><br><span class="line"><span class="comment">vm.$mount(&#x27;#app&#x27;)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="全局API调整"><a href="#全局API调整" class="headerlink" title="全局API调整"></a>全局API调整</h2><table>
+<thead>
+<tr>
+<th align="center">2.x 全局API（Vue）</th>
+<th align="center">3.x 实例API（app）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Vue.config.xxxx</td>
+<td align="center">app.config.xxx</td>
+</tr>
+<tr>
+<td align="center">Vue.config.productionTip</td>
+<td align="center">移除</td>
+</tr>
+<tr>
+<td align="center">Vue.component</td>
+<td align="center">app.component</td>
+</tr>
+<tr>
+<td align="center">Vue.directive</td>
+<td align="center">app.directive</td>
+</tr>
+<tr>
+<td align="center">Vue.mixin</td>
+<td align="center">app.mixin</td>
+</tr>
+<tr>
+<td align="center">Vue.use</td>
+<td align="center">app.use</td>
+</tr>
+<tr>
+<td align="center">Vue.prototype</td>
+<td align="center">app.config.globalProperties</td>
+</tr>
+</tbody></table>
+<h2 id="指令和插槽"><a href="#指令和插槽" class="headerlink" title="指令和插槽"></a>指令和插槽</h2><ol>
+<li>vue2中使用slot可以直接使用slot,而vue3中必须使用v-slot的形式</li>
+<li>keyCode</li>
+</ol>
+<ul>
+<li>移除keyCode作为v-on的修饰符，同时也不再支持config.keyCodes</li>
+</ul>
+<ol start="3">
+<li>移除v-on.native修饰符</li>
+</ol>
+<ul>
+<li>（区分@click等是原生事件还是自定义事件）vue3中子组件有emits:[]</li>
+</ul>
+<ol start="4">
+<li>移除filter（过滤器）</li>
+</ol>
+<ul>
+<li>如果需要过滤，可以使用计算属性</li>
+</ul>
+<ol start="5">
+<li>v-if和v-for</li>
+</ol>
+<ul>
+<li>v-for与v-if在vue2中优先级高的是v-for指令，而且不建议一起使用；vue3中v-for与v-if,只会把当前v-if当做v-for中的一个判断语句，不会相互冲突</li>
+</ul>
+<h2 id="改变数组"><a href="#改变数组" class="headerlink" title="改变数组"></a>改变数组</h2><p>vue3也可以直接通过角标修改数组中的数据，vue2必须借助七个改变原数组的方法</p>
+<h2 id="响应式原理API的改变"><a href="#响应式原理API的改变" class="headerlink" title="响应式原理API的改变"></a>响应式原理API的改变</h2><ol>
+<li>vue2响应式原理是defineProperty，而vue3是proxy<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> <span class="title class_">Proxy</span>(data, &#123;</span><br><span class="line"><span class="comment">// 读取属性时调用</span></span><br><span class="line"><span class="title function_">get</span> (target, propName) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, propName)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">//修改属性或添加属性时调用</span></span><br><span class="line"><span class="title function_">set</span> (target, propName, value) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, propName, value)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">//删除属性时调用</span></span><br><span class="line"><span class="title function_">deleteProperty</span> (target, propName) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">deleteProperty</span>(target, propName)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="ref与reactive"><a href="#ref与reactive" class="headerlink" title="ref与reactive"></a>ref与reactive</h2><ol>
+<li>ref定义的是基本数据类型</li>
+<li>ref通过Object.defineProperty()的get和set实现数据劫持</li>
+<li>ref操作数据.value，读取时不需要。value</li>
+<li>reactive定义对象或数组数据类型</li>
+<li>reactive通过Proxy实现数据劫持</li>
+<li>reactive操作和读取数据不需要.value</li>
+</ol>
+<h2 id="router"><a href="#router" class="headerlink" title="router"></a>router</h2><p>vue2中还是使用this.router.push来进行路由跳转，vue3中没有这些，而是定义了一个vueRouter, 直接引入useRoute,useRouter，相当于vue2中提供的’this.router.push’来进行路由跳转，在vue3中没有这些，而是定义了一个vue-router,直接引入useRoute,useRouter，相当于vue2中提供的&#96;this. router.push来进行路由跳转，在vue3中没有这些，而是定义了一个vueRouter,直接引入useRoute,useRouter，相当于vue2中提供的’this.route，this.router’</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;useRouter,useRoute&#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span><br><span class="line"><span class="title function_">setup</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> router= <span class="title function_">useRouter</span>()</span><br><span class="line">  <span class="keyword">const</span> route= <span class="title function_">useRoute</span>()</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$route</span>.<span class="title function_">push</span>(<span class="string">&#x27;/about&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">onMounted</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(route.<span class="property">query</span>.<span class="property">code</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span>&#123;</span><br><span class="line">    fn</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

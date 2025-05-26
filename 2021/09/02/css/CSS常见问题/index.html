@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CSS常见问题 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="常见问题选择器属性选择器[“def”]  选择属性值为”def”的元素[abc^&amp;#x3D;”def”]    选择 abc 属性值以 “def” 开头的所有元素[abc$&amp;#x3D;”def”]	,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="CSS常见问题 - Hexo"/>
+    <meta name="twitter:description" content="常见问题选择器属性选择器[“def”]  选择属性值为”def”的元素[abc^&amp;#x3D;”def”]    选择 abc 属性值以 “def” 开头的所有元素[abc$&amp;#x3D;”def”]	,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="CSS常见问题 - Hexo"/>
+    <meta property="og:description" content="常见问题选择器属性选择器[“def”]  选择属性值为”def”的元素[abc^&amp;#x3D;”def”]    选择 abc 属性值以 “def” 开头的所有元素[abc$&amp;#x3D;”def”]	,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">CSS常见问题</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">CSS常见问题</h1>
+        <div class="stuff">
+            <span>九月 02, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><h4 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h4><p>属性选择器<br>[“def”]  选择属性值为”def”的元素<br>[abc^&#x3D;”def”]    选择 abc 属性值以 “def” 开头的所有元素<br>[abc$&#x3D;”def”]	选择 abc 属性值以 “def” 结尾的所有元素<br>[abc*&#x3D;”def”]	选择 abc 属性值中包含子串 “def” 的所有元素<br>[class<del>&#x3D;”important”]  选择 class 属性中包含 important 的元素(“</del>&#x3D;” 属性选择器能用于任何属性)</p>
+<h4 id="不可继承属性"><a href="#不可继承属性" class="headerlink" title="不可继承属性"></a>不可继承属性</h4><ol>
+<li>display</li>
+<li>文本属性 <ul>
+<li>vertical-align</li>
+<li>text-decoration</li>
+<li>text-shadow</li>
+<li>white-space   空白符的处理</li>
+<li>unicode-bidi 设置文本的方向</li>
+</ul>
+</li>
+<li>盒子模型的属性<ul>
+<li>width</li>
+<li>height</li>
+<li>margin</li>
+<li>border</li>
+<li>padding</li>
+</ul>
+</li>
+<li>背景属性</li>
+<li>定位属性</li>
+<li>生成内容属性</li>
+<li>轮廓样式属性</li>
+<li>页面样式属性</li>
+<li>声音样式属性</li>
+</ol>
+<h4 id="有继承的属性"><a href="#有继承的属性" class="headerlink" title="有继承的属性"></a>有继承的属性</h4><ol>
+<li>字体系列属性</li>
+<li>文本系列属性<ul>
+<li>text-indent 文本缩进</li>
+<li>text-align 文本水平对齐</li>
+<li>line-height 行高</li>
+<li>word-spacing 单词之间的间距</li>
+<li>letter-spacing 中文或者字母之间的间距</li>
+<li>text-transform 文本大小写</li>
+<li>color 颜色</li>
+</ul>
+</li>
+<li>元素可见性 visibility</li>
+<li>列表布局属性</li>
+<li>光标属性</li>
+</ol>
+<h4 id="link和-import的区别"><a href="#link和-import的区别" class="headerlink" title="link和@import的区别"></a>link和@import的区别</h4><ol>
+<li>link是XHTML标签，除了加载css外，还可以定义rss等其他事务；@import属于css范畴，只能加载css</li>
+<li>link引用css时，在页面载入时同时加载；@import需要页面网页完全载入后加载</li>
+<li>link无兼容问题；@import低版本浏览器不支持</li>
+<li>link支持使用JavaScript控制dom去改变样式，而@import不支持</li>
+<li>link引入的样式权重大于@import引入的样式</li>
+</ol>
+<h4 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h4><ol>
+<li>请求动画帧</li>
+<li>window.requestAnimationFrame(callback) 告诉浏览器你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。该方法需要传入一个回调函数作为参数，该回调函数在浏览器下一次重绘之前执行</li>
+<li>该方法属于宏任务</li>
+<li>取消动画 cancelAnimationFrame(id) id为requestAnimationFrame默认返回的id</li>
+<li>cpu节能</li>
+<li>函数节流，防止在一个刷新间隔内发生多次函数执行，可保证在每个刷新间隔内，函数只执行一次，这样既保持流畅性，也可以节约开销</li>
+<li>减少dom操作，会把每一帧中的所有dom操作集中起来，在一次回流或者重绘中完成</li>
+</ol>
+<h4 id="为什么有时候⽤translate来改变位置⽽不是定位？"><a href="#为什么有时候⽤translate来改变位置⽽不是定位？" class="headerlink" title="为什么有时候⽤translate来改变位置⽽不是定位？"></a>为什么有时候⽤translate来改变位置⽽不是定位？</h4><ul>
+<li>translate是transform属性的一个值，改变transform或者opacity不会触发浏览器的重新布局或重绘更加高效，并且translate改变位置时元素依然会占据去原始空间</li>
+</ul>
+<h4 id="精灵图"><a href="#精灵图" class="headerlink" title="精灵图"></a>精灵图</h4><ul>
+<li>将一个页面涉及的所有图片都包含到一个大图中去，然后利用background-image、background-repeat、background-position属性进行定位</li>
+<li>减少网页的http请求，提高性能</li>
+<li>减少图片字节</li>
+<li>开发起来较为复杂，维护起来也比较麻烦</li>
+</ul>
+<h4 id="预处理器和后处理器"><a href="#预处理器和后处理器" class="headerlink" title="预处理器和后处理器"></a>预处理器和后处理器</h4><ol>
+<li>预处理器：less、sass、stylus</li>
+<li>后处理器：postCss 给浏览器属性添加浏览器私有前缀</li>
+</ol>
+<h4 id="display-inline-block-什么时候会显示间隙？"><a href="#display-inline-block-什么时候会显示间隙？" class="headerlink" title="display:inline-block 什么时候会显示间隙？"></a>display:inline-block 什么时候会显示间隙？</h4><ol>
+<li>有空格会有间隙</li>
+<li>margin正值时<br>3。 使用font-size时</li>
+</ol>
+<h4 id="文本溢出"><a href="#文本溢出" class="headerlink" title="文本溢出"></a>文本溢出</h4><ol>
+<li>单行文本溢出：<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">overflow</span>: hidden;            // 溢出隐藏</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;      // 溢出用省略号显示</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;         // 规定段落中的文本不进行换行</span><br></pre></td></tr></table></figure></li>
+<li>多行文本溢出<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">overflow</span>: hidden;            // 溢出隐藏</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;     // 溢出用省略号显示</span><br><span class="line"><span class="attribute">display</span>:-webkit-box;         // 作为弹性伸缩盒子模型显示。</span><br><span class="line">-webkit-<span class="attribute">box-orient</span>:vertical; // 设置伸缩盒子的子元素排列方式：从上到下垂直排列</span><br><span class="line">-webkit-<span class="selector-tag">line</span>-clamp:<span class="number">3</span>;        // 显示的行数</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h4><p>使用 @media 查询，可以针对不同的媒体类型定义不同的样式。</p>
+<h4 id="z-index什么时候会失效"><a href="#z-index什么时候会失效" class="headerlink" title="z-index什么时候会失效"></a>z-index什么时候会失效</h4><ol>
+<li>父元素position为relative，子元素的z-index会失效</li>
+<li>元素没有设置position为非static属性</li>
+<li>元素在设置z-index的同时还设置了float浮动</li>
+</ol>
+<h4 id="元素层叠顺序"><a href="#元素层叠顺序" class="headerlink" title="元素层叠顺序"></a>元素层叠顺序</h4><p>从上到下：</p>
+<ol>
+<li>背景和边框</li>
+<li>负的z-index</li>
+<li>块级盒</li>
+<li>浮动盒</li>
+<li>行内盒</li>
+<li>z-index:0 </li>
+<li>正z-index</li>
+</ol>
+<h4 id="display、float、position的关系"><a href="#display、float、position的关系" class="headerlink" title="display、float、position的关系"></a>display、float、position的关系</h4><ol>
+<li>首先判断display属性是否为none，如果为none，则float和position的属性值不影响元素最后的表现</li>
+<li>position的值如果为absolute或者fixed，则float失效，并且display的值应该被设置为table或者block</li>
+<li>position的值如果不为absolute或者fixed，如果float不为none，则display按上面的规则转换</li>
+<li>position为relative并且float存在，则relative相对于浮动后的最终位置定位</li>
+<li>如果float的值为none，则判断元素是否为根元素，如果是根元素则display属性按照上面的规则转换，如果不是，则保持指定的display属性值不变。</li>
+</ol>
+<h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><h4 id="加载性能"><a href="#加载性能" class="headerlink" title="加载性能"></a>加载性能</h4><h4 id="选择器性能"><a href="#选择器性能" class="headerlink" title="选择器性能"></a>选择器性能</h4><h4 id="渲染性能"><a href="#渲染性能" class="headerlink" title="渲染性能"></a>渲染性能</h4><h4 id="可维护性、健壮性"><a href="#可维护性、健壮性" class="headerlink" title="可维护性、健壮性"></a>可维护性、健壮性</h4><h3 id="css工程化"><a href="#css工程化" class="headerlink" title="css工程化"></a>css工程化</h3><h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><ol>
+<li>宏观设计</li>
+<li>编码优化</li>
+<li>构建</li>
+<li>可维护性</li>
+</ol>
+<h4 id="实现工程化"><a href="#实现工程化" class="headerlink" title="实现工程化"></a>实现工程化</h4><ol>
+<li>预处理器： less、sass等<ul>
+<li>嵌套代码的能力，通过嵌套来反映不同css属性之间的层级关系</li>
+<li>支持定义css变量</li>
+<li>提供计算函数</li>
+<li>允许对代码片段进行extend和mixin</li>
+<li>支持循环语句的使用</li>
+<li>支持将css文件模块化，实现复用</li>
+</ul>
+</li>
+<li>工程化插件： postCss<ul>
+<li>编译尚未被浏览器广泛支持的先进的css语法</li>
+<li>自动为一些需要额外兼容的语法增加前缀</li>
+<li>有着强大的插件机制，支持各种各样的扩展</li>
+</ul>
+</li>
+<li>webpack loader<ul>
+<li>style-loader 创建style标签，把css内容写入标签</li>
+<li>css-loader 导入css模块，对css代码进行编译处理，执行顺序一定要在style-loader后面</li>
+</ul>
+</li>
+</ol>
+<h3 id="浮动和BFC"><a href="#浮动和BFC" class="headerlink" title="浮动和BFC"></a>浮动和BFC</h3><h4 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h4><h4 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h4><h4 id="什么是bfc"><a href="#什么是bfc" class="headerlink" title="什么是bfc"></a>什么是bfc</h4><h4 id="如何创建bfc"><a href="#如何创建bfc" class="headerlink" title="如何创建bfc"></a>如何创建bfc</h4><h4 id="bfc的特点和作用"><a href="#bfc的特点和作用" class="headerlink" title="bfc的特点和作用"></a>bfc的特点和作用</h4>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

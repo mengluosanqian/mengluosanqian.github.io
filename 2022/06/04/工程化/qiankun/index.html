@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>qiankun - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="主服务
+在主服务中注册微应用
+registerMicroApps接收两个参数
+apps：必选，微应用的一些注册信息
+name: 微应用名称，必选
+entry：必选，微应用的入口
+container：,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="qiankun - Hexo"/>
+    <meta name="twitter:description" content="主服务
+在主服务中注册微应用
+registerMicroApps接收两个参数
+apps：必选，微应用的一些注册信息
+name: 微应用名称，必选
+entry：必选，微应用的入口
+container：,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="qiankun - Hexo"/>
+    <meta property="og:description" content="主服务
+在主服务中注册微应用
+registerMicroApps接收两个参数
+apps：必选，微应用的一些注册信息
+name: 微应用名称，必选
+entry：必选，微应用的入口
+container：,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">qiankun</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">qiankun</h1>
+        <div class="stuff">
+            <span>六月 04, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/qiankun/" rel="tag">qiankun</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="主服务"><a href="#主服务" class="headerlink" title="主服务"></a>主服务</h2><ol>
+<li>在主服务中注册微应用</li>
+<li><code>registerMicroApps</code>接收两个参数<ul>
+<li>apps：必选，微应用的一些注册信息<ul>
+<li>name: 微应用名称，必选</li>
+<li>entry：必选，微应用的入口</li>
+<li>container：必选，微应用的容器节点的选择器或者 Element 实例</li>
+<li>activeRule：必选，微应用的激活规则</li>
+</ul>
+</li>
+<li>lifeCycles：可选，全局的微应用生命周期钩子</li>
+</ul>
+</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; registerMicroApps, setDefaultMountApp, start &#125; <span class="keyword">from</span> <span class="string">&#x27;qiankun&#x27;</span> <span class="comment">// 引入qiankun服务</span></span><br><span class="line"><span class="comment">// 基于路由配置</span></span><br><span class="line"><span class="title function_">registerMicroApps</span>(microApps, &#123;</span><br><span class="line">  <span class="attr">beforeLoad</span>: [</span><br><span class="line">    <span class="function"><span class="params">app</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;before load&#x27;</span>, app)</span><br><span class="line">    &#125;</span><br><span class="line">  ], <span class="comment">// 挂载前回调</span></span><br><span class="line">  <span class="attr">beforeMount</span>: [</span><br><span class="line">    <span class="function"><span class="params">app</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;before mount&#x27;</span>, app)</span><br><span class="line">    &#125;</span><br><span class="line">  ], <span class="comment">// 挂载后回调</span></span><br><span class="line">  <span class="attr">afterUnmount</span>: [</span><br><span class="line">    <span class="function"><span class="params">app</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;after unload&#x27;</span>, app)</span><br><span class="line">    &#125;</span><br><span class="line">  ] <span class="comment">// 卸载后回调</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>注册子应用<ul>
+<li>这里的子应用就是<code>registerMicroApps</code>第一个属性  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 注册子应用</span></span><br><span class="line"><span class="keyword">const</span> hostname = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">hostname</span>;</span><br><span class="line"><span class="keyword">const</span> microApps = config.<span class="property">subAPP</span>.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name, port, activeRule,host &#125; = item</span><br><span class="line">  <span class="keyword">const</span> origin = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">origin</span>;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">pkcSubAPPConfig</span>[item.<span class="property">name</span>] = &#123;...item,<span class="attr">entry</span>:<span class="string">`http://<span class="subst">$&#123;host||hostname&#125;</span>:<span class="subst">$&#123;port&#125;</span>/`</span>&#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    name,</span><br><span class="line">    <span class="comment">//entry:`http://$&#123;host||hostname&#125;:$&#123;port&#125;`,</span></span><br><span class="line">    <span class="attr">entry</span>:(hostname == <span class="string">&#x27;localhost&#x27;</span>||hostname == <span class="string">&#x27;127.0.0.1&#x27;</span>)?<span class="string">`http://<span class="subst">$&#123;host||hostname&#125;</span>:<span class="subst">$&#123;port&#125;</span>/`</span>:<span class="string">`<span class="subst">$&#123;origin&#125;</span>/<span class="subst">$&#123;item.name&#125;</span>/`</span>,</span><br><span class="line">    render,</span><br><span class="line">    <span class="attr">activeRule</span>: <span class="title function_">genActiveRule</span>(activeRule),</span><br><span class="line">    <span class="attr">props</span>: &#123;</span><br><span class="line">      <span class="attr">activeApp</span>:item</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="微应用配置"><a href="#微应用配置" class="headerlink" title="微应用配置"></a>微应用配置</h2><ol>
+<li>导出相应的生命周期钩子<ul>
+<li>微应用需要在自己的入口 js (通常就是你配置的 webpack 的 entry js) 导出 bootstrap、mount、unmount 三个生命周期钩子，以供主应用在适当的时机调用。</li>
+</ul>
+</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">bootstrap</span>(<span class="params"></span>) &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">mount</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> path = props.<span class="property">activeApp</span>.<span class="property">activeRule</span>; </span><br><span class="line">    <span class="title function_">render</span>(path);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">unmount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    instance.$destroy();</span><br><span class="line">    instance = <span class="literal">null</span>;</span><br><span class="line">    router = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置微应用的打包工具<ul>
+<li>除了代码中暴露出相应的生命周期钩子之外，为了让主应用能正确识别微应用暴露出来的一些信息，微应用的打包工具需要增加如下配置：</li>
+</ul>
+</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> packageName = <span class="built_in">require</span>(<span class="string">&#x27;./package.json&#x27;</span>).<span class="property">name</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">library</span>: <span class="string">`<span class="subst">$&#123;packageName&#125;</span>-[name]`</span>,</span><br><span class="line">    <span class="attr">libraryTarget</span>: <span class="string">&#x27;umd&#x27;</span>,</span><br><span class="line">    <span class="attr">jsonpFunction</span>: <span class="string">`webpackJsonp_<span class="subst">$&#123;packageName&#125;</span>`</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="其他实际用到的API"><a href="#其他实际用到的API" class="headerlink" title="其他实际用到的API"></a>其他实际用到的API</h2><h3 id="setDefaultMountApp-appLink"><a href="#setDefaultMountApp-appLink" class="headerlink" title="setDefaultMountApp(appLink)"></a>setDefaultMountApp(appLink)</h3><ol>
+<li>设置主应用启动后默认进入的微应用<ul>
+<li>实际项目中根据终端和用户角色判断启动后默认打开哪个微服务</li>
+</ul>
+</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; setDefaultMountApp &#125; <span class="keyword">from</span> <span class="string">&#x27;qiankun&#x27;</span>;</span><br><span class="line"><span class="comment">// 设置默认子应用,与 genActiveRule中的参数保持一致</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getQueryString</span> = (<span class="params">name</span>)=&gt; &#123;</span><br><span class="line">  <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;(^|&amp;)&#x27;</span> + name + <span class="string">&#x27;=([^&amp;]*)(&amp;|$)&#x27;</span>, <span class="string">&#x27;i&#x27;</span>);</span><br><span class="line">  <span class="keyword">var</span> r = location.<span class="property">search</span>.<span class="title function_">substr</span>(<span class="number">1</span>).<span class="title function_">match</span>(reg);</span><br><span class="line">  <span class="keyword">if</span> (r != <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">unescape</span>(r[<span class="number">2</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> token = <span class="variable language_">window</span>.<span class="property">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> (token&amp;&amp;token!==<span class="string">&#x27;null&#x27;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> roleName = <span class="variable language_">window</span>.<span class="property">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;roleName&#x27;</span>)</span><br><span class="line">  <span class="keyword">switch</span> (roleName) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;adminEnd&#x27;</span>:</span><br><span class="line">      <span class="title function_">setDefaultMountApp</span>(<span class="string">&#x27;/portal&#x27;</span>)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;devEnd&#x27;</span>:</span><br><span class="line">      <span class="title function_">setDefaultMountApp</span>(<span class="string">&#x27;/dev&#x27;</span>)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;userEnd&#x27;</span>:</span><br><span class="line">      <span class="title function_">setDefaultMountApp</span>(<span class="string">&#x27;/portal&#x27;</span>)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> token = <span class="title function_">getQueryString</span>(<span class="string">&#x27;token&#x27;</span>)||<span class="title function_">getQueryString</span>(<span class="string">&#x27;thirdSign&#x27;</span>)</span><br><span class="line">  <span class="keyword">if</span>(token)&#123;</span><br><span class="line">    <span class="keyword">let</span> temp = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> config.<span class="property">subAPP</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; activeRule &#125; = item</span><br><span class="line">      <span class="keyword">if</span> (location.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(activeRule)) &#123;</span><br><span class="line">        <span class="title function_">setDefaultMountApp</span>(activeRule)</span><br><span class="line">        temp = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!temp) &#123;</span><br><span class="line">      <span class="title function_">setDefaultMountApp</span>(<span class="string">&#x27;/login&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> temp = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> config.<span class="property">subAPP</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; activeRule, auth &#125; = item</span><br><span class="line">      <span class="keyword">if</span> (!auth &amp;&amp; location.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(activeRule)) &#123;</span><br><span class="line">        <span class="title function_">setDefaultMountApp</span>(activeRule)</span><br><span class="line">        temp = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!temp) &#123;</span><br><span class="line">      <span class="title function_">setDefaultMountApp</span>(<span class="string">&#x27;/login&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="start"><a href="#start" class="headerlink" title="start"></a>start</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 启动</span></span><br><span class="line"><span class="title function_">start</span>(&#123;</span><br><span class="line">  <span class="attr">prefetch</span>: <span class="literal">false</span>, <span class="comment">// 可选，是否开启预加载</span></span><br><span class="line">  <span class="attr">singular</span>: <span class="literal">true</span>, <span class="comment">// 可选，是否为单实例场景，单实例指的是同一时间只会渲染一个微应用。默认为 true。</span></span><br><span class="line">  <span class="attr">sandbox</span>:<span class="literal">false</span>, <span class="comment">// 可选，是否开启沙箱，默认为 true。默认情况下沙箱可以确保单实例场景子应用之间的样式隔离，但是无法确保主应用跟子应用、或者多实例场景的子应用样式隔离。</span></span><br><span class="line">  <span class="attr">fetch</span>: <span class="variable language_">window</span>.<span class="property">fetch</span>, <span class="comment">// 可选，自定义的 fetch 方法</span></span><br><span class="line">  <span class="attr">getPublicPath</span>:<span class="function">(<span class="params">entry</span>) =&gt;</span> entry, <span class="comment">// 可选，参数是微应用的 entry 值</span></span><br><span class="line">  <span class="attr">excludeAssetFilter</span>: <span class="function"><span class="params">assetUrl</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> whiteList = []</span><br><span class="line">    <span class="keyword">const</span> whiteWords = [<span class="string">&#x27;http://127.0.0.1:9889/register&#x27;</span>,<span class="string">&#x27;http://127.0.0.1:9889/verify&#x27;</span>,<span class="string">&#x27;http://127.0.0.1:9889/get&#x27;</span>,<span class="string">&#x27;http://127.0.0.1:9889/voice&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> (whiteList.<span class="title function_">includes</span>(assetUrl)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> whiteWords.<span class="title function_">some</span>(<span class="function"><span class="params">w</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> assetUrl.<span class="title function_">includes</span>(w)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;) <span class="comment">// 可选，指定部分特殊的动态加载的微应用资源（css/js) 不被 qiankun 劫持处理。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>qiankun测试项目<br><a target="_blank" rel="noopener" href="https://github.com/mengluosanqian/qiankun-learning.git">https://github.com/mengluosanqian/qiankun-learning.git</a></li>
+<li>官网<br><a target="_blank" rel="noopener" href="https://qiankun.umijs.org/zh">https://qiankun.umijs.org/zh</a></li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

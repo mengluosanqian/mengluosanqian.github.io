@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>mini-webpack - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="mini-webpack处理文件
+对于webpack来说，首先要做的是处理文件信息，获取文件的内容
+利用fs.readFileSync读取文件
+
+
+根据获取到的文件来获取文件的依赖关系
+利用babe,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="mini-webpack - Hexo"/>
+    <meta name="twitter:description" content="mini-webpack处理文件
+对于webpack来说，首先要做的是处理文件信息，获取文件的内容
+利用fs.readFileSync读取文件
+
+
+根据获取到的文件来获取文件的依赖关系
+利用babe,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="mini-webpack - Hexo"/>
+    <meta property="og:description" content="mini-webpack处理文件
+对于webpack来说，首先要做的是处理文件信息，获取文件的内容
+利用fs.readFileSync读取文件
+
+
+根据获取到的文件来获取文件的依赖关系
+利用babe,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">mini-webpack</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">mini-webpack</h1>
+        <div class="stuff">
+            <span>六月 01, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="mini-webpack"><a href="#mini-webpack" class="headerlink" title="mini-webpack"></a>mini-webpack</h1><h2 id="处理文件"><a href="#处理文件" class="headerlink" title="处理文件"></a>处理文件</h2><ol>
+<li>对于webpack来说，首先要做的是处理文件信息，获取文件的内容<ul>
+<li>利用<code>fs.readFileSync</code>读取文件</li>
+</ul>
+</li>
+<li>根据获取到的文件来获取文件的依赖关系<ul>
+<li>利用babel&#x2F;parser将获取的文件转化为AST,并指定<code>sourceType: &#39;module&#39;</code>使文件可以解析import导入的文件</li>
+<li>利用babel&#x2F;traverse实现对AST的查找，找到其中的<code>node.source.value</code>，即当前文件引用了哪个文件，则认为存在依赖关系</li>
+</ul>
+</li>
+<li>创建一个deps容器用于收集依赖关系<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createAsset</span>(<span class="params">filePath</span>) &#123;</span><br><span class="line">    <span class="comment">// 1. 获取文件的内容</span></span><br><span class="line">    <span class="keyword">let</span> source = fs.<span class="title function_">readFileSync</span>(filePath, &#123;</span><br><span class="line">        <span class="attr">encoding</span>: <span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// console.log(source);</span></span><br><span class="line">    <span class="comment">// 2. 获取依赖关系</span></span><br><span class="line">    <span class="comment">// 通过babel/parser把文件内容转化成AST</span></span><br><span class="line">    <span class="keyword">const</span> ast = parser.<span class="title function_">parse</span>(source, &#123;</span><br><span class="line">        <span class="attr">sourceType</span>: <span class="string">&#x27;module&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// console.log(ast);</span></span><br><span class="line">    <span class="keyword">const</span> deps = [] <span class="comment">// 用于暂存依赖关系</span></span><br><span class="line">    <span class="comment">// 通过babel/parser把文件</span></span><br><span class="line">    traverse.<span class="title function_">default</span>(ast, &#123;</span><br><span class="line">        <span class="title class_">ImportDeclaration</span>(&#123;</span><br><span class="line">            node</span><br><span class="line">        &#125;) &#123;</span><br><span class="line">            <span class="comment">// console.log(node);</span></span><br><span class="line">            <span class="comment">// 要使用的是里面的source里面的value</span></span><br><span class="line">            <span class="comment">// console.log(node.source.value);</span></span><br><span class="line">            deps.<span class="title function_">push</span>(node.<span class="property">source</span>.<span class="property">value</span>) <span class="comment">// 存储依赖关系，比如有foo.js，说明source文件依赖于foo.js</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> &#123;</span><br><span class="line">        code</span><br><span class="line">    &#125; = <span class="title function_">transformFromAst</span>(ast, <span class="literal">null</span>, &#123;</span><br><span class="line">        <span class="attr">presets</span>: [<span class="string">&#x27;env&#x27;</span>],</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// console.log(code);</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        filePath,</span><br><span class="line">        code,</span><br><span class="line">        deps,</span><br><span class="line">        <span class="attr">mapping</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">id</span>: id++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="根据依赖关系生成图结构"><a href="#根据依赖关系生成图结构" class="headerlink" title="根据依赖关系生成图结构"></a>根据依赖关系生成图结构</h2><ol>
+<li>由于文件可能有相互引用的关系，所以文件之间不是简单的树结构，而是图结构</li>
+<li>指定解析的入口文件，一般来说是main.js文件</li>
+<li>将main.js作为入口文件放入一个栈中，遍历栈中元素，再遍历每一个元素的deps属性（即依赖关系），将每一个属性添加上相对路径后添加到栈中，直到栈为空</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createGraph</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> mainAsset = <span class="title function_">createAsset</span>(<span class="string">&#x27;./example/main.js&#x27;</span>) <span class="comment">// 入口</span></span><br><span class="line">    <span class="keyword">const</span> queue = [mainAsset]</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> asset <span class="keyword">of</span> queue) &#123;</span><br><span class="line">        asset.<span class="property">deps</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">relativePath</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> child = <span class="title function_">createAsset</span>(path.<span class="title function_">resolve</span>(<span class="string">&#x27;./example&#x27;</span>, relativePath))</span><br><span class="line">            asset.<span class="property">mapping</span>[relativePath] = child.<span class="property">id</span></span><br><span class="line">            queue.<span class="title function_">push</span>(child)</span><br><span class="line">            <span class="comment">// path.resolve(&quot;./example&quot;,relativePath)  处理路径</span></span><br><span class="line">            <span class="comment">// console.log(child);</span></span><br><span class="line">            <span class="comment">// console.log(relativePath);</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> queue</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="利用ejs模板文件生成最终打包好的文件"><a href="#利用ejs模板文件生成最终打包好的文件" class="headerlink" title="利用ejs模板文件生成最终打包好的文件"></a>利用ejs模板文件生成最终打包好的文件</h2><ol>
+<li>首先引入提前创建好的模板文件<code>bundle.ejs</code></li>
+<li>遍历上面生成的图，遍历取得所需要的数据</li>
+<li>指定出口文件<code>./dist/bundle.js</code></li>
+<li>将取得的数据传给模板文件，利用ejs根据文件生成最后打包生成的文件</li>
+<li>执行build方法，即可以获取打包后的文件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">build</span>(<span class="params">graph</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> template = fs.<span class="title function_">readFileSync</span>(<span class="string">&#x27;./bundle.ejs&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">encoding</span>: <span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> data = graph.<span class="title function_">map</span>(<span class="function"><span class="params">asset</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">id</span>: asset.<span class="property">id</span>,</span><br><span class="line">            <span class="attr">code</span>: asset.<span class="property">code</span>,</span><br><span class="line">            <span class="attr">mapping</span>: asset.<span class="property">mapping</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">const</span> code = ejs.<span class="title function_">render</span>(template, &#123;</span><br><span class="line">        data</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// console.log(data);</span></span><br><span class="line">    <span class="keyword">let</span> outputPath = <span class="string">&#x27;./dist/bundle.js&#x27;</span></span><br><span class="line">    fs.<span class="title function_">writeFileSync</span>(outputPath, code)</span><br><span class="line">    <span class="comment">// console.log(code);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他文件"><a href="#其他文件" class="headerlink" title="其他文件"></a>其他文件</h2><h3 id="bundle-ejs"><a href="#bundle-ejs" class="headerlink" title="bundle.ejs"></a>bundle.ejs</h3><ol>
+<li>为了防止命名冲突，采用id代替name</li>
+<li>生成图结构的时候，把文件的id作为mapping中相对路径的值存储起来<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(function (modules) &#123;  </span><br><span class="line">    function require(id) &#123;</span><br><span class="line">        const [fn, mapping] = modules[id]</span><br><span class="line">        function localRequire(filePath) &#123;</span><br><span class="line">            const id = mapping[filePath];</span><br><span class="line">            return require(id)</span><br><span class="line">        &#125;</span><br><span class="line">        const module = &#123;</span><br><span class="line">            exports: &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        fn(localRequire, module, module.exports)</span><br><span class="line">        return module.exports</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    require(0)</span><br><span class="line">&#125;)(&#123;</span><br><span class="line">    &lt;% data.forEach(info =&gt; &#123; %&gt;</span><br><span class="line">        &lt;%- info[&#x27;id&#x27;] %&gt;:[function (require,module,exports) &#123;</span><br><span class="line">            &lt;%- info[&quot;code&quot;] %&gt;</span><br><span class="line">        &#125;,&lt;%- JSON.stringify(info[&quot;mapping&quot;]) %&gt;],</span><br><span class="line">    &lt;% &#125;); %&gt;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

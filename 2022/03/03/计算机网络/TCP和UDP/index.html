@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TCP和UDP - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="TCP&amp;#x2F;UDPTCP&amp;#x2F;IP中两个具有代表性的传输层协议，分别是TCP和UDP
+UDP
+UDP协议全称是用户数据报协议，在网络中它与TCP协议一样用于处理数据包，是一种无连接的协议,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="TCP和UDP - Hexo"/>
+    <meta name="twitter:description" content="TCP&amp;#x2F;UDPTCP&amp;#x2F;IP中两个具有代表性的传输层协议，分别是TCP和UDP
+UDP
+UDP协议全称是用户数据报协议，在网络中它与TCP协议一样用于处理数据包，是一种无连接的协议,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="TCP和UDP - Hexo"/>
+    <meta property="og:description" content="TCP&amp;#x2F;UDPTCP&amp;#x2F;IP中两个具有代表性的传输层协议，分别是TCP和UDP
+UDP
+UDP协议全称是用户数据报协议，在网络中它与TCP协议一样用于处理数据包，是一种无连接的协议,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">TCP和UDP</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">TCP和UDP</h1>
+        <div class="stuff">
+            <span>三月 03, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP&#x2F;UDP"></a>TCP&#x2F;UDP</h3><p>TCP&#x2F;IP中两个具有代表性的传输层协议，分别是TCP和UDP</p>
+<h4 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h4><ol>
+<li>UDP协议全称是用户数据报协议，在网络中它与TCP协议一样用于处理数据包，是一种无连接的协议。</li>
+<li>UDP有不提供数据包分组、组装和不能对数据包进行排序的缺点，也就是说，当报文发送之后，是无法得知其是否安全到达的</li>
+<li>UDP的特点：<ul>
+<li>面向无连接<ul>
+<li>不需要和TCP一样在发送数据前进行三次握手建立连接</li>
+<li>不会对数据报文进行任何拆分和拼接操作</li>
+<li>在发送端，应用层将数据传递给传输层的UDP协议，UDP只会给数据增加一个UDP头标识下是UDP协议，然后就传递给了网络层</li>
+<li>在接收端，网络层将数据传递给传输层，UDP只去除IP报文头就传递给应用层，不会进行任何拼接操作</li>
+</ul>
+</li>
+<li>有单播、多播、广播的功能<ul>
+<li>UDP不止支持一对一的传输方式，同时支持一对多，多对多，多对一的方式</li>
+</ul>
+</li>
+<li>udp是面向报文的<ul>
+<li>发送方的UDP对应用程序交下来的报文，在添加首部后就向下交付IP层。UDP对应用层交下来的报文，既不合并，也不拆分，而是保留这些报文的边界。</li>
+</ul>
+</li>
+<li>不可靠性<ul>
+<li>UDP是无连接的，通信不需要建立连接，因此是不可靠的</li>
+<li>不会备份数据，也不关心是否成功接收到传输的数据</li>
+<li>没有拥堵控制，一直会以恒定的速度发送数据，网络环境不好时会发生丢包</li>
+</ul>
+</li>
+<li>头部开销小，传输数据报文时是很高效的<ul>
+<li>头部只有八字节，比TCP的至少20字节要少的多</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><ol>
+<li>TCP协议全称是传输控制协议，是一种面向连接的、可靠的、基于字节流的传输层通信协议</li>
+<li>TCP是面向协议的、可靠的流协议</li>
+<li>TCP连接过程就是通常所说的三次握手过程</li>
+</ol>
+<ul>
+<li>第一次握手，建立连接时，客户端发送syn（<code>同步序列编号</code>，syn&#x3D;j）包到服务器，并进入SYN_SENT状态，等待服务器确认</li>
+<li>第二次握手，服务器收到syn包并确认客户的SYN（ack&#x3D;j+1），同时也发送一个自己的SYN包（syn&#x3D;k），即syn+ack包，此时服务器进入SYN_RECV状态</li>
+<li>客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack&#x3D;k+1），此包发送完毕，客户端和服务器进入ESTABLISHED（TCP连接成功）状态，完成三次握手。</li>
+</ul>
+<ol start="4">
+<li>TCP断开连接的过程就是通常所说的四次挥手过程</li>
+<li>TCP协议的特点：<ul>
+<li>面向连接<ul>
+<li>是指发送数据之前必须在两端简历链接，简历链接的方法是“三次握手”，这样能建立可靠的链接。</li>
+</ul>
+</li>
+<li>仅支持单播传输<ul>
+<li>每条TCP传输连接只能有两个端点，只能进行点对点的数据传输，不支持多播和广播传输方式。</li>
+</ul>
+</li>
+<li>面向字节流<ul>
+<li>TCP不像UDP一样一个个报文独立地传输，而是在不保留报文边界的情况下以字节流方式进行传输</li>
+</ul>
+</li>
+<li>可靠传输</li>
+<li>提供拥塞控制<ul>
+<li>当网络出现拥堵的时候，TCP能给减少向网络注入数据的速率和数量，缓解拥塞</li>
+</ul>
+</li>
+<li>TCP提供全双工通信<ul>
+<li>TCP允许通信双方的应用程序在任何时候都能发送数据，因为 TCP连接的两端都设有缓存，用来临时存放双向通信的数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><ol>
+<li>TCP向上层提供面向连接的可靠服务，UDP向上层提供无连接的不可靠服务</li>
+<li>虽然UDP并没有TCP传输来的准确，但是也能在很多实时性要求高的地方有所作为</li>
+<li>对数据准确性要求较高的，速度可以相对较慢的，可以选用TCP</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">UDP</th>
+<th align="center">TCP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">是否连接</td>
+<td align="center">无连接</td>
+<td align="center">面向连接</td>
+</tr>
+<tr>
+<td align="center">是否可靠</td>
+<td align="center">不可靠传输，不使用流量控制和拥塞控制</td>
+<td align="center">可靠传输，使用流量控制和拥塞控制</td>
+</tr>
+<tr>
+<td align="center">连接对象个数</td>
+<td align="center">支持一对一、一对多、多对一、多对多交互通信</td>
+<td align="center">只能是一对一通信</td>
+</tr>
+<tr>
+<td align="center">传输方式</td>
+<td align="center">面向报文</td>
+<td align="center">面向字节流</td>
+</tr>
+<tr>
+<td align="center">首部开销</td>
+<td align="center">首部开销小，仅8字节</td>
+<td align="center">首部最小20字节，最大60字节</td>
+</tr>
+<tr>
+<td align="center">适用场景</td>
+<td align="center">适用于实时应用（IP电话、视频会议、直播等）</td>
+<td align="center">适用于要求可靠传输的应用，例如文件传输</td>
+</tr>
+</tbody></table>
+<h3 id="TCP-IP如何保证数据包传输的有序可靠"><a href="#TCP-IP如何保证数据包传输的有序可靠" class="headerlink" title="TCP&#x2F;IP如何保证数据包传输的有序可靠"></a>TCP&#x2F;IP如何保证数据包传输的有序可靠</h3><p>对于字节流分段并进行编号然后通过<code>ACK回复</code>和<code>超时重发</code>两个机制来保证</p>
+<ol>
+<li>为了保证数据包的可靠传输，发送方必须把已发送的数据包保留在缓存区</li>
+<li>并为每个已发送的数据包启动一个超时定时器</li>
+<li>如在定时器超时之前收到了对方发来的应答信息（可能是对本包的应答，也可以是对本包后续包的应答），则释放该数据包占据的缓存区</li>
+<li>否则，重传该数据包，直到接收到应答或者重传次数超过规定的最大次数为止</li>
+<li>接收方收到数据包后，先进性CRC（循环冗余校验）校验，如果正确把数据交给上层协议，然后给发送方发送一个累计应答包，表示该数据已收到，如果接收方正好也有数据要发给发送方，应答包也可在数据包中携带过去。</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

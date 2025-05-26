@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>实现babel插件 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="实现babel123456789101112131415161718192021222324252627282930313233343536373839404142434445module.expo,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="实现babel插件 - Hexo"/>
+    <meta name="twitter:description" content="实现babel123456789101112131415161718192021222324252627282930313233343536373839404142434445module.expo,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="实现babel插件 - Hexo"/>
+    <meta property="og:description" content="实现babel123456789101112131415161718192021222324252627282930313233343536373839404142434445module.expo,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">实现babel插件</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">实现babel插件</h1>
+        <div class="stuff">
+            <span>六月 03, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="实现babel"><a href="#实现babel" class="headerlink" title="实现babel"></a>实现babel</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="function">(<span class="params">&#123;types: t&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">visitor</span>: &#123;</span><br><span class="line">      <span class="title class_">Identifier</span> (path) &#123; <span class="comment">// 标识符,path包含了很多节点信息和方法</span></span><br><span class="line">        <span class="comment">//   console.log(&#x27;Identifier&#x27;, path.node.name);</span></span><br><span class="line">        <span class="keyword">const</span> parentIsIf = t.<span class="title function_">isIfStatement</span>(path.<span class="property">parentPath</span>)</span><br><span class="line">        <span class="keyword">const</span> isDebug = path.<span class="property">node</span>.<span class="property">name</span> === <span class="string">&#x27;DEBUG&#x27;</span></span><br><span class="line">        <span class="comment">// console.log(parentIsIf, isDebug)</span></span><br><span class="line">        <span class="keyword">if</span> (isDebug &amp;&amp; parentIsIf) &#123;</span><br><span class="line">          <span class="comment">// 把Identifier转换成string</span></span><br><span class="line">          <span class="keyword">const</span> stringNode = t.<span class="title function_">stringLiteral</span>(<span class="string">&#x27;DEBUG&#x27;</span>)</span><br><span class="line">          path.<span class="title function_">replaceWith</span>(stringNode)</span><br><span class="line">          <span class="comment">// 原来</span></span><br><span class="line">          <span class="comment">//   IfStatement &#123;</span></span><br><span class="line">          <span class="comment">//       test: this.Identifier &#123;</span></span><br><span class="line">          <span class="comment">//           name: &#x27;DEBUG&#x27;</span></span><br><span class="line">          <span class="comment">//       &#125;</span></span><br><span class="line">          <span class="comment">//   &#125;</span></span><br><span class="line">          <span class="comment">// 转换后</span></span><br><span class="line">          <span class="comment">// IfStatement &#123;</span></span><br><span class="line">          <span class="comment">//     test: StringLiteral&#123;</span></span><br><span class="line">          <span class="comment">//         extra: &#123;</span></span><br><span class="line">          <span class="comment">//             rawValue: &#x27;DEBUG&#x27;</span></span><br><span class="line">          <span class="comment">//             raw: &#x27;DEBUG&#x27;</span></span><br><span class="line">          <span class="comment">//         &#125;</span></span><br><span class="line">          <span class="comment">//         value: &#x27;DEBUG&#x27;</span></span><br><span class="line">          <span class="comment">//     &#125;</span></span><br><span class="line">          <span class="comment">// &#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title class_">StringLiteral</span> (path, state) &#123;</span><br><span class="line">        <span class="keyword">const</span> parentIsIf = t.<span class="title function_">isIfStatement</span>(path.<span class="property">parentPath</span>)</span><br><span class="line">        <span class="keyword">const</span> isDebug = path.<span class="property">node</span>.<span class="property">value</span> === <span class="string">&#x27;DEBUG&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> (isDebug &amp;&amp; parentIsIf) &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(state)</span><br><span class="line">          <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">            <span class="comment">// 生产环境下才移除</span></span><br><span class="line">            path.<span class="property">parentPath</span>.<span class="title function_">remove</span>()</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

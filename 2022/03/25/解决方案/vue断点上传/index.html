@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>vue断点上传 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="vue-simple-uploadervue-simple-uploader是基于 simple-uploader.js 封装的vue上传插件。它的优点包括且不限于以下几种：
+
+支持文件、多文件、文,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="vue断点上传 - Hexo"/>
+    <meta name="twitter:description" content="vue-simple-uploadervue-simple-uploader是基于 simple-uploader.js 封装的vue上传插件。它的优点包括且不限于以下几种：
+
+支持文件、多文件、文,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="vue断点上传 - Hexo"/>
+    <meta property="og:description" content="vue-simple-uploadervue-simple-uploader是基于 simple-uploader.js 封装的vue上传插件。它的优点包括且不限于以下几种：
+
+支持文件、多文件、文,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">vue断点上传</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">vue断点上传</h1>
+        <div class="stuff">
+            <span>三月 25, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="vue-simple-uploader"><a href="#vue-simple-uploader" class="headerlink" title="vue-simple-uploader"></a>vue-simple-uploader</h1><p>vue-simple-uploader是基于 simple-uploader.js 封装的vue上传插件。它的优点包括且不限于以下几种：</p>
+<ol>
+<li>支持文件、多文件、文件夹上传；支持拖拽文件、文件夹上传</li>
+<li>可暂停、继续上传</li>
+<li>错误处理</li>
+<li>支持“秒传”，通过文件判断服务端是否已存在从而实现“秒传”</li>
+<li>分块上传</li>
+<li>支持进度、预估剩余时间、出错自动重试、重传等操作</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-simple-uploader --save</span><br></pre></td></tr></table></figure>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> uploader <span class="keyword">from</span> <span class="string">&#x27;vue-simple-uploader&#x27;</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(uploader)</span><br></pre></td></tr></table></figure>
+<h2 id="具体vue文件"><a href="#具体vue文件" class="headerlink" title="具体vue文件"></a>具体vue文件</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uploader</span></span></span><br><span class="line"><span class="tag">         <span class="attr">:options</span>=<span class="string">&quot;options&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">:file-status-text</span>=<span class="string">&quot;statusText&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">:auto-start</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">class</span>=<span class="string">&quot;uploader-example&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">ref</span>=<span class="string">&quot;uploader&quot;</span></span></span><br><span class="line"><span class="tag">         @<span class="attr">file-added</span>=<span class="string">&quot;onFileAdded&quot;</span></span></span><br><span class="line"><span class="tag">         @<span class="attr">file-success</span>=<span class="string">&quot;onFileSuccess&quot;</span></span></span><br><span class="line"><span class="tag">         @<span class="attr">file-error</span>=<span class="string">&quot;onFileError&quot;</span></span></span><br><span class="line"><span class="tag">         @<span class="attr">file-removed</span>=<span class="string">&quot;fileRemoved&quot;</span></span></span><br><span class="line"><span class="tag">       &gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">uploader-unsupport</span>&gt;</span><span class="tag">&lt;/<span class="name">uploader-unsupport</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">uploader-drop</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">uploader-btn</span> <span class="attr">:attrs</span>=<span class="string">&quot;attrs&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #67C13B&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;el-icon-upload&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin-right: 5px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>上传文件<span class="tag">&lt;/<span class="name">uploader-btn</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">uploader-btn</span> <span class="attr">:directory</span>=<span class="string">&quot;true&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #79BBFF&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;el-icon-folder-add&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin-right: 5px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>上传文件夹<span class="tag">&lt;/<span class="name">uploader-btn</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">uploader-drop</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">uploader-list</span> &gt;</span><span class="tag">&lt;/<span class="name">uploader-list</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">uploader</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">div</span> <span class="attr">slot</span>=<span class="string">&quot;footer&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dialog-footer&quot;</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;filetotal&quot;</span>&gt;</span>共计: &#123;&#123;this.file_total&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">&quot;danger&quot;</span> <span class="attr">plain</span> @<span class="attr">click</span>=<span class="string">&quot;errorDialog=true&quot;</span> <span class="attr">v-show</span>=<span class="string">&quot;controllerErrorFileDialog&quot;</span>&gt;</span>错误信息<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">el-button</span> @<span class="attr">click</span>=<span class="string">&quot;cancelUpload&quot;</span>&gt;</span>取消上传<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;submitUpload&quot;</span>&gt;</span>开始上传<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="data设置"><a href="#data设置" class="headerlink" title="data设置"></a>data设置</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">options</span>: &#123;</span><br><span class="line">         <span class="attr">target</span>: url,</span><br><span class="line">         <span class="attr">maxChunkRetries</span>: <span class="number">2</span>,</span><br><span class="line">         <span class="attr">testChunks</span>: <span class="literal">false</span>,</span><br><span class="line">         <span class="attr">fileParameterName</span>: <span class="string">&#x27;contents&#x27;</span>,</span><br><span class="line">         <span class="attr">chunkSize</span>: <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">1024</span>,</span><br><span class="line">         <span class="attr">simultaneousUploads</span>: <span class="number">3</span>,</span><br><span class="line">         <span class="attr">query</span>: &#123;</span><br><span class="line">             <span class="attr">type</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">             <span class="attr">create_time</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">           &#125;,</span><br><span class="line">         <span class="attr">headers</span>: &#123;</span><br><span class="line">           <span class="string">&#x27;Authorization&#x27;</span>: token</span><br><span class="line">         &#125;,</span><br><span class="line">       &#125;,</span><br><span class="line">       <span class="attr">statusText</span>: &#123;</span><br><span class="line">         <span class="attr">success</span>: <span class="string">&#x27;上传成功&#x27;</span>,</span><br><span class="line">         <span class="attr">error</span>: <span class="string">&#x27;上传失败&#x27;</span>,</span><br><span class="line">         <span class="attr">uploading</span>: <span class="string">&#x27;上传中&#x27;</span>,</span><br><span class="line">         <span class="attr">paused</span>: <span class="string">&#x27;暂停中&#x27;</span>,</span><br><span class="line">         <span class="attr">waiting</span>: <span class="string">&#x27;等待中&#x27;</span></span><br><span class="line">       &#125;,</span><br><span class="line">       <span class="attr">attrs</span>: &#123;</span><br><span class="line">         <span class="attr">accept</span>: [],</span><br><span class="line">       &#125;,</span><br><span class="line">       <span class="attr">file_total</span>: <span class="number">0</span>, <span class="comment">//本次文件上传的总数</span></span><br><span class="line">       <span class="attr">errorfilelist</span>: [], <span class="comment">//上传失败信息列表</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="method中"><a href="#method中" class="headerlink" title="method中"></a>method中</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//添加文件到列表还未上传,每添加一个文件，就会调用一次,在这里过滤并收集文件夹中文件格式不正确信息，同时把所有文件的状态设为暂停中</span></span><br><span class="line">      <span class="title function_">onFileAdded</span>(<span class="params">file</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> file_type = file.<span class="property">name</span>.<span class="title function_">substring</span>(file.<span class="property">name</span>.<span class="title function_">lastIndexOf</span>(<span class="string">&quot;.&quot;</span>) + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">const</span> extension = file_type === <span class="variable language_">this</span>.<span class="property">uploadType</span>;</span><br><span class="line">        <span class="keyword">if</span> (!extension) &#123;</span><br><span class="line">          <span class="keyword">let</span> obj = &#123;</span><br><span class="line">            <span class="attr">rootname</span>: <span class="string">&#x27;无&#x27;</span>,</span><br><span class="line">            <span class="attr">name</span>: file.<span class="property">name</span>,</span><br><span class="line">            <span class="attr">errorinfo</span>: <span class="string">&quot;文件不是 &quot;</span> + <span class="variable language_">this</span>.<span class="property">uploadType</span> + <span class="string">&quot; 格式&quot;</span>,</span><br><span class="line">          &#125;;</span><br><span class="line">          <span class="keyword">let</span> arr=file.<span class="property">relativePath</span>.<span class="title function_">split</span>(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">          <span class="keyword">if</span>(arr.<span class="property">length</span>&gt;<span class="number">1</span>)&#123;</span><br><span class="line">            obj[<span class="string">&#x27;rootname&#x27;</span>] =arr[<span class="number">0</span>]</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">errorfilelist</span>.<span class="title function_">push</span>(obj);</span><br><span class="line">          file.<span class="property">ignored</span> = <span class="literal">true</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          file.<span class="title function_">pause</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.$nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">file_total</span>=<span class="variable language_">this</span>.<span class="property">$refs</span>[<span class="string">&#x27;uploader&#x27;</span>].<span class="property">files</span>.<span class="property">length</span></span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">errorfilelist</span>.<span class="property">length</span> !== <span class="number">0</span>)&#123;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">controllerErrorFileDialog</span> = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">//每个文件传输给后端之后，返回的信息</span></span><br><span class="line">      <span class="title function_">onFileSuccess</span>(<span class="params">rootFile, file, response, chunk</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> res=<span class="title class_">JSON</span>.<span class="title function_">parse</span>(response)</span><br><span class="line">        <span class="keyword">if</span>(res.<span class="property">code</span>!==<span class="number">10000</span>)&#123;</span><br><span class="line">          <span class="keyword">let</span> obj = &#123;</span><br><span class="line">            <span class="attr">rootname</span>: <span class="string">&#x27;无&#x27;</span>,</span><br><span class="line">            <span class="attr">name</span>: file.<span class="property">name</span>,</span><br><span class="line">            <span class="attr">errorinfo</span>: res.<span class="property">message</span>,</span><br><span class="line">          &#125;;</span><br><span class="line">          <span class="keyword">if</span>(rootFile.<span class="property">isFolder</span>===<span class="literal">true</span>)&#123;</span><br><span class="line">            obj[<span class="string">&#x27;rootname&#x27;</span>] = rootFile.<span class="property">name</span></span><br><span class="line">          &#125;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">errorfilelist</span>.<span class="title function_">push</span>(obj);</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">controllerErrorFileDialog</span> = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 上传错误触发，文件还未传输到后端</span></span><br><span class="line">      <span class="title function_">onFileError</span>(<span class="params">rootFile, file, response, chunk</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> obj = &#123;</span><br><span class="line">          <span class="attr">rootname</span>: <span class="string">&#x27;无&#x27;</span>,</span><br><span class="line">          <span class="attr">name</span>: file.<span class="property">name</span>,</span><br><span class="line">          <span class="attr">errorinfo</span>: <span class="string">&quot;文件上传失败&quot;</span>,</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">if</span>(rootFile.<span class="property">isFolder</span>===<span class="literal">true</span>)&#123;</span><br><span class="line">          obj[<span class="string">&#x27;rootname&#x27;</span>] = rootFile.<span class="property">name</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">errorfilelist</span>.<span class="title function_">push</span>(obj);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">controllerErrorFileDialog</span> = <span class="literal">true</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 移除文件</span></span><br><span class="line">      <span class="title function_">fileRemoved</span>(<span class="params">file</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.$nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">file_total</span>=<span class="variable language_">this</span>.<span class="property">$refs</span>[<span class="string">&#x27;uploader&#x27;</span>].<span class="property">files</span>.<span class="property">length</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line"><span class="comment">//点击开始上传按钮</span></span><br><span class="line">      <span class="title function_">submitUpload</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.$nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="variable language_">this</span>.<span class="property">$refs</span>[<span class="string">&#x27;uploader&#x27;</span>].<span class="property">files</span>.<span class="property">length</span>;i++)&#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">$refs</span>[<span class="string">&#x27;uploader&#x27;</span>].<span class="property">files</span>[i].<span class="title function_">resume</span>()</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">//关闭错误文件提示框口，知道上传对话框被关闭时才会被清空</span></span><br><span class="line">      <span class="title function_">closeErrorDialog</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">errorDialog</span> = <span class="literal">false</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 上传弹框关闭</span></span><br><span class="line">      <span class="title function_">handelClose</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">clearcache</span>()</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">thirdDialog</span> = <span class="literal">false</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 清除缓存</span></span><br><span class="line">      <span class="title function_">clearcache</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">file_total</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">errorfilelist</span>=[]</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">controllerErrorFileDialog</span> = <span class="literal">false</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">uploader</span>.<span class="property">uploader</span>.<span class="title function_">cancel</span>()</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">getresourceDetail</span>();</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">//取消上传</span></span><br><span class="line">      <span class="title function_">cancelUpload</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">thirdDialog</span> = <span class="literal">false</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">clearcache</span>();</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="css设置"><a href="#css设置" class="headerlink" title="css设置"></a>css设置</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 文件上传组件</span><br><span class="line">  <span class="selector-class">.uploader-example</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">90%</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">15px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">4</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-class">.uploader-example</span> <span class="selector-class">.uploader-btn</span> &#123;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#ffffff</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">#ffffff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  /deep/ <span class="selector-class">.uploader-example</span> <span class="selector-class">.uploader-list</span> &#123;</span><br><span class="line">    <span class="attribute">max-height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">    <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">    <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">    <span class="selector-class">.uploader-file</span><span class="selector-attr">[status=<span class="string">&quot;uploading&quot;</span>]</span>&gt; <span class="selector-class">.uploader-file-info</span>&#123;</span><br><span class="line">      &gt; <span class="selector-class">.uploader-file-status</span> &gt; <span class="selector-tag">span</span>&gt; <span class="selector-tag">i</span>&#123;</span><br><span class="line">        <span class="attribute">visibility</span>:hidden;</span><br><span class="line">      &#125;</span><br><span class="line">      &gt; <span class="selector-class">.uploader-file-status</span> &gt; <span class="selector-tag">span</span>&gt; <span class="selector-tag">em</span>&#123;</span><br><span class="line">        <span class="attribute">visibility</span>:hidden;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

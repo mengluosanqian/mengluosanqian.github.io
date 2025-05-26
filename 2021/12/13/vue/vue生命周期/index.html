@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>vue生命周期 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="生命周期钩子函数1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="vue生命周期 - Hexo"/>
+    <meta name="twitter:description" content="生命周期钩子函数1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="vue生命周期 - Hexo"/>
+    <meta property="og:description" content="生命周期钩子函数1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">vue生命周期</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">vue生命周期</h1>
+        <div class="stuff">
+            <span>十二月 13, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="生命周期钩子函数"><a href="#生命周期钩子函数" class="headerlink" title="生命周期钩子函数"></a>生命周期钩子函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">      <span class="attr">el</span>: <span class="string">&quot;#app&quot;</span>,</span><br><span class="line">      <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          <span class="attr">nowTime</span>: <span class="number">1626517256000</span>,</span><br><span class="line">          <span class="attr">msg</span>: <span class="string">&quot;我是一个可爱的人，可爱可爱&quot;</span>,</span><br><span class="line">          <span class="attr">hh</span>: <span class="string">&quot;12&quot;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">methods</span>: &#123;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">beforeCreate</span>(<span class="params"></span>) &#123; <span class="comment">//第一个生命周期函数，表示在实例完全被创建出来之前，会执行他</span></span><br><span class="line">        <span class="comment">// 此时执行data和methods中的方法会报错</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">created</span>(<span class="params"></span>) &#123; <span class="comment">//data和methods已经初始化好了，最早调用的周期</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">//vue开始编译模板，把vue中的指令开始执行，在内存中生成一个编译好的最终模板字符串，然后把这个模板字符串渲染为内存的DOM</span></span><br><span class="line">      <span class="comment">// 此时只是在内存中渲染好了,并没有真正挂载到页面中去</span></span><br><span class="line">      <span class="title function_">beforeMount</span>(<span class="params"></span>) &#123; <span class="comment">//模板已经在内存中编译完成了,但是尚未把模板渲染到页面中</span></span><br><span class="line">        <span class="comment">// 页面中的元素还没被正在替换过来</span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test&quot;</span>).<span class="property">innerHTML</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test&quot;</span>).<span class="property">innerHTML</span>); <span class="comment">//&#123;&#123;msg&#125;&#125;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">mounted</span>(<span class="params"></span>) &#123; <span class="comment">//内存中的模板已经真实的挂载到了页面中，用户已经可以看到渲染好的页面了</span></span><br><span class="line">        <span class="comment">// 此时，如果没有其他操作，这个实例就在内存中不会发生改动</span></span><br><span class="line">        <span class="comment">// 执行完了mounted ，就表示这个vue实例已经初始化完毕，此时进入到运行阶段</span></span><br><span class="line">        <span class="comment">// 如果要通过某些插件来操作dom，需要在mounted中</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test&quot;</span>).<span class="property">innerHTML</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 组件运行阶段的生命周期函数</span></span><br><span class="line">      <span class="comment">// data发生改变会触发，有选择性的触发0到无数次</span></span><br><span class="line">      <span class="title function_">beforeUpdate</span>(<span class="params"></span>) &#123; <span class="comment">//这时候表示界面还没有更新，数据已经被更新了（因为只有data发生改变才会触发）</span></span><br><span class="line">        <span class="comment">// 点击按钮查看效果</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;界面上的元素内容是：&#x27;</span>, <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test&quot;</span>).<span class="property">innerHTML</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;data中的数据是：&#x27;</span>, <span class="variable language_">this</span>.<span class="property">msg</span>);</span><br><span class="line">        <span class="comment">// 界面上的元素内容是： 我是一个可爱的人，可爱可爱</span></span><br><span class="line">        <span class="comment">// data中的数据是： 哈哈</span></span><br><span class="line">        <span class="comment">// 页面上显示的数据还是旧的，此时data数据是最新的，页面尚未和最新的数据保持同步</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">//   在内存中根据data中的数据重新渲染处一份最新的内存DOM树，</span></span><br><span class="line">      <span class="comment">// 当最新的内存DOM树被更新之后，会把最新的内存DOM树重新渲染到真实的页面中去</span></span><br><span class="line">      <span class="comment">// 这时候就完成了数据从data(Model层)到view(视图层)的更新</span></span><br><span class="line">      <span class="title function_">updated</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">//   此时页面和data数据已经保持同步了</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;界面上的元素内容是：&#x27;</span>, <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test&quot;</span>).<span class="property">innerHTML</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;data中的数据是：&#x27;</span>, <span class="variable language_">this</span>.<span class="property">msg</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">activated</span>(<span class="params"></span>) &#123; <span class="comment">//被 keep-alive 缓存的组件激活时调用。该钩子在服务器端渲染期间不被调用。</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">deactivated</span>(<span class="params"></span>) &#123;  <span class="comment">//被 keep-alive 缓存的组件停用时调用。该钩子在服务器端渲染期间不被调用。       </span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">//   销毁阶段</span></span><br><span class="line">      <span class="title function_">beforeDestroy</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// data、methods、过滤器等都处于可用状态，还没有真正执行销毁的过程  </span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">destroyed</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 已经被完全销毁，data、methods、过滤器等都处于不可用状态</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">//当捕获一个来自子孙组件的错误时被调用</span></span><br><span class="line">      <span class="attr">errorCaptured</span>: <span class="function">(<span class="params">err, vm, info</span>) =&gt;</span> &#123;</span><br><span class="line">        </span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="生命周期区别"><a href="#生命周期区别" class="headerlink" title="生命周期区别"></a>生命周期区别</h3><h4 id="created和mounted的区别"><a href="#created和mounted的区别" class="headerlink" title="created和mounted的区别"></a>created和mounted的区别</h4><p>created：在模板渲染成html前调用，即通常初始化某些值，然后再渲染成视图<br>mounted：在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作</p>
+<h4 id="一般在哪个生命周期请求异步数据"><a href="#一般在哪个生命周期请求异步数据" class="headerlink" title="一般在哪个生命周期请求异步数据"></a>一般在哪个生命周期请求异步数据</h4><ol>
+<li>created、beforeMount、mounted</li>
+<li>这三个钩子函数中，data已经创建，可以将服务端返回的数据进行赋值</li>
+<li>推荐在created钩子函数中调用异步请求：<ul>
+<li>能更快的获取到服务端数据，减少页面加载时间，用户体验更好</li>
+<li>SSR不支持beforeMount、mounted钩子函数</li>
+</ul>
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

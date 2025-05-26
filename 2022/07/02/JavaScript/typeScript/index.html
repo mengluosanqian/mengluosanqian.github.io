@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>typeScript - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="typeScript
+是微软开发的一种静态的编程语言，它是 JavaScript 的超集
+所有js 代码都可以在 ts 里面运行
+ts 支持类型支持，ts &amp;#x3D; type +JavaScri,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="typeScript - Hexo"/>
+    <meta name="twitter:description" content="typeScript
+是微软开发的一种静态的编程语言，它是 JavaScript 的超集
+所有js 代码都可以在 ts 里面运行
+ts 支持类型支持，ts &amp;#x3D; type +JavaScri,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="typeScript - Hexo"/>
+    <meta property="og:description" content="typeScript
+是微软开发的一种静态的编程语言，它是 JavaScript 的超集
+所有js 代码都可以在 ts 里面运行
+ts 支持类型支持，ts &amp;#x3D; type +JavaScri,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">typeScript</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">typeScript</h1>
+        <div class="stuff">
+            <span>七月 02, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="typeScript"><a href="#typeScript" class="headerlink" title="typeScript"></a>typeScript</h1><ol>
+<li>是微软开发的一种静态的编程语言，它是 JavaScript 的超集</li>
+<li>所有js 代码都可以在 ts 里面运行</li>
+<li>ts 支持类型支持，ts &#x3D; type +JavaScript</li>
+<li>ts 和 js 有什么区别<ul>
+<li>js属于动态编程语言（边解释边执行），ts属于静态编程语言（先编译再执行，在写的时候就会发现错误，ts不能直接执行，需要先编译成js）</li>
+<li>ts完全支持js，可以直接转化</li>
+</ul>
+</li>
+</ol>
+<h2 id="类型注解"><a href="#类型注解" class="headerlink" title="类型注解"></a>类型注解</h2><ol>
+<li>给变量添加类型约束，可以显示标记出代码中的意外行为，从而降低了发生错误的可能性</li>
+</ol>
+<h3 id="ts类型"><a href="#ts类型" class="headerlink" title="ts类型"></a>ts类型</h3><ol>
+<li>常用基础类型<ul>
+<li>number&#x2F;string&#x2F;boolean&#x2F;null&#x2F;undefined&#x2F;symbol</li>
+<li>object</li>
+</ul>
+</li>
+<li>新增类型<ul>
+<li>联合类型（以 |  分隔，类型满足一个就可以）</li>
+<li>自定义类型（类型别名，<code>type 别名 = 类型</code>）</li>
+<li>接口</li>
+<li>元组</li>
+<li>字面量类型</li>
+<li>枚举</li>
+<li>void</li>
+<li>any</li>
+</ul>
+</li>
+</ol>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ol>
+<li>函数涉及的类型实际上指的是：函数参数和返回值的类型</li>
+</ol>
+  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 普通函数</span></span><br><span class="line"><span class="keyword">function</span> 函数名(形参<span class="number">1</span>： 类型=默认值， 形参<span class="number">2</span>：类型=默认值,...): 返回值类型 &#123; &#125;</span><br><span class="line"><span class="comment">// 声明式实际写法:</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params"><span class="attr">num1</span>: <span class="built_in">number</span>, <span class="attr">num2</span>: <span class="built_in">number</span></span>): <span class="built_in">number</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 箭头函数</span></span><br><span class="line"><span class="keyword">const</span> 函数名（形参<span class="number">1</span>： 类型=默认值， 形参<span class="number">2</span>：类型=默认值, ...):返回值类型 =&gt; &#123; &#125;</span><br><span class="line"><span class="keyword">const</span> add2 = (<span class="attr">a</span>: <span class="built_in">number</span> =<span class="number">100</span>, <span class="attr">b</span>: <span class="built_in">number</span> = <span class="number">100</span>): <span class="function"><span class="params">number</span> =&gt;</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> a + b</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 注意： 箭头函数的返回值类型要写在参数小括号的后面</span></span><br><span class="line">add（<span class="number">1</span>,<span class="string">&#x27;1&#x27;</span>) <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
+<h3 id="统一定义函数格式"><a href="#统一定义函数格式" class="headerlink" title="统一定义函数格式"></a>统一定义函数格式</h3><p> 当函数的类型一致时，写多个就会显得代码冗余，所以需要统一定义函数的格式<br>   <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">const</span> add2 = (<span class="attr">a</span>: <span class="built_in">number</span> =<span class="number">100</span>, <span class="attr">b</span>: <span class="built_in">number</span> = <span class="number">100</span>): <span class="function"><span class="params">number</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add1</span> (<span class="params"><span class="attr">a</span>:<span class="built_in">number</span> = <span class="number">100</span> , <span class="attr">b</span>: <span class="built_in">number</span> = <span class="number">200</span></span>): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">// 这里的 add1 和 add2 的参数类型和返回值一致，</span></span><br><span class="line"><span class="comment">// 那么就可以统一定义一个函数类型</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Fn</span> = <span class="function">(<span class="params"><span class="attr">n1</span>:<span class="built_in">number</span>,<span class="attr">n2</span>:<span class="built_in">number</span></span>) =&gt;</span> <span class="built_in">number</span> </span><br><span class="line"><span class="keyword">const</span> add3 : <span class="title class_">Fn</span> = <span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;<span class="keyword">return</span> a+b &#125;</span><br><span class="line"><span class="comment">// 这样书写起来就简单多啦</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="函数返回值类型void"><a href="#函数返回值类型void" class="headerlink" title="函数返回值类型void"></a>函数返回值类型void</h3><ol>
+<li>如果一个函数没有返回值，应该使用void类型</li>
+<li>有以下几种情况<ul>
+<li>函数没写return</li>
+<li>只写了return，没有具体的返回值</li>
+<li>return的是undefined <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果什么都不写，此时，add 函数的返回值类型为： void</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">add</span> = (<span class="params"></span>) =&gt; &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果return之后什么都不写，此时，add 函数的返回值类型为： void</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">add</span> = (<span class="params"></span>) =&gt; &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> add = (): <span class="function"><span class="params">void</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 此处，返回的 undefined 是 JS 中的一个值</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这种写法是明确指定函数返回值类型为 void，与上面不指定返回值类型相同</span></span><br><span class="line"><span class="keyword">const</span> add = (): <span class="function"><span class="params">void</span> =&gt;</span> &#123;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="函数–可选参数"><a href="#函数–可选参数" class="headerlink" title="函数–可选参数"></a>函数–可选参数</h3><ol>
+<li>使用函数实现某个功能时，参数可以传也可以不传。</li>
+<li>可选参数和默认值<ul>
+<li>调用函数时，可以少传参数</li>
+<li>设置了默认值之后，就是可选的了，不写就会使用默认值； 可选的参数一定有值</li>
+<li>它们不能一起使用。优先使用默认值  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">可选参数：在可选参数名的后面添加 ?（问号）</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">slice</span> (<span class="params"><span class="attr">a</span>?: <span class="built_in">number</span>, <span class="attr">b</span>?: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="comment">// ? 跟在参数名字的后面，表示可选的参数</span></span><br><span class="line">    <span class="comment">// 注意：可选参数只能在 必须参数的后面</span></span><br><span class="line">    <span class="comment">// 如果可选参数在必选参数的前面，会报错</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">111</span>);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">slice</span>()</span><br><span class="line">  <span class="title function_">slice</span>(<span class="number">1</span>)</span><br><span class="line">  <span class="title function_">slice</span>(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="对象类型–单独使用"><a href="#对象类型–单独使用" class="headerlink" title="对象类型–单独使用"></a>对象类型–单独使用</h3>  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> 对象名: &#123;</span><br><span class="line">  属性名<span class="number">1</span>：类型<span class="number">1</span>，</span><br><span class="line">  属性名<span class="number">2</span>?：类型<span class="number">2</span>，</span><br><span class="line">  方法名<span class="number">1</span>(形参<span class="number">1</span>: 类型<span class="number">1</span>，形参<span class="number">2</span>: 类型<span class="number">2</span>)： 返回值类型,</span><br><span class="line">  方法名<span class="number">2</span>:<span class="function">(<span class="params">形参<span class="number">1</span>: 类型<span class="number">1</span>，形参<span class="number">2</span>: 类型<span class="number">2</span></span>) =&gt;</span> 返回值类型</span><br><span class="line">&#125; = &#123; 属性名<span class="number">1</span>: 值<span class="number">1</span>，属性名<span class="number">2</span>：值<span class="number">2</span>  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="对象类型————类型别名"><a href="#对象类型————类型别名" class="headerlink" title="对象类型————类型别名"></a>对象类型————类型别名</h3>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建类型别名</span></span><br><span class="line">type <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: string，</span><br><span class="line">  <span class="attr">age</span>: number</span><br><span class="line">  <span class="title function_">sayHi</span>(): <span class="keyword">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用类型别名作为对象的类型：</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">person</span>: <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;小花&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">  <span class="title function_">sayHi</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ol>
+<li>当一个对象类型被多次使用时，有如下两种方式来来描述对象的类型，以达到复用的目的：<ul>
+<li>类型别名 type</li>
+<li>接口 interface</li>
+</ul>
+</li>
+<li>接口和类型 的区别 interface（接口）和 type（类型别名）的对比<ul>
+<li>借口只能给对象指定类型，并且可以继承</li>
+<li>类型别名，不仅可以为对象指定类型，实际上可以为任意类型指定别名</li>
+</ul>
+</li>
+</ol>
+  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 接口的写法-------------</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IPerson</span> &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user1：<span class="title class_">IPerson</span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// type的写法-------------</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Person</span>  = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> user2：<span class="title class_">Person</span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">interface</span> 接口名  &#123;属性<span class="number">1</span>: 类型<span class="number">1</span>, 属性<span class="number">2</span>: 类型<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">// 这里用 interface 关键字来声明接口</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IGoodItem</span>  &#123;</span><br><span class="line">    <span class="comment">// 接口名称(比如，此处的 IPerson)，可以是任意合法的变量名称，推荐以 `I` 开头</span></span><br><span class="line">   <span class="attr">name</span>: <span class="built_in">string</span>, <span class="attr">price</span>: <span class="built_in">number</span>, <span class="attr">func</span>: <span class="function">()=&gt;</span><span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明接口后，直接使用接口名称作为变量的类型</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">good1</span>: <span class="title class_">IGoodItem</span> = &#123;</span><br><span class="line">   <span class="attr">name</span>: <span class="string">&#x27;手表&#x27;</span>,</span><br><span class="line">   <span class="attr">price</span>: <span class="number">200</span>,</span><br><span class="line">   <span class="attr">func</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">&#x27;看时间&#x27;</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="attr">good2</span>: <span class="title class_">IGoodItem</span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;手机&#x27;</span>,</span><br><span class="line">    <span class="attr">price</span>: <span class="number">2000</span>,</span><br><span class="line">    <span class="attr">func</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;打电话&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="接口继承"><a href="#接口继承" class="headerlink" title="接口继承"></a>接口继承</h3><p>如果两个接口之间有相同的属性或方法，可以将公共的属性或方法抽离出来，通过继承来实现复用<br>  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> 接口2 <span class="keyword">extends</span> 接口1 &#123;</span><br><span class="line"> 属性<span class="number">1</span>： 类型<span class="number">1</span>， <span class="comment">// 接口2中特有的类型 </span></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> a &#123; <span class="attr">x</span>: <span class="built_in">number</span>; <span class="attr">y</span>: <span class="built_in">number</span> &#125;</span><br><span class="line"><span class="comment">// 继承 a</span></span><br><span class="line"><span class="comment">// 使用 extends(继承)关键字实现了接口</span></span><br><span class="line"><span class="keyword">interface</span> b <span class="keyword">extends</span> a &#123;</span><br><span class="line">  <span class="attr">z</span>: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 继承后，b 就有了 a 的所有属性和方法(此时，b 同时有 x、y、z 三个属性)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><p>元组是一种特殊的数组，约定了元素个数，约定了特定索引对应的数据类型</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>移动端 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="视口理想视口
+width  viewport的宽度 
+height viewport的高度   
+device-width 定义输出设备的屏幕可见宽度
+initial-scale  初始的缩放比例
+,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="移动端 - Hexo"/>
+    <meta name="twitter:description" content="视口理想视口
+width  viewport的宽度 
+height viewport的高度   
+device-width 定义输出设备的屏幕可见宽度
+initial-scale  初始的缩放比例
+,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="移动端 - Hexo"/>
+    <meta property="og:description" content="视口理想视口
+width  viewport的宽度 
+height viewport的高度   
+device-width 定义输出设备的屏幕可见宽度
+initial-scale  初始的缩放比例
+,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">移动端</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">移动端</h1>
+        <div class="stuff">
+            <span>八月 27, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="视口"><a href="#视口" class="headerlink" title="视口"></a>视口</h3><h4 id="理想视口"><a href="#理想视口" class="headerlink" title="理想视口"></a>理想视口</h4><ol>
+<li>width  viewport的宽度 </li>
+<li>height viewport的高度   </li>
+<li>device-width 定义输出设备的屏幕可见宽度</li>
+<li>initial-scale  初始的缩放比例</li>
+<li>minimum-scale  允许用户缩放到的最小比例</li>
+<li>maximum-scale  允许用户缩放到的最大比例</li>
+<li>user-scalable  用户是否可以手动缩放</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0&quot;</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="移动端特殊样式"><a href="#移动端特殊样式" class="headerlink" title="移动端特殊样式"></a>移动端特殊样式</h4><ol>
+<li>box-sizing:border-sizing</li>
+<li>-webkit-box-sizing:border-sizing   默认：content-box   border-box：margin、padding不会撑开盒子</li>
+<li>-webkit-tap-highlight-color:transparent   可以设置高亮颜色以及清除点击高亮</li>
+<li>-webkit-appearance:none   清除iOS中预置的样式，如input，botton</li>
+<li>-webkit-touch-callout:none   禁用长按弹出菜单</li>
+</ol>
+<h3 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">@media</span> mediaType <span class="keyword">and</span>|<span class="keyword">not</span>|<span class="keyword">only</span> (media feature) &#123;</span><br><span class="line">    CSS-<span class="selector-tag">Code</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="mediaType-媒体类型"><a href="#mediaType-媒体类型" class="headerlink" title="mediaType 媒体类型"></a>mediaType 媒体类型</h4><p>|	名称	|	作用	|<br>| :—:|	:—:	|<br>|	all	|	用于所有设备	|<br>|	print	|	 用于打印机和打印预览	|<br>|	screen	|	用于电脑屏幕，平板电脑，智能手机等。	|<br>|	speech	|	应用于屏幕阅读器等发声设备	|</p>
+<h4 id="media-feature-媒体功能"><a href="#media-feature-媒体功能" class="headerlink" title="media feature 媒体功能"></a>media feature 媒体功能</h4><p>|	名称	|	作用	|<br>| :—:|	:—:	|<br>|aspect-ratio	|定义输出设备中的页面可见区域宽度与高度的比率|<br>|color	|定义输出设备每一组彩色原件的个数。如果不是彩色设备，则值等于0|<br>|color-index|	定义在输出设备的彩色查询表中的条目数。如果没有使用彩色查询表，则值等于0|<br>|device-aspect-ratio	|定义输出设备的屏幕可见宽度与高度的比率。|<br>|device-height	|定义输出设备的屏幕可见高度。|<br>|device-width	|定义输出设备的屏幕可见宽度。|<br>|grid	|用来查询输出设备是否使用栅格或点阵。|<br>|height|	定义输出设备中的页面可见区域高度。|<br>|max-aspect-ratio	|定义输出设备的屏幕可见宽度与高度的最大比率。|<br>|max-color	|定义输出设备每一组彩色原件的最大个数。|<br>|max-color-index	|定义在输出设备的彩色查询表中的最大条目数。|<br>|max-device-aspect-ratio	|定义输出设备的屏幕可见宽度与高度的最大比率。|<br>|max-device-height	|定义输出设备的屏幕可见的最大高度。|<br>|max-device-width	|定义输出设备的屏幕最大可见宽度。|<br>|max-height	|定义输出设备中的页面最大可见区域高度。|<br>|max-monochrome	|定义在一个单色框架缓冲区中每像素包含的最大单色原件个数。|<br>|max-resolution	|定义设备的最大分辨率。|<br>|max-width	|定义输出设备中的页面最大可见区域宽度。|<br>|min-aspect-ratio	|定义输出设备中的页面可见区域宽度与高度的最小比率。|<br>|min-color	|定义输出设备每一组彩色原件的最小个数。|<br>|min-color-index	|定义在输出设备的彩色查询表中的最小条目数。|<br>|min-device-aspect-ratio	|定义输出设备的屏幕可见宽度与高度的最小比率。|<br>|min-device-width	|定义输出设备的屏幕最小可见宽度。|<br>|min-device-height	|定义输出设备的屏幕的最小可见高度。|<br>|min-height	|定义输出设备中的页面最小可见区域高度。|<br>|min-monochrome	|定义在一个单色框架缓冲区中每像素包含的最小单色原件个数|<br>|min-resolution	|定义设备的最小分辨率。||<br>|min-width	|定义输出设备中的页面最小可见区域宽度。|<br>|monochrome	|定义在一个单色框架缓冲区中每像素包含的单色原件个数。如果不是单色设备，则值等于0|<br>|orientation	|定义输出设备中的页面可见区域高度是否大于或等于宽度。|<br>|resolution	|定义设备的分辨率。如：96dpi, 300dpi, 118dpcm|<br>|can	|定义电视类设备的扫描工序。|<br>|width	|定义输出设备中的页面可见区域宽度。|</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>:<span class="number">400px</span>) &#123;</span><br><span class="line">           <span class="selector-tag">body</span>&#123;</span><br><span class="line">               <span class="attribute">background-color</span>: red;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>:<span class="number">401px</span>) &#123;</span><br><span class="line">           <span class="selector-tag">body</span>&#123;</span><br><span class="line">               <span class="attribute">background-color</span>: blue;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>:<span class="number">601px</span>) &#123;</span><br><span class="line">           <span class="selector-tag">body</span>&#123;</span><br><span class="line">               <span class="attribute">background-color</span>: yellow;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="selector-tag">html</span>&#123;</span><br><span class="line">           <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="selector-class">.box</span>&#123;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">10rem</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">10rem</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: red;</span><br><span class="line">           <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="REM-和EM"><a href="#REM-和EM" class="headerlink" title="REM 和EM"></a>REM 和EM</h3><h4 id="em"><a href="#em" class="headerlink" title="em"></a>em</h4><ol>
+<li>字体大小相对于父元素字体大小来说的</li>
+<li>其他属性相对于自身的字体大小来说，如果自身没有，则寻找有字体大小的父级元素</li>
+</ol>
+<h4 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h4><ol>
+<li>相对于html元素字体大小来说的(通过修改html里面的文字大小来改变页面中元素的大小)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">setRem</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> deviceWidth = <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span>;</span><br><span class="line">  <span class="comment">// 获取相对UI稿，屏幕的缩放比例</span></span><br><span class="line">  <span class="keyword">const</span> rem = (deviceWidth *<span class="number">100</span>) / <span class="number">750</span>;</span><br><span class="line">  <span class="comment">// 动态设置html的font-size</span></span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;html&#x27;</span>).<span class="property">style</span>.<span class="property">fontSize</span> =  rem + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

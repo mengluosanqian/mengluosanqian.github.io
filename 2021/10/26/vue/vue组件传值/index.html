@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>vue组件传值 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="组件传值方式props&amp;#x2F;$emit最常见的父子组件传值方式
+
+子组件通过props接受参数
+子组件通过$emit向父组件传值
+
+eventBus事件总线 （$emit&amp;#x2F;$on）
+,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="vue组件传值 - Hexo"/>
+    <meta name="twitter:description" content="组件传值方式props&amp;#x2F;$emit最常见的父子组件传值方式
+
+子组件通过props接受参数
+子组件通过$emit向父组件传值
+
+eventBus事件总线 （$emit&amp;#x2F;$on）
+,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="vue组件传值 - Hexo"/>
+    <meta property="og:description" content="组件传值方式props&amp;#x2F;$emit最常见的父子组件传值方式
+
+子组件通过props接受参数
+子组件通过$emit向父组件传值
+
+eventBus事件总线 （$emit&amp;#x2F;$on）
+,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">vue组件传值</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">vue组件传值</h1>
+        <div class="stuff">
+            <span>十月 26, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="组件传值方式"><a href="#组件传值方式" class="headerlink" title="组件传值方式"></a>组件传值方式</h3><h4 id="props-emit"><a href="#props-emit" class="headerlink" title="props&#x2F;$emit"></a>props&#x2F;$emit</h4><p>最常见的父子组件传值方式</p>
+<ol>
+<li>子组件通过props接受参数</li>
+<li>子组件通过$emit向父组件传值</li>
+</ol>
+<h4 id="eventBus事件总线-（-emit-on）"><a href="#eventBus事件总线-（-emit-on）" class="headerlink" title="eventBus事件总线 （$emit&#x2F;$on）"></a>eventBus事件总线 （$emit&#x2F;$on）</h4><ol>
+<li>可以引入vue-bus，在使用时即可使用$bus</li>
+<li>注册一个空的vue实例作为事件总线<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">EventBus</span> = <span class="keyword">new</span> <span class="title class_">Vue</span>()</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$emit(<span class="string">&#x27;方法名&#x27;</span>,参数<span class="number">1</span>,参数<span class="number">2</span>……)</span><br><span class="line">$on(<span class="string">&#x27;方法名&#x27;</span>,<span class="function">(<span class="params">参数<span class="number">1</span>,参数<span class="number">2</span>……</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件1</span></span><br><span class="line">&lt;button @click=<span class="string">&quot;sendMsg&quot;</span>&gt;给兄弟节点发送msg&lt;/button&gt;</span><br><span class="line"><span class="comment">// bus.$emit(&#x27;share&#x27;, this.msg)</span></span><br><span class="line"><span class="comment">// 在main.js中注册了全局事件总线后，可以采取下面的写法，$bus是在main.js中自定义的，一般为$bus</span></span><br><span class="line"><span class="comment">// this.$bus.$emit(&#x27;share&#x27;, this.msg)</span></span><br><span class="line"><span class="title class_">EventBus</span>.$emit(<span class="string">&#x27;share&#x27;</span>, <span class="variable language_">this</span>.<span class="property">msg</span>,<span class="variable language_">this</span>.<span class="property">msg2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子组件2</span></span><br><span class="line"> <span class="title class_">EventBus</span>.$on(<span class="string">&#x27;share&#x27;</span>,<span class="function">(<span class="params">data,data2</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">newMsg</span> = data</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(data, data2,<span class="string">&#x27;这是接收数据的兄弟组件&#x27;</span>);</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="依赖注入-provide-inject"><a href="#依赖注入-provide-inject" class="headerlink" title="依赖注入 provide&#x2F;inject"></a>依赖注入 provide&#x2F;inject</h4><ol>
+<li>provide钩子用来发送数据或者方法</li>
+<li>inject钩子用来接收数据或方法</li>
+<li>依赖注入所提供的属性是非响应式的。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">provide</span>: &#123;</span><br><span class="line">    <span class="attr">options</span>: <span class="variable language_">this</span>.<span class="property">list</span></span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line"><span class="attr">inject</span>: [<span class="string">&#x27;options&#x27;</span>],</span><br></pre></td></tr></table></figure>
+
+<h4 id="ref和-refs"><a href="#ref和-refs" class="headerlink" title="ref和$refs"></a>ref和$refs</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;zizujianTest ref=<span class="string">&quot;zizujianTest&quot;</span> :datas=<span class="string">&quot;list&quot;</span> @dianji=<span class="string">&quot;myclick&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="title function_">myclick</span> () &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">zizujianTest</span>.<span class="property">data</span>)</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;来自父组件的点击方法&#x27;</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="parent-children"><a href="#parent-children" class="headerlink" title="$parent &#x2F; $children"></a>$parent &#x2F; $children</h4><ol>
+<li>通过$parent访问到的是上一级父组件实例，可以使用$root来访问跟组件的实例</li>
+<li>在组件中使用$children拿到的是所有子组件的实例，他是一个数组，而且是无序的</li>
+<li>在根组件#app上拿$parent得到的是new Vue()的实例，在这实例上再拿$parent得到的是undefined，最底层的子组件拿$children 是个空数组</li>
+<li>$children的值是数组，而$parent是个对象</li>
+</ol>
+<h4 id="attrs-listeners"><a href="#attrs-listeners" class="headerlink" title="$attrs &#x2F; $listeners"></a>$attrs &#x2F; $listeners</h4><ol>
+<li>利用$attrs &#x2F; $listeners实现组件之间的跨代通信</li>
+<li>inheritAttrs 默认值是true，继承所有父组件属性除props之外的所有属性，false只继承class属性</li>
+<li>$attrs：继承所有的父组件属性（除了props传递的属性、class和style），一般用在子组件的子元素上</li>
+<li>$listeners: 该属性是一个对象，里面包含了作用在这个组件上的所有监听器，可以配合 v-on&#x3D;”$listeners” 将所有的事件监听器指向这个组件的某个特定子元素（相当于子组件继承父组件的事件）</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> // 祖父节点</span><br><span class="line">&lt;fuzujian :testMsg1=&quot;testMsg1&quot; :testMsg2=&quot;testMsg2&quot; @attrsMehtods1=&quot;attrsMehtods1&quot; @attrsMehtods2=&quot;attrsMehtods2&quot;&gt;&lt;/fuzujian&gt;</span><br><span class="line"></span><br><span class="line">// 父节点</span><br><span class="line">&lt;div class=&quot;fuzujian&quot;&gt;</span><br><span class="line">      &lt;strong&gt;这是通过$attrs接受的值,除了props里面的所有值&lt;/strong&gt;</span><br><span class="line">      &lt;main&gt;</span><br><span class="line">      $attrs:&#123;&#123;$attrs&#125;&#125;</span><br><span class="line">      &lt;/main&gt;</span><br><span class="line">      &lt;el-button @click=&quot;testMethods&quot;&gt;测试向父组件传值&lt;/el-button&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">          &lt;strong&gt;通过attrs向子组件传值，相对于testAttrs的孙子节点，利用$listeners向其传递方法&lt;/strong&gt;</span><br><span class="line">      &lt;zizujian v-bind=&quot;$attrs&quot; v-on=&quot;$listeners&quot;&gt;&lt;/zizujian&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  testMethods () &#123;</span><br><span class="line">      this.$emit(&#x27;attrsMehtods1&#x27;, this.msg1)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">// 子节点</span><br><span class="line"> &lt;main class=&quot;zizujian&quot;&gt;</span><br><span class="line">    &lt;strong&gt;这是孙子节点接收的值&lt;/strong&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123;&#123; $attrs &#125;&#125;</span><br><span class="line">      &lt;el-button @click=&quot;myMethods1&quot;&gt;孙子节点调用祖父节点的方法&lt;/el-button&gt;</span><br><span class="line">      &lt;el-button @click=&quot;myMethods2&quot;&gt;孙子节点调用祖父节点的方法2&lt;/el-button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/main&gt;</span><br><span class="line">   myMethods1 () &#123;</span><br><span class="line">      this.$emit(&#x27;attrsMehtods1&#x27;, this.msg1)</span><br><span class="line">    &#125;,</span><br><span class="line">    myMethods2 () &#123;</span><br><span class="line">      this.$emit(&#x27;attrsMehtods2&#x27;, this.msg2)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
