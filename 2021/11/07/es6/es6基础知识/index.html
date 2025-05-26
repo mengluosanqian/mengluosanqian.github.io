@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="es6let和const let和const没有变量提升 let定义后可以进行修改 const引用对象定义后指针指向可以修改，但基本类型不能修改 let、const不能重复声明  箭头函数 没有自己的this 不能作为构造函数，不可以new 没有arguments对象 没有原型对象  解构函数 数组的解构1const [a,b,c] &#x3D; [1,2,3] 对象的解构1234567891011cons">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6基础知识">
+<meta property="og:url" content="http://example.com/2021/11/07/es6/es6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="es6let和const let和const没有变量提升 let定义后可以进行修改 const引用对象定义后指针指向可以修改，但基本类型不能修改 let、const不能重复声明  箭头函数 没有自己的this 不能作为构造函数，不可以new 没有arguments对象 没有原型对象  解构函数 数组的解构1const [a,b,c] &#x3D; [1,2,3] 对象的解构1234567891011cons">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-07T09:05:43.000Z">
+<meta property="article:modified_time" content="2022-05-22T09:14:01.674Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/11/07/es6/es6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>es6基础知识 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/es6/es6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          es6基础知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-07 17:05:43" itemprop="dateCreated datePublished" datetime="2021-11-07T17:05:43+08:00">2021-11-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-22 17:14:01" itemprop="dateModified" datetime="2022-05-22T17:14:01+08:00">2022-05-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/es6/" itemprop="url" rel="index"><span itemprop="name">es6</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="es6"><a href="#es6" class="headerlink" title="es6"></a>es6</h3><h4 id="let和const"><a href="#let和const" class="headerlink" title="let和const"></a>let和const</h4><ol>
+<li>let和const没有变量提升</li>
+<li>let定义后可以进行修改</li>
+<li>const引用对象定义后指针指向可以修改，但基本类型不能修改</li>
+<li>let、const不能重复声明</li>
+</ol>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><ol>
+<li>没有自己的this</li>
+<li>不能作为构造函数，不可以new</li>
+<li>没有arguments对象</li>
+<li>没有原型对象</li>
+</ol>
+<h4 id="解构函数"><a href="#解构函数" class="headerlink" title="解构函数"></a>解构函数</h4><ol>
+<li>数组的解构<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [a,b,c] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure></li>
+<li>对象的解构<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> aaa = &#123;</span><br><span class="line">           <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">           <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">           <span class="attr">sayHi</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">               <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hi&#x27;</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">let</span> &#123;</span><br><span class="line">           sayHi</span><br><span class="line">       &#125; = aaa;</span><br><span class="line">       <span class="title function_">sayHi</span>()</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="函数参数默认值"><a href="#函数参数默认值" class="headerlink" title="函数参数默认值"></a>函数参数默认值</h4><ol>
+<li>会影响函数的length，只会统计有函数值前的无函数值的个数</li>
+<li>形参初始值<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add1</span>(<span class="params">a,b,c=<span class="number">10</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b +c</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> result1 = <span class="title function_">add1</span>(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result1);</span><br></pre></td></tr></table></figure></li>
+<li>与解构赋值结合使用<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">connect</span>(<span class="params">&#123;host,username,password,port=<span class="number">8088</span>&#125;</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(host,username,password,port);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">connect</span>(&#123;</span><br><span class="line">            <span class="attr">host</span>:<span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">            <span class="attr">username</span>:<span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">            <span class="attr">password</span>:<span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">            <span class="attr">port</span>:<span class="number">8080</span></span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h4><p><code>$&#123;&#125;</code></p>
+<h4 id="数值扩展"><a href="#数值扩展" class="headerlink" title="数值扩展"></a>数值扩展</h4><ol>
+<li>Number.EPSILON 是JavaScript中表示的最小精度</li>
+<li>Number.isFinite 检测一个数值是否是有限数</li>
+<li>Number.isNaN 检测一个数值是否是NaN，Number.isNaN()只有对于NaN才返回true，非NaN一律返回false。</li>
+<li>Number.parseInt Number.parseFloat 字符串转化为整数，es6将这两个方法移到Number，逐步减少全局性方法，使语言逐步模块化。</li>
+<li>Number.isInteger 判断一个数是否为整数，与传统的全局方法isFinite()的区别在于，传统方法先调用Number()将非数值的值转为数值，再进行判断， 而这两个新方法只对数值有效，Number.isFinite()对于非数值一律返回false, </li>
+<li>Math.trunc 将数字的小数部分抹掉</li>
+<li>Math.sign 判断一个数是整数还是负数还是0</li>
+<li>数值分隔符<ul>
+<li>ES2021，允许 JavaScript 的数值使用下划线（_）作为分隔符。</li>
+<li>这个数值分隔符没有指定间隔的位数，也就是说，可以每三位添加一个分隔符，也可以每一位、每两位、每四位添加一个。</li>
+<li>小数和科学计数法也可以使用数值分隔符。</li>
+<li>不能放在数值的最前面（leading）或最后面（trailing）。</li>
+<li>不能两个或两个以上的分隔符连在一起。</li>
+<li>小数点的前后不能有分隔符。</li>
+<li>科学计数法里面，表示指数的e或E前后不能有分隔符。</li>
+<li>数值分隔符只是一种书写便利，对于 JavaScript 内部数值的存储和输出，并没有影响。</li>
+<li>将字符串转成数值的函数，不支持数值分隔符。</li>
+</ul>
+</li>
+</ol>
+<h4 id="对象方法扩展"><a href="#对象方法扩展" class="headerlink" title="对象方法扩展"></a>对象方法扩展</h4><ol>
+<li>Object.is 判断两个值是否相等<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">is</span>(<span class="number">120</span>, <span class="number">121</span>)); <span class="comment">//false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">is</span>(<span class="title class_">NaN</span>, <span class="title class_">NaN</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">NaN</span> === <span class="title class_">NaN</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure></li>
+<li>Object.assign 对象的合并<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config1 = &#123;</span><br><span class="line">           <span class="attr">host</span>: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">           <span class="attr">port</span>: <span class="number">3306</span>,</span><br><span class="line">           <span class="attr">name</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">           <span class="attr">pass</span>: <span class="string">&#x27;root&#x27;</span></span><br><span class="line">       &#125;;</span><br><span class="line">       <span class="keyword">const</span> config2 = &#123;</span><br><span class="line">           <span class="attr">host</span>: <span class="string">&#x27;172.0.0.1&#x27;</span>,</span><br><span class="line">           <span class="attr">port</span>: <span class="number">8080</span>,</span><br><span class="line">           <span class="attr">name</span>: <span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">           <span class="attr">pass</span>: <span class="string">&#x27;admin&#x27;</span></span><br><span class="line">       &#125;;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 只有字符串的包装对象会产生可枚举属性，可以并入目标对象</span></span><br><span class="line">       <span class="keyword">const</span> v1 = <span class="string">&#x27;abc&#x27;</span></span><br><span class="line">       <span class="keyword">const</span> v2 = <span class="literal">true</span></span><br><span class="line">       <span class="keyword">const</span> v3 = <span class="number">12</span></span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,v1,v2,v3),<span class="string">&#x27;Object.assign(&#123;&#125;,v1,v2,v3)&#x27;</span>);</span><br><span class="line">       <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,v1,v2,v3)</span><br><span class="line">       <span class="comment">// 如果重名，后面对象属性会覆盖前面对象属性</span></span><br><span class="line">       <span class="comment">// console.log(Object.assign(config1, config2));</span></span><br><span class="line">       <span class="comment">// console.log(Object.assign(config2, config1));</span></span><br></pre></td></tr></table></figure></li>
+<li>Object.setPrototypeOf 设置原型对象<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//    Object.setPrototypeOf 设置原型对象 Object.getPrototypeOf</span></span><br><span class="line">        <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(config1, config2)</span><br><span class="line">        <span class="comment">// config2 会设置在config1的原型对象上</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(config1);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(config1),<span class="string">&#x27;111&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
+<li>Object.keys()、Object.values()、Object.entries()<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取对象所有的键名 Object.keys()</span></span><br><span class="line">        <span class="comment">// 获取对象所有的值 Object.values()</span></span><br><span class="line">        <span class="comment">// 获取对象所有的键值 Object.entries()</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">keys</span>(config2));</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">values</span>(config2));</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">entries</span>(config2)); <span class="comment">//可以用来创建map</span></span><br><span class="line">        <span class="keyword">const</span> m = <span class="keyword">new</span> <span class="title class_">Map</span>(<span class="title class_">Object</span>.<span class="title function_">entries</span>(config2))</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(m);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">get</span>(<span class="string">&#x27;name&#x27;</span>));</span><br></pre></td></tr></table></figure></li>
+<li>Object.getOwnPropertyDescriptors() 对象属性的描述</li>
+<li>Object.getOwnPropertyNames(obj) 返回一个数组，含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。</li>
+<li>Object.getOwnPropertySymbols(obj) Object.getOwnPropertySymbols返回一个数组，包含对象自身的所有 Symbol 属性的键名。</li>
+</ol>
+<h4 id="数组方法扩展"><a href="#数组方法扩展" class="headerlink" title="数组方法扩展"></a>数组方法扩展</h4><p>具体可以看另外一篇文章 数组方法</p>
+<ol>
+<li>reduce</li>
+<li>Array.from</li>
+<li>flat</li>
+<li>flatMap</li>
+</ol>
+<h4 id="字符串方法扩展"><a href="#字符串方法扩展" class="headerlink" title="字符串方法扩展"></a>字符串方法扩展</h4><ol>
+<li>includes(‘字符串’,’从第N个字符开始’)：返回布尔值，表示是否找到了参数字符串。</li>
+<li>startsWith(‘字符串’,’从第N个字符开始’)：返回布尔值，表示参数字符串是否在原字符串的头部。</li>
+<li>endsWith(‘字符串’,’前N个字符’)：返回布尔值，表示参数字符串是否在原字符串的尾部。</li>
+<li>repeat(重复次数)<ul>
+<li>repeat方法返回一个新字符串，表示将原字符串重复n次。</li>
+<li>参数如果是小数，会被取整。</li>
+<li>如果repeat的参数是负数或者Infinity，会报错。</li>
+<li>参数NaN等同于 0。</li>
+<li>如果repeat的参数是字符串，则会先转换成数字。</li>
+</ul>
+</li>
+<li>padStart(位数,’补全字符串’)、padEnd(位数,’补全字符串’)<ul>
+<li>padStart()用于头部补全，padEnd()用于尾部补全。</li>
+<li>如果原字符串的长度，等于或大于最大长度，则字符串补全不生效，返回原字符串</li>
+<li>如果用来补全的字符串与原字符串，两者的长度之和超过了最大长度，则会截去超出位数的补全字符串。</li>
+<li>如果省略第二个参数，默认使用空格补全长度。</li>
+</ul>
+</li>
+<li>at(指定位置) 返回参数指定位置的字符，支持负索引</li>
+</ol>
+<h4 id="proxy"><a href="#proxy" class="headerlink" title="proxy"></a>proxy</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">            <span class="attr">name</span>:<span class="string">&#x27;dsa&#x27;</span>,</span><br><span class="line">            <span class="attr">age</span>:<span class="number">18</span>,</span><br><span class="line">            <span class="attr">_pwd</span>: <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 拦截方法</span></span><br><span class="line">        <span class="keyword">let</span> handler = &#123;</span><br><span class="line">            <span class="attr">get</span>:<span class="keyword">function</span>(<span class="params">target,prop,recevier</span>)&#123;</span><br><span class="line">                <span class="comment">// console.log(&#x27;访问量person对象的name属性&#x27;);</span></span><br><span class="line">                <span class="comment">// console.log(this);</span></span><br><span class="line">                <span class="comment">// return target[prop];</span></span><br><span class="line">                <span class="keyword">if</span>(prop <span class="keyword">in</span> target) &#123;</span><br><span class="line">                    <span class="keyword">return</span> target[prop]</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;访问的属性不存在&#x27;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="comment">// 生成proxy的实例</span></span><br><span class="line">        <span class="keyword">let</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(person,handler)</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">name</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 读取负索引的值</span></span><br><span class="line">        <span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">16</span>,<span class="number">25</span>,<span class="number">36</span>,<span class="number">49</span>,<span class="number">64</span>,<span class="number">81</span>]</span><br><span class="line">        <span class="keyword">const</span> proxy1 = <span class="keyword">new</span> <span class="title class_">Proxy</span>(arr,&#123;</span><br><span class="line">            <span class="attr">get</span>:<span class="keyword">function</span>(<span class="params">target,index</span>)&#123;</span><br><span class="line">                index = <span class="title class_">Number</span>(index)</span><br><span class="line">                <span class="keyword">if</span>(index &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> target[index]</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> target[target.<span class="property">length</span>+index]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(proxy1[<span class="number">2</span>]);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(proxy1[-<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 禁止访问私有属性</span></span><br><span class="line">        <span class="keyword">const</span> proxy2 = <span class="keyword">new</span> <span class="title class_">Proxy</span>(person,&#123;</span><br><span class="line">            <span class="attr">get</span>:<span class="keyword">function</span>(<span class="params">target,prop</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(prop.<span class="title function_">indexOf</span>(<span class="string">&#x27;_&#x27;</span>) === <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;不能访问私有属性&#x27;</span>)</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> target[prop]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// console.log(proxy2._pwd);</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        实现真正的私有：</span></span><br><span class="line"><span class="comment">            - 不能访问到私有属性，如果访问到私有属性则返回undefined</span></span><br><span class="line"><span class="comment">            - 不能直接修改私有属性，即使设置了也无效</span></span><br><span class="line"><span class="comment">            - 不能遍历出私有属性，遍历出来的属性也不包含私有属性</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">const</span> api = &#123;</span><br><span class="line">            <span class="attr">_apiKey</span>:<span class="string">&#x27;12313sfsdfg234234&#x27;</span>,</span><br><span class="line">            <span class="attr">getAll</span>:<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;查询全部用户&#x27;</span>);</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">getUserById</span>:<span class="keyword">function</span>(<span class="params">userId</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;根据用户id查询用户&#x27;</span>);</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">saveUser</span>:<span class="keyword">function</span>(<span class="params">user</span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;保存用户&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> proxy3 = <span class="keyword">new</span> <span class="title class_">Proxy</span>(api,&#123;</span><br><span class="line">            <span class="attr">get</span>:<span class="keyword">function</span>(<span class="params">target,prop</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(prop.<span class="title function_">indexOf</span>(<span class="string">&#x27;_&#x27;</span>) === <span class="number">0</span>)&#123;</span><br><span class="line">                   <span class="keyword">return</span> <span class="literal">undefined</span></span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> target[prop]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">set</span>:<span class="keyword">function</span>(<span class="params">target,prop,value</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(prop[<span class="number">0</span>] !== <span class="string">&#x27;_&#x27;</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> target[prop] = value</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;无法修改&#x27;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">has</span>:<span class="keyword">function</span> (<span class="params">target,prop</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(prop[<span class="number">0</span>] === <span class="string">&#x27;_&#x27;</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> prop <span class="keyword">in</span> target</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(proxy3.<span class="property">_apiKey</span>);</span><br><span class="line">        proxy3.<span class="property">_apiKey</span>= <span class="string">&#x27;aasd&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> (key <span class="keyword">in</span> proxy3)&#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(key);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="微任务和宏任务"><a href="#微任务和宏任务" class="headerlink" title="微任务和宏任务"></a>微任务和宏任务</h4><ol>
+<li>微任务：<ul>
+<li>promise.then()</li>
+<li>mutaionObserver</li>
+<li>object.observe</li>
+<li>process.nextTick</li>
+</ul>
+</li>
+<li>宏任务：<ul>
+<li>script 可以理解为外层同步代码</li>
+<li>setTimeout、setInterval</li>
+<li>UI render &#x2F; UI事件</li>
+<li>setImmediate、I&#x2F;O</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/ES6/" rel="tag"># ES6</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/06/JavaScript/JavaScript%E7%BB%A7%E6%89%BF/" rel="prev" title="JavaScript继承">
+      <i class="fa fa-chevron-left"></i> JavaScript继承
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/15/JavaScript/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95/" rel="next" title="字符串方法">
+      字符串方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#es6"><span class="nav-number">1.</span> <span class="nav-text">es6</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#let%E5%92%8Cconst"><span class="nav-number">1.1.</span> <span class="nav-text">let和const</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">解构函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">1.4.</span> <span class="nav-text">函数参数默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.5.</span> <span class="nav-text">模板字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E6%89%A9%E5%B1%95"><span class="nav-number">1.6.</span> <span class="nav-text">数值扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95%E6%89%A9%E5%B1%95"><span class="nav-number">1.7.</span> <span class="nav-text">对象方法扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95%E6%89%A9%E5%B1%95"><span class="nav-number">1.8.</span> <span class="nav-text">数组方法扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95%E6%89%A9%E5%B1%95"><span class="nav-number">1.9.</span> <span class="nav-text">字符串方法扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#proxy"><span class="nav-number">1.10.</span> <span class="nav-text">proxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%8F%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.11.</span> <span class="nav-text">微任务和宏任务</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

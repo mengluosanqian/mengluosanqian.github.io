@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="常见loader   名称 作用    raw-loader 加载文件原始内容   file-loader 把文件输出到一个文件夹中，在代码中通过相对URL去引用输出的文件（处理图片和字体）   url-loader 与file-loader类似，区别是用户可以设置一个阈值，大于阈值会交给file-loader处理，小于阈值时返回文件base64形式编码（处理图片和字体）   source-map">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wekpack常见属性">
+<meta property="og:url" content="http://example.com/2022/04/18/%E5%B7%A5%E7%A8%8B%E5%8C%96/wekpack%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="常见loader   名称 作用    raw-loader 加载文件原始内容   file-loader 把文件输出到一个文件夹中，在代码中通过相对URL去引用输出的文件（处理图片和字体）   url-loader 与file-loader类似，区别是用户可以设置一个阈值，大于阈值会交给file-loader处理，小于阈值时返回文件base64形式编码（处理图片和字体）   source-map">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-18T14:32:24.000Z">
+<meta property="article:modified_time" content="2022-04-21T13:12:55.966Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/04/18/%E5%B7%A5%E7%A8%8B%E5%8C%96/wekpack%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>wekpack常见属性 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/18/%E5%B7%A5%E7%A8%8B%E5%8C%96/wekpack%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          wekpack常见属性
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-18 22:32:24" itemprop="dateCreated datePublished" datetime="2022-04-18T22:32:24+08:00">2022-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-21 21:12:55" itemprop="dateModified" datetime="2022-04-21T21:12:55+08:00">2022-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index"><span itemprop="name">webpack</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="常见loader"><a href="#常见loader" class="headerlink" title="常见loader"></a>常见loader</h2><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">raw-loader</td>
+<td align="center">加载文件原始内容</td>
+</tr>
+<tr>
+<td align="center">file-loader</td>
+<td align="center">把文件输出到一个文件夹中，在代码中通过相对URL去引用输出的文件（处理图片和字体）</td>
+</tr>
+<tr>
+<td align="center">url-loader</td>
+<td align="center">与file-loader类似，区别是用户可以设置一个阈值，大于阈值会交给file-loader处理，小于阈值时返回文件base64形式编码（处理图片和字体）</td>
+</tr>
+<tr>
+<td align="center">source-map-loader</td>
+<td align="center">加载额外的source map文件，以方便断点调试</td>
+</tr>
+<tr>
+<td align="center">svg-inline-loader</td>
+<td align="center">将压缩后的svg内容注入代码中</td>
+</tr>
+<tr>
+<td align="center">image-loader</td>
+<td align="center">加载并且压缩图片文件</td>
+</tr>
+<tr>
+<td align="center">json-loader</td>
+<td align="center">加载json文件</td>
+</tr>
+<tr>
+<td align="center">handlebars-loader</td>
+<td align="center">将handlebars模板编译成函数并返回</td>
+</tr>
+<tr>
+<td align="center">babel-loader</td>
+<td align="center">将es6转化为es5</td>
+</tr>
+<tr>
+<td align="center">ts-loader</td>
+<td align="center">将typescript转化为JavaScript</td>
+</tr>
+<tr>
+<td align="center">awesome-typescript-loader</td>
+<td align="center">将typescript转化为JavaScript ，性能优于ts-loader</td>
+</tr>
+<tr>
+<td align="center">sass-loader</td>
+<td align="center">将scss&#x2F;sass代码转化为css</td>
+</tr>
+<tr>
+<td align="center">css-loader</td>
+<td align="center">加载css，支持模块化、压缩、文件导入等特性</td>
+</tr>
+<tr>
+<td align="center">style-loader</td>
+<td align="center">将css代码注入到JavaScript中，通过DOM操作去加载CSS</td>
+</tr>
+<tr>
+<td align="center">postcss-loader</td>
+<td align="center">扩展css语法，使用下一代css，可以配合autoprefixer插件自动补齐css3前缀</td>
+</tr>
+<tr>
+<td align="center">eslint-loader</td>
+<td align="center">通过eslint检查JavaScript代码</td>
+</tr>
+<tr>
+<td align="center">tslint-loader</td>
+<td align="center">通过tslint检查typescript代码</td>
+</tr>
+<tr>
+<td align="center">mocha-loader</td>
+<td align="center">加载mocha测试用例的代码</td>
+</tr>
+<tr>
+<td align="center">coverjs-loader</td>
+<td align="center">计算测试的覆盖率</td>
+</tr>
+<tr>
+<td align="center">vue-loader</td>
+<td align="center">加载vue.js单文件组件</td>
+</tr>
+<tr>
+<td align="center">i18n-loader</td>
+<td align="center">国际化</td>
+</tr>
+<tr>
+<td align="center">cache-loader</td>
+<td align="center">可以在一些性能开销较大的loader之前添加，目的是将结果缓存到磁盘里</td>
+</tr>
+</tbody></table>
+<h2 id="常见plugin"><a href="#常见plugin" class="headerlink" title="常见plugin"></a>常见plugin</h2><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">define-plugin</td>
+<td align="center">定义环境变量（webpack4之后指定mode会自定配置）</td>
+</tr>
+<tr>
+<td align="center">ignore-plugin</td>
+<td align="center">忽略部分文件</td>
+</tr>
+<tr>
+<td align="center">html-webpack-plugin</td>
+<td align="center">简化HTML文件创建（依赖于html-loader）</td>
+</tr>
+<tr>
+<td align="center">web-webpack-plugin</td>
+<td align="center">可方便的为单页应用输出HTML，比html-webpack-plugin好用</td>
+</tr>
+<tr>
+<td align="center">uglifyjs-webpack-plugin</td>
+<td align="center">不支持ES6压缩（Webpack4 以前）</td>
+</tr>
+<tr>
+<td align="center">terser-webpack-plugin</td>
+<td align="center">支持压缩ES6（webpack4）</td>
+</tr>
+<tr>
+<td align="center">mini-css-extract-plugin</td>
+<td align="center">分离样式文件，CSS 提取为独立文件，支持按需加载 (替代extract-text-webpack-plugin)</td>
+</tr>
+<tr>
+<td align="center">webpack-parallel-uglify-plugin</td>
+<td align="center">多进程执行代码压缩，提升构建速度</td>
+</tr>
+<tr>
+<td align="center">serviceworker-webpack-loader</td>
+<td align="center">为网页应用增加离线缓存功能</td>
+</tr>
+<tr>
+<td align="center">clean-webpack-plugin</td>
+<td align="center">目录清理</td>
+</tr>
+<tr>
+<td align="center">moduleConcatenationPlugin</td>
+<td align="center">开启scope hoisting</td>
+</tr>
+<tr>
+<td align="center">speed-measure-webpack-plugin</td>
+<td align="center">可以看到每个loader和plugin执行耗时</td>
+</tr>
+<tr>
+<td align="center">webpack-bundle-analyzer</td>
+<td align="center">可视化webpack输出文件的体积（业务组件、依赖第三方模块）</td>
+</tr>
+</tbody></table>
+<h2 id="loader和plugin的区别"><a href="#loader和plugin的区别" class="headerlink" title="loader和plugin的区别"></a>loader和plugin的区别</h2><ol>
+<li>loader本质是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。 因为 Webpack 只认识 JavaScript，所以 Loader 就成了翻译官，对其他类型的资源进行转译的预处理工作。</li>
+<li>plugin就是插件，基于事件流框架tapable，插件可以扩展webpack的功能，在webpack运行的生命周期中会广播出许多事件，plugin可以监听这些事件，在合适的时机通过webpack提供的api改变输出结果</li>
+<li>loader在module.rules中配置，作为木块的解析规则，类型为数组。每一项都是一个object，内部包含了test(类型文件)、loader、options(参数)等属性</li>
+<li>plugin在plugins中单独配置，类型为数组，每一项是一个plugin的实例，参数都通过构造函数传入</li>
+</ol>
+<h2 id="source-map是什么？生产环境怎么用？"><a href="#source-map是什么？生产环境怎么用？" class="headerlink" title="source map是什么？生产环境怎么用？"></a>source map是什么？生产环境怎么用？</h2><ol>
+<li>source map是将编译、打包、压缩后的代码映射回源代码的过程。打包压缩后的代码不具备良好的可读性，想要调试源码就需要source map</li>
+<li>map文件只要不打开开发者工具，浏览器是不会加载的</li>
+<li>线上环境一般有三种处理方案<ul>
+<li>hidden-source-map：借助第三方错误监控平台sentry使用</li>
+<li>nosources-source-map  只会显示具体行数以及查看源代码的错误栈，安全性比sourcemap高</li>
+<li>sourcemap：通过nginx设置。map文件只对白名单开放（公司内网）</li>
+</ul>
+</li>
+</ol>
+<h2 id="使用webpack开发时，用过哪些可以提高效率的插件"><a href="#使用webpack开发时，用过哪些可以提高效率的插件" class="headerlink" title="使用webpack开发时，用过哪些可以提高效率的插件"></a>使用webpack开发时，用过哪些可以提高效率的插件</h2><ol>
+<li>webpack-dashboard 可以更友好的展示相关打包信息</li>
+<li>webpack-merge 提取公共配置，减少重复配置代码</li>
+<li>speed-measure-webpack-plugin SMP，分析webpack打包过程中loader和plugin的耗时，有助于找到构建过程中的性能瓶颈</li>
+<li>size-plugin 监控资源体积变化，尽早发现问题</li>
+<li>HotModuleReplacementPlugin 模块热替换</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/webpack/" rel="tag"># webpack</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/15/JavaScript/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" rel="prev" title="执行上下文">
+      <i class="fa fa-chevron-left"></i> 执行上下文
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/19/node/egg-js%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="next" title="egg.js基本使用">
+      egg.js基本使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81loader"><span class="nav-number">1.</span> <span class="nav-text">常见loader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81plugin"><span class="nav-number">2.</span> <span class="nav-text">常见plugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loader%E5%92%8Cplugin%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">loader和plugin的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-map%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">source map是什么？生产环境怎么用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8webpack%E5%BC%80%E5%8F%91%E6%97%B6%EF%BC%8C%E7%94%A8%E8%BF%87%E5%93%AA%E4%BA%9B%E5%8F%AF%E4%BB%A5%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">使用webpack开发时，用过哪些可以提高效率的插件</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

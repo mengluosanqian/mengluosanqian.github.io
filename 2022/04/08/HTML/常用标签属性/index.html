@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="a标签   值 描述    _blank 在新窗口中打开被链接文档。   _self 默认。在相同的框架中打开被链接文档。   _parent 在父框架集中打开被链接文档。   _top 在整个窗口中打开被链接文档。   framename 在指定的框架中打开被链接文档。   link标签   rel属性 描述    dns-prefetch 浏览器会对href中的域名进行DNS解析并缓存，当再次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用标签属性">
+<meta property="og:url" content="http://example.com/2022/04/08/HTML/%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="a标签   值 描述    _blank 在新窗口中打开被链接文档。   _self 默认。在相同的框架中打开被链接文档。   _parent 在父框架集中打开被链接文档。   _top 在整个窗口中打开被链接文档。   framename 在指定的框架中打开被链接文档。   link标签   rel属性 描述    dns-prefetch 浏览器会对href中的域名进行DNS解析并缓存，当再次">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-08T09:13:42.000Z">
+<meta property="article:modified_time" content="2022-04-08T09:14:14.306Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/04/08/HTML/%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>常用标签属性 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/08/HTML/%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常用标签属性
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-04-08 17:13:42 / Modified: 17:14:14" itemprop="dateCreated datePublished" datetime="2022-04-08T17:13:42+08:00">2022-04-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="a标签"><a href="#a标签" class="headerlink" title="a标签"></a>a标签</h1><table>
+<thead>
+<tr>
+<th align="center">值</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">_blank</td>
+<td align="center">在新窗口中打开被链接文档。</td>
+</tr>
+<tr>
+<td align="center">_self</td>
+<td align="center">默认。在相同的框架中打开被链接文档。</td>
+</tr>
+<tr>
+<td align="center">_parent</td>
+<td align="center">在父框架集中打开被链接文档。</td>
+</tr>
+<tr>
+<td align="center">_top</td>
+<td align="center">在整个窗口中打开被链接文档。</td>
+</tr>
+<tr>
+<td align="center">framename</td>
+<td align="center">在指定的框架中打开被链接文档。</td>
+</tr>
+</tbody></table>
+<h1 id="link标签"><a href="#link标签" class="headerlink" title="link标签"></a>link标签</h1><table>
+<thead>
+<tr>
+<th align="center">rel属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">dns-prefetch</td>
+<td align="center">浏览器会对href中的域名进行DNS解析并缓存，当再次请求该域名资源时，能省去查询IP的过程，从而减少时间损耗</td>
+</tr>
+<tr>
+<td align="center">prefetch</td>
+<td align="center">预先下载并缓存某个资源，浏览器忙的时候会被忽略</td>
+</tr>
+<tr>
+<td align="center">preload</td>
+<td align="center">预先下载某个资源，一定会预先下载</td>
+</tr>
+<tr>
+<td align="center">preconnect</td>
+<td align="center">正式发送http    请求前预先执行DNS解析、TCP握手、TLS协商。通过消除往返延迟来节省时间</td>
+</tr>
+<tr>
+<td align="center">prerender</td>
+<td align="center">浏览器不仅会加载资源，还会解析执行页面，并进行预渲染</td>
+</tr>
+</tbody></table>
+<h1 id="script"><a href="#script" class="headerlink" title="script"></a>script</h1><ol>
+<li>async <ul>
+<li>async浏览器立即异步下载文件，不同于defer得是，下载完成会立即执行，此时会阻塞dom渲染，</li>
+<li>不能保证多个的先后顺序</li>
+</ul>
+</li>
+<li>defer<ul>
+<li>立即请求文件，但不阻塞渲染引擎，脚本会被延迟到整个页面都解析完毕后再运行。浏览器渲染页面，读取到包含defer属性的外部<code>&lt;script&gt;</code>标签时不会停止DOM渲染，而是异步下载，加载完整个页面再运行js</li>
+<li>会按照顺序下载执行</li>
+</ul>
+</li>
+</ol>
+<h1 id="href和src"><a href="#href和src" class="headerlink" title="href和src"></a>href和src</h1><ol>
+<li>href<ul>
+<li>href引入的css会阻塞页面渲染，css加载完成才会进行渲染</li>
+<li>不会阻塞js加载，但会阻塞js的执行，因为js执行可能会操作DOM</li>
+</ul>
+</li>
+<li>src<ul>
+<li>src引入的js会阻塞页面的渲染</li>
+</ul>
+</li>
+</ol>
+<h1 id="link和-import"><a href="#link和-import" class="headerlink" title="link和@import"></a>link和@import</h1><ol>
+<li>@import是css提供的语法规则，只有导入样式表的作用；link是HTML提供的标签，不仅可以加载css文件，还可以定义RSS、rel连接属性等</li>
+<li>加载页面时，link标签引入的css被同时加载；@import引入的css将在页面加载完毕后被加载</li>
+<li>@import存在兼容性问题</li>
+<li>可以通过js操作DOM，插入link标签来改变样式；由于DOM方法是基于文档的，无法使用@import的方法来插入样式</li>
+<li>link引入样式的权重大于@import引入的样式</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/31/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%A0%91/%E7%AE%97%E6%B3%95%E7%AF%87%E2%80%94%E2%80%94%E4%BA%8C%E5%8F%89%E6%A0%91%E7%B1%BB%E5%9E%8B/" rel="prev" title="算法篇——二叉树类型">
+      <i class="fa fa-chevron-left"></i> 算法篇——二叉树类型
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/15/JavaScript/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" rel="next" title="执行上下文">
+      执行上下文 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#a%E6%A0%87%E7%AD%BE"><span class="nav-number">1.</span> <span class="nav-text">a标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#link%E6%A0%87%E7%AD%BE"><span class="nav-number">2.</span> <span class="nav-text">link标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#script"><span class="nav-number">3.</span> <span class="nav-text">script</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#href%E5%92%8Csrc"><span class="nav-number">4.</span> <span class="nav-text">href和src</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#link%E5%92%8C-import"><span class="nav-number">5.</span> <span class="nav-text">link和@import</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="启明星辰一面 html5 语义化标签的作用 localStorage和sessionStorage的区别 拖拽API 水平垂直居中 js继承 原型链继承是怎么实现的 闭包及其使用场景 防抖和节流 闭包的优缺点 es6的新特性 let和const 深拷贝和浅拷贝是怎么区分的，为什么会这样？ promise promise有几种状态 promise和async await有什么区别 set和map介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022年前端面经">
+<meta property="og:url" content="http://example.com/2022/10/04/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E7%BB%8F/2022%E5%B9%B4%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="启明星辰一面 html5 语义化标签的作用 localStorage和sessionStorage的区别 拖拽API 水平垂直居中 js继承 原型链继承是怎么实现的 闭包及其使用场景 防抖和节流 闭包的优缺点 es6的新特性 let和const 深拷贝和浅拷贝是怎么区分的，为什么会这样？ promise promise有几种状态 promise和async await有什么区别 set和map介绍">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-04T09:08:50.000Z">
+<meta property="article:modified_time" content="2022-10-04T09:12:26.278Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/10/04/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E7%BB%8F/2022%E5%B9%B4%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>2022年前端面经 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/04/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E7%BB%8F/2022%E5%B9%B4%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2022年前端面经
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-10-04 17:08:50 / Modified: 17:12:26" itemprop="dateCreated datePublished" datetime="2022-10-04T17:08:50+08:00">2022-10-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="启明星辰"><a href="#启明星辰" class="headerlink" title="启明星辰"></a>启明星辰</h1><h2 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h2><ol>
+<li>html5</li>
+<li>语义化标签的作用</li>
+<li>localStorage和sessionStorage的区别</li>
+<li>拖拽API</li>
+<li>水平垂直居中</li>
+<li>js继承</li>
+<li>原型链继承是怎么实现的</li>
+<li>闭包及其使用场景</li>
+<li>防抖和节流</li>
+<li>闭包的优缺点</li>
+<li>es6的新特性</li>
+<li>let和const</li>
+<li>深拷贝和浅拷贝是怎么区分的，为什么会这样？</li>
+<li>promise</li>
+<li>promise有几种状态</li>
+<li>promise和async await有什么区别</li>
+<li>set和map介绍一下</li>
+<li>ts有没有使用过 </li>
+<li>箭头函数和普通函数的区别</li>
+<li>普通函数改变this指向的方法，区别是什么</li>
+<li>watch和computed的区别</li>
+<li>vue的双向绑定原理</li>
+<li>v-show和v-if的区别是什么</li>
+<li>为什么不推荐使用index作为key值</li>
+<li>provide和inject</li>
+<li>什么情况下会使用vuex</li>
+<li>nextTick</li>
+<li>性能优化</li>
+<li>打包方面的优化</li>
+<li>项目中webpack的使用</li>
+<li>source map的使用</li>
+<li>浏览器缓存</li>
+<li>事件循环机制题目</li>
+<li>tree转为list</li>
+<li>为什么有三个月空窗期</li>
+<li>你觉得在一个公司呆多长的时间是一个理想状态</li>
+<li>考虑一家公司长久待下去最看重的是什么</li>
+<li>上一家公司的开发流程</li>
+<li>线上的问题怎么处理</li>
+<li>测试过程中和测试意见不一致怎么处理</li>
+<li>上一家公司的节奏和任务量对于你来说是否大</li>
+<li>家是哪里的</li>
+<li>第二学位是什么？在校的成绩大概是什么样的</li>
+<li>你觉得自己在工作中的学习能力怎么样</li>
+<li>项目相关</li>
+<li>对于自己代码的追求是什么样的</li>
+<li>自己的优缺点</li>
+</ol>
+<h2 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h2><ol>
+<li>十万条数据如何处理</li>
+<li>vue和其他框架相比的优势</li>
+<li>前后端分离模式简单描述</li>
+<li>开发方式是IPD还是敏捷开发</li>
+<li>对于数据库有什么了解</li>
+<li>对于node的中间件有什么了解</li>
+<li>消息中间件</li>
+<li>对于微服务架构有什么了解</li>
+<li>对于实际工作量超过工时安排该怎么办</li>
+<li>对于后端是什么看法</li>
+</ol>
+<h1 id="久其软件"><a href="#久其软件" class="headerlink" title="久其软件"></a>久其软件</h1><ol>
+<li>开发组件需要注意什么</li>
+<li>css常用的布局方式<ul>
+<li>静态布局</li>
+<li>自适应布局</li>
+<li>流式布局</li>
+<li>响应式布局</li>
+<li>弹性布局</li>
+</ul>
+</li>
+<li>flex布局的问题<ul>
+<li>如果在不给父元素固定宽高，并且给子元素固定宽高的情况下，子元素是不能撑开父元素的宽高的</li>
+</ul>
+</li>
+<li>水平垂直居中方式</li>
+<li>css的权重</li>
+<li>important使用</li>
+<li>上下三栏布局怎么实现</li>
+<li>怎么避免类名冲突</li>
+<li>字符串和数组常用方法</li>
+<li>遍历对象<ul>
+<li>for in</li>
+<li>for of</li>
+<li>object.keys</li>
+<li>object.values</li>
+<li>object.entries</li>
+<li>Object.getOwnPropertyNames</li>
+</ul>
+</li>
+<li>怎么判断对象是否是空对象</li>
+<li>深拷贝和浅拷贝</li>
+<li>对于promise的理解</li>
+<li>异步代码同步执行该怎么做</li>
+<li>本地存储</li>
+<li>动态引用样式文件</li>
+<li>v-if和v-show的区别</li>
+<li>双向数据绑定原理</li>
+<li>computed和watch的区别</li>
+<li>组件传值方式</li>
+<li>vuex的使用</li>
+<li>修改数据界面不渲染怎么解决</li>
+<li>父子组件周期函数执行顺序<ul>
+<li>父beforeCreate-&gt;父created-&gt;父beforeMount-&gt;子beforeCreate-&gt;子created-&gt;子beforeMount-&gt;子mounted-&gt;父mounted</li>
+</ul>
+</li>
+<li>插槽的使用</li>
+<li>混入的使用和本身生命周期的优先级</li>
+<li>过滤器的使用场景</li>
+<li>性能优化</li>
+<li>项目中比较难解决的问题</li>
+<li>开源组件库有什么问题</li>
+</ol>
+<h1 id="二六三"><a href="#二六三" class="headerlink" title="二六三"></a>二六三</h1><ol>
+<li>vue兼容性的问题</li>
+<li>JavaScript为什么是个弱类型语言</li>
+<li>什么是闭包？有什么优缺点</li>
+<li>发生内存泄漏怎么定位到问题</li>
+<li>怎么定位生产环境的问题</li>
+<li>vue的单向数据流？实际应用</li>
+<li>vue双向数据绑定的原理是什么</li>
+<li>layUI</li>
+<li>vue路由</li>
+<li>数据去重</li>
+<li>数据结构和算法简单介绍一下</li>
+<li>从输入URL到展示的过程</li>
+<li>文件是怎么渲染的<ul>
+<li>DOM + CSSOM</li>
+<li>render树</li>
+<li>绘制</li>
+</ul>
+</li>
+<li>虚拟DOM简单介绍一下</li>
+<li>重绘和回流简单介绍一下<ul>
+<li>当渲染树中的一些元素需要更新属性，而这些属性只是影响元素的外观、风格，而不会影响布局的操作</li>
+<li>当渲染树中的一部分（或全部）因为元素的规模尺寸、布局、隐藏等改变而需要重新构建的操作，会影响到布局的操作，这样的操作我们称为回流</li>
+</ul>
+</li>
+</ol>
+<h1 id="小熊博望"><a href="#小熊博望" class="headerlink" title="小熊博望"></a>小熊博望</h1><ol>
+<li>最近在学习什么</li>
+<li>node简单介绍一下</li>
+<li>移动端适配</li>
+<li>rem的实现逻辑</li>
+<li>设置根节点的基数是根据什么来设置</li>
+<li>图片的预加载</li>
+<li>什么时间会触发onload</li>
+<li>onload时候放在head里面的js和放在body里面的js会不会都执行</li>
+<li>js放在head和body里面</li>
+<li>图片的懒加载</li>
+<li>虚拟列表怎么增加，会用到哪些API</li>
+<li>怎么判断一个图片有没有显示在可视区域</li>
+<li>em和rem的区别</li>
+<li>父元素font-size设置为20px，子元素设置为2em</li>
+<li>父元素font-size设置为1rem，子元素设置为2em</li>
+<li>空的html，1rem等于</li>
+<li>vw和vh</li>
+<li>padding-left &#x3D;&#x3D; 10%，父元素宽是1000px,那么padding-left为多少</li>
+<li>父元素高度是500px,宽度是1000px，padding-left：10%，padding-top：10%，那么现在padding各是多少</li>
+<li>标题最多显示两行，超过两行显示省略号</li>
+<li>从红色渐变成蓝色有什么方法</li>
+<li>transition写在元素本身还是写在hover里面？如果写在hover里面会有什么效果</li>
+<li>动画的api，反向、运动次数、最后停止位置</li>
+<li>对密码强度进行校验，强中弱？<ul>
+<li>面试官提了一个优化方法：设置一个变量进行加权</li>
+</ul>
+</li>
+<li>vue的生命周期简单介绍</li>
+<li>beforeCreate和created都做了什么</li>
+<li>什么时候挂载到页面上</li>
+<li>最早可以在哪个钩子函数里面取到页面dom</li>
+<li>v-model原理</li>
+<li>vue的两种路由</li>
+<li>原生js怎么取到hash模式下的路由和参数</li>
+<li>window.location.hash的参数包含在里面吗</li>
+<li>原生js怎么取到history模式下的路由和参数</li>
+<li>一个数组，每一项是一个对象，包含姓名和年龄，按年龄进行排序</li>
+</ol>
+<h1 id="百度"><a href="#百度" class="headerlink" title="百度"></a>百度</h1><h2 id="一面-1"><a href="#一面-1" class="headerlink" title="一面"></a>一面</h2><ol>
+<li>vue2和vue3之间的区别</li>
+<li>css使元素实现水平垂直居中</li>
+<li>内阴影</li>
+<li>单测</li>
+</ol>
+<p>手写题</p>
+<ol>
+<li>[<br>{‘day’:20111001,’type’:’aa’,’value’:1101},<br>{‘day’:20111002,’type’:’aa’,’value’:1102}, <br>{‘day’:20111002,’type’:’bb’,’value’:2202}, <br>{‘day’:20111003,’type’:’aa’,’value’:1103}, <br>{‘day’:20111003,’type’:’bb’,’value’:2203}, <br>{‘day’:20111005,’type’:’bb’,’value’:2205}<br>]</li>
+</ol>
+<p>  </p>
+<p>{‘aa’:[1101,1102,1103,null],’bb’:[null,2202,2203,2205]}  </p>
+<ol start="2">
+<li>data &#x3D; [<br> {user: ‘a’,time: ‘2022-05-12 09:13:34’, status: 1},<br> {user: ‘b’,time: ‘2022-05-12 12:13:34’, status: 1},<br> {user: ‘a’,time: ‘2022-05-12 09:13:34’, status: 2},<br> {user: ‘b’,time: ‘2022-05-12 09:13:34’, status: 2},<br> {user: ‘a’,time: ‘2022-05-13 09:13:34’, status: 1},<br> {user: ‘b’,time: ‘2022-05-14 09:13:34’, status: 1},<br> {user: ‘a’,time: ‘2022-05-14 09:13:34’, status: 0},<br> {user: ‘b’,time: ‘2022-05-15 09:13:34’, status: 0}<br>]</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">returnDay</span>(<span class="params">user</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> arr = [&#123;</span><br><span class="line">          <span class="attr">user</span>: <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">          <span class="attr">time</span>: <span class="string">&#x27;2022-05-12 09:13:34&#x27;</span>,</span><br><span class="line">          <span class="attr">status</span>: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">user</span>: <span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">          <span class="attr">time</span>: <span class="string">&#x27;2022-05-12 12:13:34&#x27;</span>,</span><br><span class="line">          <span class="attr">status</span>: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">user</span>: <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">          <span class="attr">time</span>: <span class="string">&#x27;2022-05-12 09:13:34&#x27;</span>,</span><br><span class="line">          <span class="attr">status</span>: <span class="number">2</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">user</span>: <span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">          <span class="attr">time</span>: <span class="string">&#x27;2022-05-12 09:13:34&#x27;</span>,</span><br><span class="line">          <span class="attr">status</span>: <span class="number">2</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">user</span>: <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">          <span class="attr">time</span>: <span class="string">&#x27;2022-05-13 09:13:34&#x27;</span>,</span><br><span class="line">          <span class="attr">status</span>: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">user</span>: <span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">          <span class="attr">time</span>: <span class="string">&#x27;2022-05-14 09:13:34&#x27;</span>,</span><br><span class="line">          <span class="attr">status</span>: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">user</span>: <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">          <span class="attr">time</span>: <span class="string">&#x27;2022-05-14 09:13:34&#x27;</span>,</span><br><span class="line">          <span class="attr">status</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">user</span>: <span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">          <span class="attr">time</span>: <span class="string">&#x27;2022-05-15 09:13:34&#x27;</span>,</span><br><span class="line">          <span class="attr">status</span>: <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">      <span class="keyword">let</span> newArr = [] <span class="comment">// user相等的time</span></span><br><span class="line">      arr.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (user = item.<span class="property">user</span>) &#123;</span><br><span class="line">          newArr.<span class="title function_">push</span>(item.<span class="property">time</span>.<span class="title function_">slice</span>(<span class="number">0</span>, <span class="number">10</span>))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="comment">//   [2022-05-15,2022-05-15] 20200515</span></span><br><span class="line">      <span class="keyword">let</span> max = <span class="number">0</span>,</span><br><span class="line">        set = <span class="keyword">new</span> <span class="title class_">Set</span>(newArr) <span class="comment">// max返回的最大值，set过滤，找数据</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> set) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!set.<span class="title function_">get</span>(i - <span class="number">1</span>)) &#123; <span class="comment">// i前一天的数据</span></span><br><span class="line">          <span class="keyword">let</span> cur = i,</span><br><span class="line">            path = <span class="number">1</span> <span class="comment">// cur临时变量 ，当前日期 ，path当前日期之后的连续天数</span></span><br><span class="line">          <span class="keyword">while</span> (set.<span class="title function_">get</span>(cur + <span class="number">1</span>)) &#123;</span><br><span class="line">            cur = cur + <span class="number">1</span> <span class="comment">// 当前日期加一</span></span><br><span class="line">            path++ <span class="comment">// 临时最大值</span></span><br><span class="line">            max = <span class="title class_">Math</span>.<span class="title function_">max</span>(max, path) <span class="comment">// 实际最大值</span></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> max</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">returnDay</span>(<span class="string">&#x27;aa&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="二面-1"><a href="#二面-1" class="headerlink" title="二面"></a>二面</h2><ol>
+<li>项目上这些组件是通过什么方式聚合起来</li>
+<li>引擎拿到组件和组件绑定的数据，是怎么还原成页面的<ul>
+<li>是否是jsonToUI</li>
+</ul>
+</li>
+<li>页面加载会需要等待多长时间<ul>
+<li>这段时间发生了什么</li>
+<li>有排查过是因为什么导致渲染卡顿</li>
+</ul>
+</li>
+<li>是否调研过业界开源的低代码</li>
+<li>事件这一块是怎么设计的<ul>
+<li>是预先设计好的逻辑</li>
+<li>是否支持自定义事件</li>
+</ul>
+</li>
+<li>页面和模型之间是耦合在一起的<ul>
+<li>有没有可能把这两个进行解耦</li>
+<li>理想太是什么样的</li>
+</ul>
+</li>
+<li>事件会有提交流程<ul>
+<li>渲染的时候会再去做事件绑定，触发事件</li>
+<li>有没有考虑过安全的问题，比如js的注入等</li>
+<li>安全处理这块做在哪一层</li>
+<li>前端提交的时候有没有可能做一些优化</li>
+</ul>
+</li>
+<li>印象最深刻的地方是什么</li>
+<li>技术的提升具体在哪一块</li>
+<li>最近在关注的新的技术点</li>
+<li>平时是怎么去关注最新的技术点</li>
+<li>最近的业务会需要用到的技术去做准备</li>
+</ol>
+<h1 id="字节一面"><a href="#字节一面" class="headerlink" title="字节一面"></a>字节一面</h1><ol>
+<li>对于平台的优化<ul>
+<li>系统优化都有哪些</li>
+<li>怎么知道优化提高了多少</li>
+<li>因为什么原因要去优化</li>
+</ul>
+</li>
+<li>通用组件的开发</li>
+</ol>
+<h1 id="新华三"><a href="#新华三" class="headerlink" title="新华三"></a>新华三</h1><ol>
+<li>vue双向绑定原理</li>
+<li>双向绑定什么时候会失效<ul>
+<li>$SET</li>
+</ul>
+</li>
+<li>vue2和vue3的双向绑定有什么不同</li>
+<li>v-for为什么使用key</li>
+<li>什么是盒模型<ul>
+<li>由几个部分组成</li>
+</ul>
+</li>
+<li>独立写过一个功能<ul>
+<li>做好这个模块哪些东西需要考虑</li>
+<li>兼容性问题</li>
+</ul>
+</li>
+</ol>
+<h1 id="数坤"><a href="#数坤" class="headerlink" title="数坤"></a>数坤</h1><h2 id="一面-2"><a href="#一面-2" class="headerlink" title="一面"></a>一面</h2><ol>
+<li>vue2的双向绑定原理</li>
+<li>vue更新的颗粒度</li>
+<li>react和vue的对比</li>
+<li>vue的性能瓶颈</li>
+<li>虚拟DOM快不快<ul>
+<li>面试官说快体现在开发效率上</li>
+</ul>
+</li>
+<li>把真实DOM转换成虚拟DOM是什么过程</li>
+<li>vue和react去哪里解析html</li>
+<li>template最终遍历的结果是什么东西，存在DOM结构里吗</li>
+<li>vue-router两种模式的原理</li>
+<li>刷新页面时候404是怎么处理的，怎么定位到原来的页面</li>
+<li>elementUI按需引入怎么实现的？这个插件是怎么实现？对应的css是什么样的<ul>
+<li>不管是全部引入还是按需引入 ，css样式还是需要全部引入的</li>
+</ul>
+</li>
+<li>BFF主要做什么？BFF具体是什么？</li>
+<li>最近在学习什么</li>
+<li>工作中最近遇到了什么难点</li>
+<li>从输入URL到展示<ul>
+<li>缓存</li>
+<li>DNS解析在哪里解析的</li>
+<li>日常对什么文件进行缓存</li>
+<li>index.html为什么不设置缓存</li>
+</ul>
+</li>
+</ol>
+<h2 id="二面-2"><a href="#二面-2" class="headerlink" title="二面"></a>二面</h2><ol>
+<li>vue的生命周期</li>
+<li>文件上传，vue中怎么实现表单提交<ul>
+<li>formdata</li>
+</ul>
+</li>
+<li>forEach、map、filter的区别</li>
+<li>原生获取dom的方法</li>
+<li>vuex介绍一下</li>
+<li>vuex、props、localstorage的区别</li>
+<li>动态路由</li>
+<li>axios的拦截器有什么作用<ul>
+<li>请求拦截器：添加统一cookie，请求体加验证、设置请求头等</li>
+<li>响应拦截器：对响应体的一些处理</li>
+</ul>
+</li>
+<li>mock.js</li>
+<li>nginx的location访问规则<ul>
+<li>精准匹配 &#x3D; </li>
+<li>大小写敏感匹配 ~</li>
+<li>大小写不敏感匹配 ~*</li>
+<li>指定后缀匹配</li>
+<li>忽略正则匹配</li>
+</ul>
+</li>
+<li>echarts用在什么场景下</li>
+<li>vue2和vue3版本之间的区别</li>
+<li>细问项目</li>
+</ol>
+<h1 id="字节火山一面"><a href="#字节火山一面" class="headerlink" title="字节火山一面"></a>字节火山一面</h1><ol>
+<li>渲染引擎</li>
+<li>项目中的事件配置</li>
+<li>js中的数据类型</li>
+<li>symbol和bigInt的作用</li>
+<li>基本类型和引用类型有什么区别</li>
+<li>堆和栈分别是什么，有什么区别，为什么要区分堆存放和栈存放</li>
+<li>数据类型判断</li>
+<li>typeof function是什么</li>
+<li>从输入URL到最后渲染发生了什么</li>
+<li>tcp三次握手的大概过程</li>
+<li>第一次握手的初始序列号是怎么样生成的</li>
+<li>为什么需要有初始序列号</li>
+<li>把初始序列号设为1会有什么影响</li>
+<li>render树经过什么变化才到最终页面形成</li>
+<li>ast用到的最多的是在什么时候</li>
+<li>ast是什么样的结构，全称是什么，用来描述什么</li>
+<li>vue的响应式原理</li>
+<li>单向数据流怎么理解</li>
+<li>nextTick怎么理解，是怎么实现的</li>
+<li>vue中怎么把多次的数据修改合并成一次的</li>
+<li>常见web安全方面的，防护原理</li>
+<li>链表中间节点</li>
+<li>实现链表</li>
+<li>js限流调度器</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出值</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> x = <span class="number">2</span>; </span><br><span class="line">      <span class="keyword">const</span> a = &#123;</span><br><span class="line">        <span class="attr">x</span>:<span class="number">3</span>,</span><br><span class="line">        <span class="title function_">fn1</span>(<span class="params"></span>) &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">x</span>,<span class="string">&#x27;fn1&#x27;</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">fn2</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">x</span>,<span class="string">&#x27;fn2&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">const</span> fn3 =a.<span class="property">fn1</span></span><br><span class="line">      a.<span class="title function_">fn1</span>()</span><br><span class="line">      a.<span class="title function_">fn2</span>()</span><br><span class="line">      <span class="title function_">fn3</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    fn.<span class="title function_">call</span>(&#123;<span class="attr">x</span>: <span class="number">4</span>&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">&#125;,<span class="number">0</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resolve</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i == <span class="number">0</span>;i &lt; <span class="number">10000</span>;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">9999</span>) &#123;</span><br><span class="line">            <span class="title function_">resolve</span>()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="方正电子"><a href="#方正电子" class="headerlink" title="方正电子"></a>方正电子</h1><ol>
+<li>换肤怎么实现</li>
+<li>js的数据类型</li>
+<li>怎么判断数据类型</li>
+<li>0.1+0.2的结果是多少？怎么计算几个小数并求和？</li>
+<li>对于原型和原型链的了解</li>
+<li>浅拷贝或者深拷贝</li>
+<li>对于事件队列的了解</li>
+<li>怎么判断输出顺序？async和await的执行顺序</li>
+<li>await的代码时立即执行还是放到任务队列里面</li>
+<li>类数组转化为数组的方法</li>
+<li>splice和slice的区别</li>
+<li>promise.all如果有一个结果错误但是想要返回其他的怎么办</li>
+<li>https访问http下的地址，一些图片访问不了应该怎么办</li>
+<li>vue2和vue3的区别</li>
+<li>组件传值的方法</li>
+<li>vuex的基本属性</li>
+<li>vue2的双向绑定原理</li>
+<li>组件更新时的父子生命周期</li>
+<li>父组件访问子组件的mounted</li>
+<li>路由守卫</li>
+<li>动态路由</li>
+<li>移动端单位换算</li>
+<li>常用的plugin和loader</li>
+</ol>
+<h1 id="奇安信"><a href="#奇安信" class="headerlink" title="奇安信"></a>奇安信</h1><ol>
+<li>大屏页面宽高不固定，怎么适配</li>
+<li>闭包</li>
+<li>原型和原型链</li>
+<li>var let const</li>
+<li>promise.all</li>
+<li>vue的生命周期</li>
+<li>vue store为什么值改变会同步到页面上</li>
+<li>vuex用的什么设计模式</li>
+<li>vue中data里面的值改变页面上的值为什么会更新</li>
+<li>axios是基于什么封装的</li>
+<li>普通监听和深度监听</li>
+<li>父子组件传值</li>
+<li>hash和history路由实现</li>
+<li>console.log是同步还是异步的</li>
+<li>vue是基于什么实现的？用的什么算法</li>
+</ol>
+<h1 id="华为od"><a href="#华为od" class="headerlink" title="华为od"></a>华为od</h1><h2 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h2><ol>
+<li>三数之和变种题 – 数组中满足 A &#x3D; B + 2*C的值 mid</li>
+<li>数组拼接 – 多个数组按固定长度依次拼接 easy</li>
+<li>leetcode-394 字符串解码 mid</li>
+</ol>
+<h2 id="一面-3"><a href="#一面-3" class="headerlink" title="一面"></a>一面</h2><ol>
+<li>自我介绍</li>
+<li>项目介绍，职责介绍</li>
+<li>null和undefined的区别</li>
+<li>visibility: hidden 和 display:none的区别</li>
+<li>闭包</li>
+<li>flex</li>
+<li>垃圾回收</li>
+<li>vue-router的两种模式</li>
+<li>vue的生命周期</li>
+<li>css选择器权重</li>
+<li>算法题：连续子数组的最大和 剑指 Offer 42. 连续子数组的最大和 easy</li>
+<li>算法题：判断数组中是否有重复数字，两种方法 easy</li>
+</ol>
+<h2 id="二面-3"><a href="#二面-3" class="headerlink" title="二面"></a>二面</h2><ol>
+<li>前后端交互</li>
+<li>axios</li>
+<li>性能优化</li>
+<li>vue原理</li>
+<li>算法题：合并区间 mid</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/29/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E9%A2%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E6%87%92%E5%8A%A0%E8%BD%BD/" rel="prev" title="预加载和懒加载">
+      <i class="fa fa-chevron-left"></i> 预加载和懒加载
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/18/nginx/" rel="next" title="nginx">
+      nginx <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E6%98%8E%E6%98%9F%E8%BE%B0"><span class="nav-number">1.</span> <span class="nav-text">启明星辰</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%9D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">一面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%9D%A2"><span class="nav-number">1.2.</span> <span class="nav-text">二面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%85%E5%85%B6%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">久其软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%85%AD%E4%B8%89"><span class="nav-number">3.</span> <span class="nav-text">二六三</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%86%8A%E5%8D%9A%E6%9C%9B"><span class="nav-number">4.</span> <span class="nav-text">小熊博望</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BE%E5%BA%A6"><span class="nav-number">5.</span> <span class="nav-text">百度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%9D%A2-1"><span class="nav-number">5.1.</span> <span class="nav-text">一面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%9D%A2-1"><span class="nav-number">5.2.</span> <span class="nav-text">二面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E4%B8%80%E9%9D%A2"><span class="nav-number">6.</span> <span class="nav-text">字节一面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E5%8D%8E%E4%B8%89"><span class="nav-number">7.</span> <span class="nav-text">新华三</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%9D%A4"><span class="nav-number">8.</span> <span class="nav-text">数坤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%9D%A2-2"><span class="nav-number">8.1.</span> <span class="nav-text">一面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%9D%A2-2"><span class="nav-number">8.2.</span> <span class="nav-text">二面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%81%AB%E5%B1%B1%E4%B8%80%E9%9D%A2"><span class="nav-number">9.</span> <span class="nav-text">字节火山一面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%AD%A3%E7%94%B5%E5%AD%90"><span class="nav-number">10.</span> <span class="nav-text">方正电子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A5%87%E5%AE%89%E4%BF%A1"><span class="nav-number">11.</span> <span class="nav-text">奇安信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8E%E4%B8%BAod"><span class="nav-number">12.</span> <span class="nav-text">华为od</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AF%95"><span class="nav-number">12.1.</span> <span class="nav-text">笔试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%9D%A2-3"><span class="nav-number">12.2.</span> <span class="nav-text">一面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%9D%A2-3"><span class="nav-number">12.3.</span> <span class="nav-text">二面</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

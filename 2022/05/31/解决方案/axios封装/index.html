@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="axiosaxios是什么 axios 是一个轻量的 HTTP客户端 特点 从浏览器创建XMLHttpRequests 从node.js创建http请求 支持promise API 拦截请求和响应 转化请求数据和响应数据 取消请求 自动转化JSON数据 客户端支持防御XSRF   简单请求  1234567891011axios(&#123;          url:&#x27;xxx&amp;#x27">
+<meta property="og:type" content="article">
+<meta property="og:title" content="axios封装">
+<meta property="og:url" content="http://example.com/2022/05/31/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/axios%E5%B0%81%E8%A3%85/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="axiosaxios是什么 axios 是一个轻量的 HTTP客户端 特点 从浏览器创建XMLHttpRequests 从node.js创建http请求 支持promise API 拦截请求和响应 转化请求数据和响应数据 取消请求 自动转化JSON数据 客户端支持防御XSRF   简单请求  1234567891011axios(&#123;          url:&#x27;xxx&amp;#x27">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-31T06:32:09.000Z">
+<meta property="article:modified_time" content="2022-05-31T07:58:45.222Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="axios">
+<meta property="article:tag" content="解决方法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/05/31/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/axios%E5%B0%81%E8%A3%85/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>axios封装 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/31/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/axios%E5%B0%81%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          axios封装
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-31 14:32:09 / Modified: 15:58:45" itemprop="dateCreated datePublished" datetime="2022-05-31T14:32:09+08:00">2022-05-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">解决方法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h1><h2 id="axios是什么"><a href="#axios是什么" class="headerlink" title="axios是什么"></a>axios是什么</h2><ol>
+<li>axios 是一个轻量的 HTTP客户端</li>
+<li>特点<ul>
+<li>从浏览器创建XMLHttpRequests</li>
+<li>从node.js创建http请求</li>
+<li>支持promise API</li>
+<li>拦截请求和响应</li>
+<li>转化请求数据和响应数据</li>
+<li>取消请求</li>
+<li>自动转化JSON数据</li>
+<li>客户端支持防御XSRF</li>
+</ul>
+</li>
+<li>简单请求</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">axios</span>(&#123;        </span><br><span class="line">  <span class="attr">url</span>:<span class="string">&#x27;xxx&#x27;</span>,    <span class="comment">// 设置请求的地址</span></span><br><span class="line">  <span class="attr">method</span>:<span class="string">&quot;GET&quot;</span>, <span class="comment">// 设置请求方法</span></span><br><span class="line">  <span class="attr">params</span>:&#123;      <span class="comment">// get请求使用params进行参数凭借,如果是post请求用data</span></span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    <span class="attr">page</span>: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;  </span><br><span class="line">  <span class="comment">// res为后端返回的数据</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res);   </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="为什么要进行封装"><a href="#为什么要进行封装" class="headerlink" title="为什么要进行封装"></a>为什么要进行封装</h2><ol>
+<li>axios的API很友好，完全可以在项目中直接使用</li>
+<li>不过随着项目规模的增大，如果没发起一次HTTP请求，就要这些比如<code>设置超时时间、设置请求头、根据项目环境判断使用哪个请求地址、错误处理等</code>重新写一遍，不仅浪费人力，而且会使代码冗余<br>比如<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">axios</span>(<span class="string">&#x27;http://localhost:3000/data&#x27;</span>, &#123;</span><br><span class="line">  <span class="comment">// 配置代码</span></span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">1000</span>,</span><br><span class="line">  <span class="attr">withCredentials</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">    <span class="title class_">Authorization</span>: <span class="string">&#x27;xxx&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">transformRequest</span>: [<span class="keyword">function</span> (<span class="params">data, headers</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="comment">// 其他请求配置...</span></span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// todo: 真正业务逻辑代码</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 错误处理代码  </span></span><br><span class="line">  <span class="keyword">if</span> (err.<span class="property">response</span>.<span class="property">status</span> === <span class="number">401</span>) &#123;</span><br><span class="line">  <span class="comment">// handle authorization error</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (err.<span class="property">response</span>.<span class="property">status</span> === <span class="number">403</span>) &#123;</span><br><span class="line">  <span class="comment">// handle server forbidden error</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 其他错误处理.....</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="如何封装"><a href="#如何封装" class="headerlink" title="如何封装"></a>如何封装</h2><ol>
+<li>约定好请求头、状态码、请求超时时间等<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> service = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="attr">timeout</span>: <span class="number">30000</span>,  <span class="comment">// 请求 30s 超时</span></span><br><span class="line">      <span class="attr">headers</span>: &#123;</span><br><span class="line">        <span class="attr">get</span>: &#123;</span><br><span class="line">          <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span></span><br><span class="line">          <span class="comment">// 在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">post</span>: &#123;</span><br><span class="line">          <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json;charset=utf-8&#x27;</span></span><br><span class="line">          <span class="comment">// 在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来</span></span><br><span class="line">        &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>设置接口请求前缀：根据开发、测试、生产环境的不同，前缀需要加以区分<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用node环境变量来作判断，用来区分开发、测试、生产环境</span></span><br><span class="line"><span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;development&#x27;</span>) &#123;</span><br><span class="line">  axios.<span class="property">defaults</span>.<span class="property">baseURL</span> = <span class="string">&#x27;http://dev.xxx.com&#x27;</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">  axios.<span class="property">defaults</span>.<span class="property">baseURL</span> = <span class="string">&#x27;http://prod.xxx.com&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在本地调试的时候，还需要在vue.config.js文件中配置devServer实现代理转发，从而实现跨域</span></span><br><span class="line"><span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;/proxyApi&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;http://dev.xxx.com&#x27;</span>,</span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">pathRewrite</span>: &#123;</span><br><span class="line">          <span class="string">&#x27;/proxyApi&#x27;</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li>请求头：来实现一些具体的业务，必须携带一些参数才可以请求</li>
+<li>状态码：根据接口返回的不同status，来执行不同的业务</li>
+<li>请求方法：根据get、post等方法进行一个再次封装，使用起来更加方便</li>
+<li>请求拦截器：根据请求的请求头设定，来决定哪些请求可以访问<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求拦截器可以在每个请求里加上token，做了统一处理后维护起来也方便</span></span><br><span class="line"><span class="comment">// 请求拦截器</span></span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(</span><br><span class="line">  <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 每次发送请求之前判断是否存在token</span></span><br><span class="line">    <span class="comment">// 如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录情况，此处token一般是用户完成登录后储存到localstorage里的</span></span><br><span class="line">    hl-&amp;&amp; (config.<span class="property">headers</span>.<span class="property">Authorization</span> = token)</span><br><span class="line">    <span class="keyword">return</span> config</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">error</span>(error)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></li>
+<li>响应拦截器：根据后端返回来的状态码判定执行不同的业务<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 响应拦截器</span></span><br><span class="line">响应拦截器可以在接收到响应后先做一层操作，如根据状态码判断登录状态、授权</span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据</span></span><br><span class="line">  <span class="comment">// 否则的话抛出错误</span></span><br><span class="line">  <span class="keyword">if</span> (response.<span class="property">status</span> === <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (response.<span class="property">data</span>.<span class="property">code</span> === <span class="number">511</span>) &#123;</span><br><span class="line">      <span class="comment">// 未授权调取授权接口</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (response.<span class="property">data</span>.<span class="property">code</span> === <span class="number">510</span>) &#123;</span><br><span class="line">      <span class="comment">// 未登录跳转登录页</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(response)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(response)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 我们可以在这里对异常状态作统一处理</span></span><br><span class="line">  <span class="keyword">if</span> (error.<span class="property">response</span>.<span class="property">status</span>) &#123;</span><br><span class="line">    <span class="comment">// 处理请求失败的情况</span></span><br><span class="line">    <span class="comment">// 对不同返回码对相应处理</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error.<span class="property">response</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="项目实际处理"><a href="#项目实际处理" class="headerlink" title="项目实际处理"></a>项目实际处理</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @Description: 本模块用于 api调用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">&quot;qs&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> storage <span class="keyword">from</span> <span class="string">&quot;store&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Message</span> &#125; <span class="keyword">from</span> <span class="string">&quot;ccxd-ux&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置超时时间和baseURL</span></span><br><span class="line"><span class="keyword">const</span> service = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">600000</span>, <span class="comment">// 超时时间</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST 传参序列化，请求拦截器</span></span><br><span class="line">service.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(</span><br><span class="line">  <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">  	 <span class="comment">// 从localStorage中获取token</span></span><br><span class="line">    <span class="keyword">const</span> token = storage.<span class="title function_">get</span>(<span class="string">&quot;token&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (token) &#123;</span><br><span class="line">      config.<span class="property">headers</span>.<span class="property">Token</span> = token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (config.<span class="property">method</span> === <span class="string">&quot;POST&quot;</span>) &#123;</span><br><span class="line">      config.<span class="property">data</span> = qs.<span class="title function_">stringify</span>(config.<span class="property">data</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="params">error</span> =&gt;</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error)</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 返回状态判断，响应拦截器</span></span><br><span class="line">service.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(</span><br><span class="line">  <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> data = res.<span class="property">data</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// code由Long转为String，便于前端使用，</span></span><br><span class="line">    data.<span class="property">code</span> += <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">const</span> &#123; code, msg &#125; = data;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!code.<span class="title function_">startsWith</span>(<span class="string">&quot;200&quot;</span>)) &#123;</span><br><span class="line">      <span class="comment">// 未登录或token失效，具体code需要和后端想协商好</span></span><br><span class="line">      <span class="keyword">if</span> (code == <span class="string">&quot;4510700000&quot;</span> || code == <span class="string">&quot;3110701403&quot;</span>) &#123;</span><br><span class="line">        <span class="title class_">Message</span>(&#123;</span><br><span class="line">          <span class="attr">message</span>: <span class="string">&quot;token失效，请重新登录&quot;</span>,</span><br><span class="line">          <span class="attr">type</span>: <span class="string">&quot;info&quot;</span>,</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> &#123; pathname, origin &#125; = <span class="variable language_">window</span>.<span class="property">location</span>;</span><br><span class="line">        <span class="keyword">const</span> isRuntime = storage.<span class="title function_">get</span>(<span class="string">&quot;isRuntime&quot;</span>);</span><br><span class="line">        <span class="keyword">const</span> appInfo = storage.<span class="title function_">get</span>(<span class="string">&quot;appInfo&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isRuntime&amp;&amp;!pathname.<span class="title function_">includes</span>(<span class="string">&quot;runLogin&quot;</span>)) &#123;</span><br><span class="line">          <span class="comment">//运行态逻辑</span></span><br><span class="line">          storage.<span class="title function_">remove</span>(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">          <span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">replace</span>(<span class="string">`<span class="subst">$&#123;origin&#125;</span>/runLogin?name=<span class="subst">$&#123;appInfo?.name&#125;</span>&amp;namespace=<span class="subst">$&#123;appInfo?.namespace&#125;</span>&amp;version=<span class="subst">$&#123;appInfo?.version&#125;</span>`</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (isRuntime&amp;&amp;pathname.<span class="title function_">includes</span>(<span class="string">&quot;runLogin&quot;</span>)) &#123;</span><br><span class="line">            <span class="comment">//运行态逻辑</span></span><br><span class="line">            storage.<span class="title function_">remove</span>(<span class="string">&quot;token&quot;</span>);      </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          storage.<span class="title function_">clearAll</span>();</span><br><span class="line">          <span class="keyword">if</span> (!pathname.<span class="title function_">includes</span>(<span class="string">&quot;/login&quot;</span>) || !pathname.<span class="title function_">includes</span>(<span class="string">&quot;runLogin&quot;</span>)) &#123;</span><br><span class="line">            <span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">replace</span>(<span class="string">`<span class="subst">$&#123;origin&#125;</span>/login`</span>);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title class_">Message</span>(&#123;</span><br><span class="line">          <span class="attr">message</span>: msg || <span class="string">&quot;系统繁忙，请稍候再试&quot;</span>,</span><br><span class="line">          <span class="attr">type</span>: <span class="string">&quot;error&quot;</span>,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="title class_">Message</span>(&#123;</span><br><span class="line">      <span class="attr">message</span>: <span class="string">&quot;系统繁忙，请稍候再试&quot;</span>,</span><br><span class="line">      <span class="attr">type</span>: <span class="string">&quot;error&quot;</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 处理请求方法</span></span><br><span class="line"><span class="keyword">const</span> request = &#123;</span><br><span class="line">  <span class="title function_">post</span>(<span class="params">url, data, prefix = <span class="string">&quot;&quot;</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">service</span>(&#123;</span><br><span class="line">      <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">      <span class="attr">url</span>: prefix + url,</span><br><span class="line">      data,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">url, data, prefix = <span class="string">&quot;&quot;</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">service</span>(&#123;</span><br><span class="line">      <span class="attr">method</span>: <span class="string">&quot;GET&quot;</span>,</span><br><span class="line">      <span class="attr">url</span>: prefix + url,</span><br><span class="line">      <span class="attr">params</span>: data,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">delete</span>(<span class="params">url, data, prefix = <span class="string">&quot;&quot;</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">service</span>(&#123;</span><br><span class="line">      <span class="attr">method</span>: <span class="string">&quot;DELETE&quot;</span>,</span><br><span class="line">      <span class="attr">url</span>: prefix + url,</span><br><span class="line">      <span class="attr">params</span>: data,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">patch</span>(<span class="params">url, data, prefix = <span class="string">&quot;&quot;</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">service</span>(&#123;</span><br><span class="line">      <span class="attr">method</span>: <span class="string">&quot;PATCH&quot;</span>,</span><br><span class="line">      <span class="attr">url</span>: prefix + url,</span><br><span class="line">      data,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> requestFile = &#123;</span><br><span class="line">  <span class="title function_">post</span>(<span class="params">url, data, prefix = <span class="string">&quot;&quot;</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">service</span>(&#123;</span><br><span class="line">      <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">      <span class="attr">url</span>: prefix + url,</span><br><span class="line">      data,</span><br><span class="line">      <span class="attr">config</span>: &#123;</span><br><span class="line">        <span class="attr">headers</span>: &#123; <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;multipart/form-data&quot;</span> &#125;,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> request;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/axios/" rel="tag"># axios</a>
+              <a href="/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" rel="tag"># 解决方法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/27/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E5%8D%81%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/" rel="prev" title="十万条数据如何处理">
+      <i class="fa fa-chevron-left"></i> 十万条数据如何处理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/01/%E5%B7%A5%E7%A8%8B%E5%8C%96/mini-webpack/" rel="next" title="mini-webpack">
+      mini-webpack <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#axios"><span class="nav-number">1.</span> <span class="nav-text">axios</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#axios%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">axios是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%B0%81%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要进行封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%81%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">如何封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E9%99%85%E5%A4%84%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">项目实际处理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

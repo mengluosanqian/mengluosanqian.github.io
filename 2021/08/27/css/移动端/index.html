@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="视口理想视口 width  viewport的宽度  height viewport的高度    device-width 定义输出设备的屏幕可见宽度 initial-scale  初始的缩放比例 minimum-scale  允许用户缩放到的最小比例 maximum-scale  允许用户缩放到的最大比例 user-scalable  用户是否可以手动缩放  12&lt;meta name&#x3D;&amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端">
+<meta property="og:url" content="http://example.com/2021/08/27/css/%E7%A7%BB%E5%8A%A8%E7%AB%AF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="视口理想视口 width  viewport的宽度  height viewport的高度    device-width 定义输出设备的屏幕可见宽度 initial-scale  初始的缩放比例 minimum-scale  允许用户缩放到的最小比例 maximum-scale  允许用户缩放到的最大比例 user-scalable  用户是否可以手动缩放  12&lt;meta name&#x3D;&amp;q">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-27T02:32:19.000Z">
+<meta property="article:modified_time" content="2022-08-14T09:24:20.620Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="移动端">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/27/css/%E7%A7%BB%E5%8A%A8%E7%AB%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>移动端 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/27/css/%E7%A7%BB%E5%8A%A8%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          移动端
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-27 10:32:19" itemprop="dateCreated datePublished" datetime="2021-08-27T10:32:19+08:00">2021-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-08-14 17:24:20" itemprop="dateModified" datetime="2022-08-14T17:24:20+08:00">2022-08-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="视口"><a href="#视口" class="headerlink" title="视口"></a>视口</h3><h4 id="理想视口"><a href="#理想视口" class="headerlink" title="理想视口"></a>理想视口</h4><ol>
+<li>width  viewport的宽度 </li>
+<li>height viewport的高度   </li>
+<li>device-width 定义输出设备的屏幕可见宽度</li>
+<li>initial-scale  初始的缩放比例</li>
+<li>minimum-scale  允许用户缩放到的最小比例</li>
+<li>maximum-scale  允许用户缩放到的最大比例</li>
+<li>user-scalable  用户是否可以手动缩放</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0&quot;</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="移动端特殊样式"><a href="#移动端特殊样式" class="headerlink" title="移动端特殊样式"></a>移动端特殊样式</h4><ol>
+<li>box-sizing:border-sizing</li>
+<li>-webkit-box-sizing:border-sizing   默认：content-box   border-box：margin、padding不会撑开盒子</li>
+<li>-webkit-tap-highlight-color:transparent   可以设置高亮颜色以及清除点击高亮</li>
+<li>-webkit-appearance:none   清除iOS中预置的样式，如input，botton</li>
+<li>-webkit-touch-callout:none   禁用长按弹出菜单</li>
+</ol>
+<h3 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">@media</span> mediaType <span class="keyword">and</span>|<span class="keyword">not</span>|<span class="keyword">only</span> (media feature) &#123;</span><br><span class="line">    CSS-<span class="selector-tag">Code</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="mediaType-媒体类型"><a href="#mediaType-媒体类型" class="headerlink" title="mediaType 媒体类型"></a>mediaType 媒体类型</h4><p>|	名称	|	作用	|<br>| :—:|	:—:	|<br>|	all	|	用于所有设备	|<br>|	print	|	 用于打印机和打印预览	|<br>|	screen	|	用于电脑屏幕，平板电脑，智能手机等。	|<br>|	speech	|	应用于屏幕阅读器等发声设备	|</p>
+<h4 id="media-feature-媒体功能"><a href="#media-feature-媒体功能" class="headerlink" title="media feature 媒体功能"></a>media feature 媒体功能</h4><p>|	名称	|	作用	|<br>| :—:|	:—:	|<br>|aspect-ratio	|定义输出设备中的页面可见区域宽度与高度的比率|<br>|color	|定义输出设备每一组彩色原件的个数。如果不是彩色设备，则值等于0|<br>|color-index|	定义在输出设备的彩色查询表中的条目数。如果没有使用彩色查询表，则值等于0|<br>|device-aspect-ratio	|定义输出设备的屏幕可见宽度与高度的比率。|<br>|device-height	|定义输出设备的屏幕可见高度。|<br>|device-width	|定义输出设备的屏幕可见宽度。|<br>|grid	|用来查询输出设备是否使用栅格或点阵。|<br>|height|	定义输出设备中的页面可见区域高度。|<br>|max-aspect-ratio	|定义输出设备的屏幕可见宽度与高度的最大比率。|<br>|max-color	|定义输出设备每一组彩色原件的最大个数。|<br>|max-color-index	|定义在输出设备的彩色查询表中的最大条目数。|<br>|max-device-aspect-ratio	|定义输出设备的屏幕可见宽度与高度的最大比率。|<br>|max-device-height	|定义输出设备的屏幕可见的最大高度。|<br>|max-device-width	|定义输出设备的屏幕最大可见宽度。|<br>|max-height	|定义输出设备中的页面最大可见区域高度。|<br>|max-monochrome	|定义在一个单色框架缓冲区中每像素包含的最大单色原件个数。|<br>|max-resolution	|定义设备的最大分辨率。|<br>|max-width	|定义输出设备中的页面最大可见区域宽度。|<br>|min-aspect-ratio	|定义输出设备中的页面可见区域宽度与高度的最小比率。|<br>|min-color	|定义输出设备每一组彩色原件的最小个数。|<br>|min-color-index	|定义在输出设备的彩色查询表中的最小条目数。|<br>|min-device-aspect-ratio	|定义输出设备的屏幕可见宽度与高度的最小比率。|<br>|min-device-width	|定义输出设备的屏幕最小可见宽度。|<br>|min-device-height	|定义输出设备的屏幕的最小可见高度。|<br>|min-height	|定义输出设备中的页面最小可见区域高度。|<br>|min-monochrome	|定义在一个单色框架缓冲区中每像素包含的最小单色原件个数|<br>|min-resolution	|定义设备的最小分辨率。||<br>|min-width	|定义输出设备中的页面最小可见区域宽度。|<br>|monochrome	|定义在一个单色框架缓冲区中每像素包含的单色原件个数。如果不是单色设备，则值等于0|<br>|orientation	|定义输出设备中的页面可见区域高度是否大于或等于宽度。|<br>|resolution	|定义设备的分辨率。如：96dpi, 300dpi, 118dpcm|<br>|can	|定义电视类设备的扫描工序。|<br>|width	|定义输出设备中的页面可见区域宽度。|</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>:<span class="number">400px</span>) &#123;</span><br><span class="line">           <span class="selector-tag">body</span>&#123;</span><br><span class="line">               <span class="attribute">background-color</span>: red;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>:<span class="number">401px</span>) &#123;</span><br><span class="line">           <span class="selector-tag">body</span>&#123;</span><br><span class="line">               <span class="attribute">background-color</span>: blue;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>:<span class="number">601px</span>) &#123;</span><br><span class="line">           <span class="selector-tag">body</span>&#123;</span><br><span class="line">               <span class="attribute">background-color</span>: yellow;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="selector-tag">html</span>&#123;</span><br><span class="line">           <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="selector-class">.box</span>&#123;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">10rem</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">10rem</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: red;</span><br><span class="line">           <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="REM-和EM"><a href="#REM-和EM" class="headerlink" title="REM 和EM"></a>REM 和EM</h3><h4 id="em"><a href="#em" class="headerlink" title="em"></a>em</h4><ol>
+<li>字体大小相对于父元素字体大小来说的</li>
+<li>其他属性相对于自身的字体大小来说，如果自身没有，则寻找有字体大小的父级元素</li>
+</ol>
+<h4 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h4><ol>
+<li>相对于html元素字体大小来说的(通过修改html里面的文字大小来改变页面中元素的大小)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">setRem</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> deviceWidth = <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span>;</span><br><span class="line">  <span class="comment">// 获取相对UI稿，屏幕的缩放比例</span></span><br><span class="line">  <span class="keyword">const</span> rem = (deviceWidth *<span class="number">100</span>) / <span class="number">750</span>;</span><br><span class="line">  <span class="comment">// 动态设置html的font-size</span></span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;html&#x27;</span>).<span class="property">style</span>.<span class="property">fontSize</span> =  rem + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag"># 移动端</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/21/css/%E5%A1%8C%E9%99%B7%E9%97%AE%E9%A2%98/" rel="prev" title="塌陷问题">
+      <i class="fa fa-chevron-left"></i> 塌陷问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/31/css/BFC/" rel="next" title="BFC">
+      BFC <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">视口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E8%A7%86%E5%8F%A3"><span class="nav-number">1.1.</span> <span class="nav-text">理想视口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E7%89%B9%E6%AE%8A%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">移动端特殊样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.</span> <span class="nav-text">媒体查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mediaType-%E5%AA%92%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">mediaType 媒体类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#media-feature-%E5%AA%92%E4%BD%93%E5%8A%9F%E8%83%BD"><span class="nav-number">2.2.</span> <span class="nav-text">media feature 媒体功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REM-%E5%92%8CEM"><span class="nav-number">3.</span> <span class="nav-text">REM 和EM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#em"><span class="nav-number">3.1.</span> <span class="nav-text">em</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rem"><span class="nav-number">3.2.</span> <span class="nav-text">rem</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

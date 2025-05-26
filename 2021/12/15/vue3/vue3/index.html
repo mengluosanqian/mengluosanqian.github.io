@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="vue3基础知识setup: vue3中的一个配置项，值为一个函数 是所有组合api‘表演的舞台’ 组件中用到的：数据、方法等等均要配置在setup中 返回值：对象：对象中的方法、属性，在模板中均可直接使用，渲染函数：自定义渲染内容 尽量不要与vue2.x混用 2.x的配置（data，methods，computed）可以访问到setup中的属性方法 setup访问不到2.x中的配置 有重名，se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3基础知识">
+<meta property="og:url" content="http://example.com/2021/12/15/vue3/vue3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="vue3基础知识setup: vue3中的一个配置项，值为一个函数 是所有组合api‘表演的舞台’ 组件中用到的：数据、方法等等均要配置在setup中 返回值：对象：对象中的方法、属性，在模板中均可直接使用，渲染函数：自定义渲染内容 尽量不要与vue2.x混用 2.x的配置（data，methods，computed）可以访问到setup中的属性方法 setup访问不到2.x中的配置 有重名，se">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-15T09:24:41.000Z">
+<meta property="article:modified_time" content="2022-01-03T10:21:43.298Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="vue3">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/12/15/vue3/vue3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>vue3基础知识 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/15/vue3/vue3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue3基础知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-15 17:24:41" itemprop="dateCreated datePublished" datetime="2021-12-15T17:24:41+08:00">2021-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-03 18:21:43" itemprop="dateModified" datetime="2022-01-03T18:21:43+08:00">2022-01-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue3/" itemprop="url" rel="index"><span itemprop="name">vue3</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="vue3基础知识"><a href="#vue3基础知识" class="headerlink" title="vue3基础知识"></a>vue3基础知识</h3><h4 id="setup"><a href="#setup" class="headerlink" title="setup:"></a>setup:</h4><ol>
+<li>vue3中的一个配置项，值为一个函数</li>
+<li>是所有组合api‘表演的舞台’</li>
+<li>组件中用到的：数据、方法等等均要配置在setup中</li>
+<li>返回值：对象：对象中的方法、属性，在模板中均可直接使用，渲染函数：自定义渲染内容</li>
+<li>尽量不要与vue2.x混用<ul>
+<li>2.x的配置（data，methods，computed）可以访问到setup中的属性方法</li>
+<li>setup访问不到2.x中的配置</li>
+<li>有重名，setup优先</li>
+</ul>
+</li>
+<li>setup不能是async函数，因为返回值不再是return的对象，而是promise,模板中看不到return对象中的属性</li>
+<li>后期也可以返回一个promise实例，但需要Suspense和异步组件的配合</li>
+</ol>
+<h4 id="ref函数"><a href="#ref函数" class="headerlink" title="ref函数"></a>ref函数</h4><ol>
+<li>对于基本数据类型，通过getter、setter实现数据劫持,响应式依旧是靠Object.defineProperty()的get和set实现</li>
+<li>对于对象等将传入的数据变成proxy代理对象，实现响应式内部求助于一个新函数–reactive函数</li>
+<li>定义一个响应式数据</li>
+<li>语法 const xxx &#x3D; ref(initValue)</li>
+<li>创建一个包含响应式数据的引用对象（ref对象）</li>
+<li>js中操作数据： xxx.value</li>
+<li>模板中读取数据： <div></div></li>
+</ol>
+<h4 id="reactive函数"><a href="#reactive函数" class="headerlink" title="reactive函数"></a>reactive函数</h4><ol>
+<li>只能处理对象</li>
+<li>使用reactive定义的不需要再.value</li>
+<li>定义一个对象类型的响应式数据</li>
+<li>语法：const 代理对象 &#x3D; reactive(源对象) 接收一个对象（或数组），返回一个代理对象（proxy对象）</li>
+<li>reactive定义的响应式数据是‘深层次的’</li>
+<li>内部基于es6的proxy实现，通过代理对象操作源对象来实现</li>
+</ol>
+<h4 id="ref-对比-reactive"><a href="#ref-对比-reactive" class="headerlink" title="ref 对比 reactive"></a>ref 对比 reactive</h4><ol>
+<li>定义数据：<ul>
+<li>ref：基本类型数据（也可以定义对象或数组，内部会进行转换）</li>
+<li>reactive：对象（或数组）类型数据</li>
+</ul>
+</li>
+<li>原理： <ul>
+<li>ref通过object.defineProperty()的get和set来实现响应式</li>
+<li>reactive通过proxy来实现响应式，并通过reflect操作源对象内部的数据</li>
+</ul>
+</li>
+<li>使用角度：<ul>
+<li>ref操作数据需要.value，读取数据时模板不需要</li>
+<li>reactive均不需要.value <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">setup</span>(<span class="params">props,context</span>) &#123;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(props,context);</span><br><span class="line">       <span class="keyword">let</span> person = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">           <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">           <span class="attr">age</span>: <span class="number">24</span></span><br><span class="line">       &#125;)</span><br><span class="line">       <span class="keyword">function</span> <span class="title function_">test</span>(<span class="params">params</span>) &#123;</span><br><span class="line">           context.<span class="title function_">emit</span>(<span class="string">&#x27;sayHi&#x27;</span>,person.<span class="property">name</span>)</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> &#123;</span><br><span class="line">           person,</span><br><span class="line">           test</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h4 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h4> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">et person = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">           <span class="attr">firsrName</span>: <span class="string">&#x27;张&#x27;</span>,</span><br><span class="line">           <span class="attr">lastName</span>: <span class="string">&#x27;三&#x27;</span>,</span><br><span class="line">       &#125;);</span><br><span class="line">       <span class="comment">// 计算属性 -- 简写（没有考虑计算属性被修改的情况）</span></span><br><span class="line">       person.<span class="property">fullName</span> = <span class="title function_">computed</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">           <span class="keyword">return</span> person.<span class="property">firsrName</span> + <span class="string">&#x27;-&#x27;</span> + person.<span class="property">lastName</span></span><br><span class="line">       &#125;)</span><br><span class="line">       <span class="comment">// 计算属性 -- 完整写法（考虑读写）</span></span><br><span class="line">       person.<span class="property">fullName</span> = <span class="title function_">computed</span>(&#123;</span><br><span class="line">           <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">               <span class="keyword">return</span> person.<span class="property">firsrName</span> + <span class="string">&#x27;-&#x27;</span> + person.<span class="property">lastName</span></span><br><span class="line">           &#125;,</span><br><span class="line">           <span class="title function_">set</span>(<span class="params">value</span>) &#123;</span><br><span class="line">               <span class="keyword">const</span> nameArr = value.<span class="title function_">split</span>(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">               person.<span class="property">firsrName</span> = nameArr[<span class="number">0</span>]</span><br><span class="line">               person.<span class="property">lastName</span> = nameArr[<span class="number">1</span>]</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h4><ol>
+<li>用ref定义的基本类型数据refImpl中的value是具体的值，所以watch的时候不需要.value,.value会使监视无法实现</li>
+<li>用ref定义的对象，refImpl中的value是proxy,所以watch需要写value或者写deep:true</li>
+<li>情况一：监视ref所定义的一个响应式数据</li>
+<li>情况二：监视ref所定义的多个响应式数据</li>
+<li>情况三：监视reactive所定义的一个响应式数据</li>
+<li>情况四：监视reactive所定义的一个响应式数据中的某个属性</li>
+<li>情况五：监视reactive所定义的一个响应式数据中的某些属性 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sum = <span class="title function_">ref</span>(<span class="number">0</span>)</span><br><span class="line">       <span class="keyword">let</span> msg = <span class="title function_">ref</span>(<span class="string">&#x27;你好&#x27;</span>)</span><br><span class="line">       <span class="keyword">let</span> person = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">           <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">           <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">           <span class="attr">job</span>:&#123;</span><br><span class="line">               <span class="attr">j1</span>:&#123;</span><br><span class="line">                   <span class="attr">salary</span>: <span class="number">20000</span></span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)</span><br><span class="line">       <span class="keyword">let</span> person1 = <span class="title function_">ref</span>(&#123;</span><br><span class="line">           <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">           <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">           <span class="attr">job</span>:&#123;</span><br><span class="line">               <span class="attr">j1</span>:&#123;</span><br><span class="line">                   <span class="attr">salary</span>: <span class="number">20000</span></span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)</span><br><span class="line">       <span class="comment">// 用ref定义的基本类型数据refImpl中的value是具体的值，所以watch的时候不需要.value,.value会使监视无法实现</span></span><br><span class="line">       <span class="comment">// 用ref定义的对象，refImpl中的value是proxy,所以watch需要写value或者写deep:true</span></span><br><span class="line">       <span class="title function_">watch</span>(person1,<span class="function">(<span class="params">newVal,oldVal</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1值变换了&#x27;</span>,newVal,oldVal);</span><br><span class="line">       &#125;,&#123;<span class="attr">deep</span>:<span class="literal">true</span>&#125;)</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 情况一：监视ref所定义的一个响应式数据</span></span><br><span class="line">       <span class="title function_">watch</span>(sum,<span class="function">(<span class="params">newVal,oldVal</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;sum值变换了&#x27;</span>,newVal,oldVal);</span><br><span class="line">       &#125;)</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 情况二：监视ref所定义的多个响应式数据</span></span><br><span class="line">       <span class="title function_">watch</span>([sum,msg],<span class="function">(<span class="params">newVal,oldVal</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;sum或msg值变换了&#x27;</span>,newVal,oldVal);</span><br><span class="line">       &#125;,&#123;<span class="attr">immediate</span>: <span class="literal">true</span>, <span class="attr">deep</span>: <span class="literal">true</span>&#125;)</span><br><span class="line">       <span class="comment">// watch(msg,(newVal,oldVal) =&gt; &#123;</span></span><br><span class="line">       <span class="comment">//      console.log(&#x27;msg值变换了&#x27;,newVal,oldVal);</span></span><br><span class="line">       <span class="comment">// &#125;) </span></span><br><span class="line">       <span class="comment">// 情况三：监视reactive所定义的一个响应式数据,</span></span><br><span class="line">                   <span class="comment">// 此处无法正确的获取oldValue</span></span><br><span class="line">                   <span class="comment">// 强制开起来深度监视，deep配置无效</span></span><br><span class="line">       <span class="title function_">watch</span>(person,<span class="function">(<span class="params">newVal,oldVal</span>) =&gt;</span> &#123;</span><br><span class="line">           <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person变换了&#x27;</span>,newVal,oldVal);</span><br><span class="line">       &#125;)</span><br><span class="line">        <span class="comment">// 情况四：监视reactive所定义的一个响应式数据中的某个属性,</span></span><br><span class="line">       <span class="title function_">watch</span>(<span class="function">() =&gt;</span> person.<span class="property">age</span>,<span class="function">(<span class="params">newVal,oldVal</span>) =&gt;</span> &#123;</span><br><span class="line">           <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person的age变换了&#x27;</span>,newVal,oldVal);</span><br><span class="line">       &#125;,&#123;<span class="attr">deep</span>:<span class="literal">false</span>&#125;)</span><br><span class="line">        <span class="comment">// 情况五：监视reactive所定义的一个响应式数据中的某些属性,</span></span><br><span class="line">        <span class="title function_">watch</span>([<span class="function">() =&gt;</span> person.<span class="property">age</span>,<span class="function">() =&gt;</span> person.<span class="property">name</span>],<span class="function">(<span class="params">newVal,oldVal</span>) =&gt;</span> &#123;</span><br><span class="line">           <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person的age或者name变换了&#x27;</span>,newVal,oldVal);</span><br><span class="line">       &#125;)</span><br><span class="line">        <span class="comment">// 特殊情况</span></span><br><span class="line">       <span class="comment">//  2021-11-11 测试不写deep:true 也可以</span></span><br><span class="line">        <span class="title function_">watch</span>(<span class="function">() =&gt;</span> person.<span class="property">job</span>,<span class="function">(<span class="params">newVal,oldVal</span>) =&gt;</span> &#123;</span><br><span class="line">           <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person的job变换了&#x27;</span>,newVal,oldVal);</span><br><span class="line">       &#125;,&#123;<span class="attr">deep</span>:<span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="新的组件："><a href="#新的组件：" class="headerlink" title="新的组件："></a>新的组件：</h4><ol>
+<li>fragment<ul>
+<li>vue3可以没有根标签，内部会将多个标签包含在一个fragment虚拟元素中</li>
+<li>减少标签层级、减少内存占用</li>
+</ul>
+</li>
+<li>teleport<ul>
+<li>将组件html结构移动到指定位置的技术</li>
+<li><teleport to="要移到到的地方">要移动的代码</teleport></li>
+</ul>
+</li>
+<li>Suspense<ul>
+<li>静态引入和异步引入见：src\vue-learning\src\test-customRef.vue</li>
+<li>异步引入组件，使用Suspense 包裹组件，并配置好default和fallback</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Suspense</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TestTeleport</span> <span class="attr">:show</span>=<span class="string">&quot;show&quot;</span> @<span class="attr">open</span>=<span class="string">&quot;open&quot;</span> @<span class="attr">close</span>=<span class="string">&quot;close&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:fallback</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>加载中<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Suspense</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="toRef和toRefs"><a href="#toRef和toRefs" class="headerlink" title="toRef和toRefs"></a>toRef和toRefs</h4><ol>
+<li>toRef :<ul>
+<li>创建一个ref对象，其value值指向另一个对象中的属性</li>
+<li>详见src\vue-learning\src\test-toref.vue</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">setup</span>(<span class="params">props</span>) &#123;</span><br><span class="line">   <span class="keyword">let</span> person = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">     <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">     <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">     <span class="attr">job</span>: &#123;</span><br><span class="line">       <span class="attr">j1</span>: &#123;</span><br><span class="line">         <span class="attr">salary</span>: <span class="number">20000</span>,</span><br><span class="line">       &#125;,</span><br><span class="line">     &#125;,</span><br><span class="line">   &#125;);</span><br><span class="line">   <span class="keyword">const</span> x = <span class="title function_">toRefs</span>(person)</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">       person,</span><br><span class="line">       ...<span class="title function_">toRefs</span>(person),</span><br><span class="line">     <span class="comment">// 这样写跳过了proxy，响应式消失了</span></span><br><span class="line">     <span class="comment">//   name:person.name,</span></span><br><span class="line">     <span class="comment">//   age:person.age,</span></span><br><span class="line">     <span class="comment">//   salary:person.job.j1.salary,</span></span><br><span class="line"></span><br><span class="line">     <span class="comment">// 这样写在后续修改中修改的不是原来的数据，而是新增的ref对象</span></span><br><span class="line">   <span class="comment">//   name: ref(person.name),</span></span><br><span class="line">   <span class="comment">//   age: ref(person.age),</span></span><br><span class="line">   <span class="comment">//   salary: ref(person.job.j1.salary),</span></span><br><span class="line">   <span class="comment">//   name: toRef(person, &quot;name&quot;),</span></span><br><span class="line">   <span class="comment">//   age: toRef(person, &quot;age&quot;),</span></span><br><span class="line">   <span class="comment">//   salary: toRef(person.job.j1, &quot;salary&quot;),</span></span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="shallowReactive和shallowRef"><a href="#shallowReactive和shallowRef" class="headerlink" title="shallowReactive和shallowRef"></a>shallowReactive和shallowRef</h4><ol>
+<li>shallowReactive：<ul>
+<li>只考虑第一层的响应式</li>
+</ul>
+</li>
+<li>shallowRef:<ul>
+<li>如果传入的是对象，则不是响应式</li>
+<li>只处理基本类型的响应式</li>
+</ul>
+</li>
+<li>详见：src\vue-learning\src\test-shallow.vue<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">setup</span>(<span class="params">props</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> sum = <span class="title function_">shallowRef</span>(<span class="number">0</span>)</span><br><span class="line">    <span class="comment">//   使用shallowRef ，如果传入的是对象，则不是响应式</span></span><br><span class="line">    <span class="comment">// 只处理基本类型的响应式</span></span><br><span class="line">      <span class="keyword">let</span> x = <span class="title function_">shallowRef</span>(&#123;</span><br><span class="line">          <span class="attr">y</span>: <span class="number">0</span> </span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="comment">//   使用shallowReactive，只有第一层是响应式的</span></span><br><span class="line">    <span class="keyword">let</span> person = <span class="title function_">shallowReactive</span>(&#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">      <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">      <span class="attr">job</span>: &#123;</span><br><span class="line">        <span class="attr">j1</span>: &#123;</span><br><span class="line">          <span class="attr">salary</span>: <span class="number">20000</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        person,</span><br><span class="line">        sum,</span><br><span class="line">        x,</span><br><span class="line">        ...<span class="title function_">toRefs</span>(person),</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="readonly和shallowReadonly"><a href="#readonly和shallowReadonly" class="headerlink" title="readonly和shallowReadonly"></a>readonly和shallowReadonly</h4><ol>
+<li>详见：src\vue-learning\src\test-readonly.vue</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">setup</span>(<span class="params">props</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> sum = <span class="title function_">readonly</span>(<span class="number">0</span>)</span><br><span class="line">      <span class="keyword">let</span> x = <span class="title function_">readonly</span>(&#123;</span><br><span class="line">          <span class="attr">y</span>: <span class="number">0</span> </span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="comment">//   使用shallowReadonly，只有第一层是只读的</span></span><br><span class="line">    <span class="keyword">let</span> person = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">      <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">      <span class="attr">job</span>: &#123;</span><br><span class="line">        <span class="attr">j1</span>: &#123;</span><br><span class="line">          <span class="attr">salary</span>: <span class="number">20000</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">    person = <span class="title function_">shallowReadonly</span>(person)</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        person,</span><br><span class="line">        sum,</span><br><span class="line">        x,</span><br><span class="line">        ...<span class="title function_">toRefs</span>(person),</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="toRaw和markRaw"><a href="#toRaw和markRaw" class="headerlink" title="toRaw和markRaw"></a>toRaw和markRaw</h4><ol>
+<li>toRaw: <ul>
+<li>作用：将一个由reactive生成的响应式对象转为普通对象</li>
+<li>使用场景： 用于读取响应式对象对应的普通对象，对这个普通对象的所有操作，不会引起页面更新</li>
+</ul>
+</li>
+<li>markRaw:<ul>
+<li>作用： 标记一个对象，使其永远不会再成为响应式对象</li>
+<li>应用场景： <ol>
+<li>有些值不应该被设置成响应式</li>
+<li>当渲染具有不可变数据的大列表时，跳过响应式转换可以提高性能</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>详见：src\vue-learning\src\test-raw.vue</li>
+</ol>
+<h4 id="customRef"><a href="#customRef" class="headerlink" title="customRef"></a>customRef</h4><ol>
+<li>详见：src\vue-learning\src\test-customRef.vue<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">setup</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> show = <span class="title function_">ref</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">open</span>(<span class="params"></span>) &#123;</span><br><span class="line">      show = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">close</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">11111111111</span>);</span><br><span class="line">      show = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//   使用vue内置的ref</span></span><br><span class="line">    <span class="comment">// let keyWord = ref(&quot;hello&quot;);</span></span><br><span class="line">    <span class="comment">// 使用自定义的ref</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">myRef</span>(<span class="params">value</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> timer;</span><br><span class="line">      <span class="comment">//   自带防抖处理</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;--myRef--&quot;</span>, value);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">customRef</span>(<span class="function">(<span class="params">track, trigger</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;从自定义的myRef中读取数据&quot;</span>, value);</span><br><span class="line">            <span class="title function_">track</span>(); <span class="comment">// 通知vue追踪value的变化</span></span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="title function_">set</span>(<span class="params">newValue</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;通过自定义的myRef设置数据&quot;</span>, newValue);</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timer);</span><br><span class="line">            timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">              value = newValue;</span><br><span class="line">              <span class="title function_">trigger</span>(); <span class="comment">// 通知vue去重新解析模板</span></span><br><span class="line">            &#125;, <span class="number">500</span>);</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="comment">// console.log(x);</span></span><br><span class="line">      <span class="comment">// return x</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> keyWord = <span class="title function_">myRef</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      keyWord,</span><br><span class="line">      show,</span><br><span class="line">      open,</span><br><span class="line">      close,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/vue3/" rel="tag"># vue3</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/14/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86/" rel="prev" title="vue原理">
+      <i class="fa fa-chevron-left"></i> vue原理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/15/vue3/vue3%E5%AF%B9%E6%AF%94vue2%E7%9A%84%E6%94%B9%E5%8F%98/" rel="next" title="vue3对比vue2的改变">
+      vue3对比vue2的改变 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#vue3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">vue3基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setup"><span class="nav-number">1.1.</span> <span class="nav-text">setup:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ref%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">ref函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reactive%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">reactive函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ref-%E5%AF%B9%E6%AF%94-reactive"><span class="nav-number">1.4.</span> <span class="nav-text">ref 对比 reactive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="nav-number">1.5.</span> <span class="nav-text">计算属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#watch"><span class="nav-number">1.6.</span> <span class="nav-text">watch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E7%9A%84%E7%BB%84%E4%BB%B6%EF%BC%9A"><span class="nav-number">1.7.</span> <span class="nav-text">新的组件：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#toRef%E5%92%8CtoRefs"><span class="nav-number">1.8.</span> <span class="nav-text">toRef和toRefs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shallowReactive%E5%92%8CshallowRef"><span class="nav-number">1.9.</span> <span class="nav-text">shallowReactive和shallowRef</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#readonly%E5%92%8CshallowReadonly"><span class="nav-number">1.10.</span> <span class="nav-text">readonly和shallowReadonly</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#toRaw%E5%92%8CmarkRaw"><span class="nav-number">1.11.</span> <span class="nav-text">toRaw和markRaw</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#customRef"><span class="nav-number">1.12.</span> <span class="nav-text">customRef</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

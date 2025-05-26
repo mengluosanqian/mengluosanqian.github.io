@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="HTTP补充Accept字段Accept字段主要由四部分组成：数据格式、压缩方式、支持语言和字符集 数据格式对于发送方来说，报文 body 部分的数据类型，这些类型体现在Content-Type这个字段。接收端想要收到特定类型的数据，也可以用Accept字段。这两个字段可以分为下面几类：  text： text&#x2F;html, text&#x2F;plain, text&#x2F;css 等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP补充">
+<meta property="og:url" content="http://example.com/2022/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP%E8%A1%A5%E5%85%85/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="HTTP补充Accept字段Accept字段主要由四部分组成：数据格式、压缩方式、支持语言和字符集 数据格式对于发送方来说，报文 body 部分的数据类型，这些类型体现在Content-Type这个字段。接收端想要收到特定类型的数据，也可以用Accept字段。这两个字段可以分为下面几类：  text： text&#x2F;html, text&#x2F;plain, text&#x2F;css 等">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-02T15:20:32.000Z">
+<meta property="article:modified_time" content="2022-06-21T03:09:11.185Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="HTTP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP%E8%A1%A5%E5%85%85/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>HTTP补充 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP%E8%A1%A5%E5%85%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP补充
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-02 23:20:32" itemprop="dateCreated datePublished" datetime="2022-03-02T23:20:32+08:00">2022-03-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-21 11:09:11" itemprop="dateModified" datetime="2022-06-21T11:09:11+08:00">2022-06-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="HTTP补充"><a href="#HTTP补充" class="headerlink" title="HTTP补充"></a>HTTP补充</h2><h3 id="Accept字段"><a href="#Accept字段" class="headerlink" title="Accept字段"></a>Accept字段</h3><p>Accept字段主要由四部分组成：<code>数据格式、压缩方式、支持语言和字符集</code></p>
+<h4 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h4><p>对于发送方来说，报文 body 部分的数据类型，这些类型体现在Content-Type这个字段。接收端想要收到特定类型的数据，也可以用Accept字段。<br>这两个字段可以分为下面几类：</p>
+<ol>
+<li>text： text&#x2F;html, text&#x2F;plain, text&#x2F;css 等</li>
+<li>image: image&#x2F;gif, image&#x2F;jpeg, image&#x2F;png 等</li>
+<li>audio&#x2F;video: audio&#x2F;mpeg, video&#x2F;mp4 等</li>
+<li>application: application&#x2F;json, application&#x2F;javascript, application&#x2F;pdf, application&#x2F;octet-stream</li>
+</ol>
+<h4 id="压缩方式"><a href="#压缩方式" class="headerlink" title="压缩方式"></a>压缩方式</h4><p>当然一般这些数据都是会进行编码压缩的，采取什么样的压缩方式就体现在了发送方的Content-Encoding字段上， 同样的，接收什么样的压缩方式体现在了接受方的Accept-Encoding字段上。这个字段的取值有下面几种：</p>
+<ol>
+<li>gzip: 当今最流行的压缩格式</li>
+<li>deflate: 另外一种著名的压缩格式</li>
+<li>br: 一种专门为 HTTP 发明的压缩算法</li>
+</ol>
+<h4 id="支持语言"><a href="#支持语言" class="headerlink" title="支持语言"></a>支持语言</h4><p>对于发送方而言，还有一个Content-Language字段，在需要实现国际化的方案当中，可以用来指定支持的语言，在接受方对应的字段为Accept-Language</p>
+<h4 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h4><p>最后是一个比较特殊的字段, 在接收端对应为Accept-Charset，指定可以接受的字符集，而在发送端并没有对应的Content-Charset, 而是直接放在了Content-Type中，以charset属性指定<br>HTTP请求处理表单数据的提交，体现在两种不同的Content-Type取值:application&#x2F;x-www-form-urlencoded<br>multipart&#x2F;form-data</p>
+<h3 id="HTTP版本"><a href="#HTTP版本" class="headerlink" title="HTTP版本"></a>HTTP版本</h3><p>HTTP传输是基于请求-应答的模式进行的，报文必须是一发一收，里面的任务被放在一个任务队列中串行执行，一旦队首的请求处理太慢，就会阻塞后面请求的处理。</p>
+<h4 id="1-0版本"><a href="#1-0版本" class="headerlink" title="1.0版本"></a>1.0版本</h4><ol>
+<li>最早的http只是使用在一些较为简单的网页上和网络请求上，所以比较简单，每次请求都打开一个新的TCP连接，收到响应后立即断开连接</li>
+<li>后面提供了一个非标准字段connection字段来实现长连接，但是由于非标准字段，所以不同实现的行为可能不一致</li>
+<li>支持发送的http请求方式有get、post、head</li>
+</ol>
+<h4 id="1-1版本"><a href="#1-1版本" class="headerlink" title="1.1版本"></a>1.1版本</h4><ol>
+<li>引入了更多的缓存控制策略，如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等</li>
+<li>允许范围请求，即在请求头中加入range头部</li>
+<li>请求消息和响应消息都必须包含Host头部，以区分同一个物理主机中的不同虚拟主机的域名</li>
+<li>默认开启持久连接，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟</li>
+<li>支持持久化连接Persistent Connection，并且默认使用persistent，Connection，在同一个tcp的连接中可以传送多个HTTP请求和响应。多个请求和响应可以重叠。多个请求和响应可以同时进行</li>
+<li>Connection请求头的值为keep-alive时，客户端通知服务器返回本次请求结果后保持连接</li>
+<li>HTTP1.1还提供了与身份认证、状态管理和Cache缓存等机制相关的请求头和响应头</li>
+<li>HTTP1.1支持请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟，这种机制容易造成队头堵塞</li>
+<li>请求方式增加put、patch、options、delete等。</li>
+</ol>
+<h4 id="HTTP2-0"><a href="#HTTP2-0" class="headerlink" title="HTTP2.0"></a>HTTP2.0</h4><ol>
+<li>由于HTTPS在安全方面已经做得非常好了，HTTP改进的关注点放在了性能方面，对于HTTP&#x2F;2而言，他对于性能的提升主要在于两点：头部压缩、多路复用</li>
+<li>增加双工模式，即不仅客户端能够同时发送多个请求，服务端也能同时处理多个请求，解决了队头堵塞的问题</li>
+<li>支持二进制帧的格式来传递报头和数据</li>
+<li>头信息压缩机制，头信息使用gzip或compress压缩后再发送</li>
+</ol>
+<ul>
+<li>采用HPACK算法，在客户端和服务器两端建立字典，用索引号表示重复字符串，采用哈夫曼编码啦压缩整数和字符串，可以达到50%~90%的高压缩率</li>
+<li>在客户端和服务器端使用“首部表”来跟踪和存储之前发送的键值对，对于相同的数据，不再通过每次请求和响应发送</li>
+<li>首部表在HTTP&#x2F;2连接续存期内始终存在，由客户端和服务器共同渐进的更新</li>
+<li>每个首部键值对要么被追加到当前表的末尾，要么替换表中之前的值</li>
+</ul>
+<h4 id="HTTP3-0"><a href="#HTTP3-0" class="headerlink" title="HTTP3.0"></a>HTTP3.0</h4><ol>
+<li>由于TCP和UDP两者在运输层存在一定差距，TCP的传递效率与UDP相比有天然劣势，于是google基于UDP开发出了新的协议QUIC（quick UDP internet Connections），希望取代TCP提高传输效率，后经过协商将QUIC更名为HTTP&#x2F;3</li>
+<li>UDP比TCP相比效率更高但不具备传输可靠性。而quic便是根据UDP传输效率高这一特点，结合TCP、TLS、http2的优势，加以优化</li>
+<li>零RTT建立连接</li>
+</ol>
+<ul>
+<li>仅需一次 RTT(Round-TripTime:往返时延)即可传递数据，如果将其缓存，就可将RTT减少至0</li>
+<li>核心是DH秘钥交换算法</li>
+</ul>
+<ol start="4">
+<li>连接迁移</li>
+<li>HTTP&#x2F;3基于UDP的传输，不保证连接可靠性，也就没有对头阻塞的后果。同样传输单元与加密单元为Packet，在TLS下也可避免对头阻塞的问题。</li>
+<li>拥塞控制：TCP对于拥塞控制在于传输层，quic可在应用层操作改变拥塞控制方法</li>
+<li>流量控制：TCP使用滑动窗口的方法对发送方的流量进行控制，而对接收方并无现在，在quic中补齐了这一短板</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+              <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/" rel="prev" title="HTTP">
+      <i class="fa fa-chevron-left"></i> HTTP
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/OSI/" rel="next" title="OSI">
+      OSI <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E8%A1%A5%E5%85%85"><span class="nav-number">1.</span> <span class="nav-text">HTTP补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Accept%E5%AD%97%E6%AE%B5"><span class="nav-number">1.1.</span> <span class="nav-text">Accept字段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">压缩方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E8%AF%AD%E8%A8%80"><span class="nav-number">1.1.3.</span> <span class="nav-text">支持语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">1.1.4.</span> <span class="nav-text">字符集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E7%89%88%E6%9C%AC"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP版本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-0%E7%89%88%E6%9C%AC"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.0版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1%E7%89%88%E6%9C%AC"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.1版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP2-0"><span class="nav-number">1.2.3.</span> <span class="nav-text">HTTP2.0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP3-0"><span class="nav-number">1.2.4.</span> <span class="nav-text">HTTP3.0</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

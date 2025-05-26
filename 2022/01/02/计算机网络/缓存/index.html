@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="缓存缓存分类优先级从上到下，找到就直接返回  service worker 运行在浏览器背后的独立线程     传输协议必须为https 可以让我们自由控制缓存哪些文件、如何匹配缓存、如何读取缓存，并且缓存是持续性的   memory cache 内存缓存 读取速度快，持续时间短     一旦我们关闭了tab页面，内存中的缓存也就被释放了  访问页面过后，再次刷新页面，很多数据都来自于内存缓存 几">
+<meta property="og:type" content="article">
+<meta property="og:title" content="缓存">
+<meta property="og:url" content="http://example.com/2022/01/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="缓存缓存分类优先级从上到下，找到就直接返回  service worker 运行在浏览器背后的独立线程     传输协议必须为https 可以让我们自由控制缓存哪些文件、如何匹配缓存、如何读取缓存，并且缓存是持续性的   memory cache 内存缓存 读取速度快，持续时间短     一旦我们关闭了tab页面，内存中的缓存也就被释放了  访问页面过后，再次刷新页面，很多数据都来自于内存缓存 几">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-02T03:25:10.000Z">
+<meta property="article:modified_time" content="2022-06-14T13:09:01.440Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="缓存">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/01/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BC%93%E5%AD%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>缓存 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BC%93%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          缓存
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-02 11:25:10" itemprop="dateCreated datePublished" datetime="2022-01-02T11:25:10+08:00">2022-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-14 21:09:01" itemprop="dateModified" datetime="2022-06-14T21:09:01+08:00">2022-06-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h2 id="缓存分类"><a href="#缓存分类" class="headerlink" title="缓存分类"></a>缓存分类</h2><p>优先级从上到下，找到就直接返回</p>
+<ol>
+<li>service worker<ul>
+<li>运行在浏览器背后的独立线程</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>传输协议必须为https</li>
+<li>可以让我们自由控制缓存哪些文件、如何匹配缓存、如何读取缓存，并且缓存是持续性的</li>
+</ul>
+<ol start="2">
+<li>memory cache 内存缓存<ul>
+<li>读取速度快，持续时间短</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>一旦我们关闭了tab页面，内存中的缓存也就被释放了 </li>
+<li>访问页面过后，再次刷新页面，很多数据都来自于内存缓存</li>
+<li>几乎所有的请求资源都能进入memory cache，细分来说主要分为<code>preloader</code>和<code>preload</code><ul>
+<li>preloader：页面优化的常见手段之一，主要作用用于在浏览器打开一个网页的时候，能够一<code>边解析执行js、css，一边去请求下一个资源 </code>，而这些被preloader请求来的资源就会被放入memory cache中，供之后的解析执行操作使用</li>
+<li>preload：显示指定预加载的资源，这些资源也会被放进memory cache中</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>disk cache 硬盘缓存<ul>
+<li>存储在硬盘中的缓存</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>缓存在硬盘中，容量大</li>
+<li>读取速度慢</li>
+<li>强缓存、协商缓存都属于disk cache的范畴</li>
+<li>在所有浏览器缓存中，disk cache是覆盖面最大的，它会根据前面我们提到的HTTP header中的缓存字段来判断哪些资源需要缓存, 哪些资源不需要请求而直接使用, 哪些已经过期了需要重新请求获取.</li>
+</ul>
+<ol start="4">
+<li>push cache 推送缓存<ul>
+<li>http&#x2F;2中的内容，当以上三种缓存都没有命中时，才会被利用</li>
+<li>只在会话(session)中存在，一旦会话结束就被释放，并且缓存时间也很短暂</li>
+</ul>
+</li>
+</ol>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><ol>
+<li><p>服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行比较缓存策略</p>
+</li>
+<li><p>cache-control（相对值）&#x2F; expries（绝对值）</p>
+</li>
+<li><p>expries是http1.0的标准</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> nowTime = <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">nowTime.<span class="title function_">setTime</span>(<span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>() + <span class="number">3600</span>*<span class="number">1000</span>)</span><br><span class="line">ctx.<span class="title function_">set</span>(<span class="string">&quot;Expires&quot;</span>,nowTime.<span class="title function_">toUTCString</span>())</span><br></pre></td></tr></table></figure></li>
+<li><p>到了http&#x2F;1.1 expries已经被cache-control替代</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">set</span>(<span class="string">&quot;cache-control&quot;</span>,<span class="string">&quot;max-age=3600&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>max-age 和 s-maxage<br>两者是 cache-control 的主要字段，它们是一个数字，表示资源过了多少秒之后变为无效。在浏览器中，max-age 和 s-maxage 都起作用，而且 s-maxage 的优先级高于 max-age。在代理服务器中，只有 s-maxage 起作用。 可以通过设置 max-age 为 0 表示立马过期来向服务器请求资源。</p>
+</li>
+<li><p>public 和 private<br>public 表示该资源可以被所有客户端和代理服务器缓存，而 private 表示该资源仅能客户端缓存。默认值是 private，当设置了 s-maxage 的时候表示允许代理服务器缓存，相当于 public。</p>
+</li>
+<li><p>no-cache 和 no-store<br>no-cache 表示的是不直接询问浏览器缓存情况，而是去向服务器验证当前资源是否更新（即协商缓存）。no-store 则更狠，完全不使用缓存策略，不缓存请求或响应的任何内容，直接向服务器请求最新。由于两者都不考虑缓存情况而是直接与服务器交互，所以当 no-cache 和 no-store 存在时会直接忽略 max-age 等</p>
+</li>
+</ol>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><ol>
+<li>让客户端和服务器之间能实现缓存文件是否更新的验证，提升缓存的复用率，将缓存信息中的etag和lastModified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存，出现from disk、from memory的策略是强缓存</li>
+<li>控制协商缓存的字段分别有：Last-Modified &#x2F; If-Modified-Since 和 Etag &#x2F; If-None-Match，其中Etag &#x2F; If-None-Match的优先级比Last-Modified &#x2F; If-Modified-Since高。协商缓存主要有以下两种情况：</li>
+</ol>
+<h3 id="强缓存优于协商缓存"><a href="#强缓存优于协商缓存" class="headerlink" title="强缓存优于协商缓存"></a>强缓存优于协商缓存</h3><h4 id="请求过程"><a href="#请求过程" class="headerlink" title="请求过程"></a>请求过程</h4><ol>
+<li>首先通过Cache-Control验证强缓存是否可用，如果强缓存可用，那么直接读取缓存</li>
+<li>如果不可以，那么进入协商缓存阶段，发起HTTP请求，服务器通过请求头上是否带有if-Modified-Since和If-None-Match这些条件请求字段检查资源是否更新<ul>
+<li>如果资源更新，那么返回资源和200状态码</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>如果资源未更新，那么告诉浏览器直接使用缓存获取资源</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+              <a href="/tags/%E7%BC%93%E5%AD%98/" rel="tag"># 缓存</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/cookie%E5%92%8Cstorage/" rel="prev" title="cookie和storage">
+      <i class="fa fa-chevron-left"></i> cookie和storage
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ajax/" rel="next" title="ajax">
+      ajax <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">缓存分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="nav-number">1.1.1.</span> <span class="nav-text">强缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="nav-number">1.1.2.</span> <span class="nav-text">协商缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98%E4%BC%98%E4%BA%8E%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="nav-number">1.1.3.</span> <span class="nav-text">强缓存优于协商缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">请求过程</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

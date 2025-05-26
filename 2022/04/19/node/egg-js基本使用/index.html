@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="控制器（controller） 直接响应数据或渲染模板 接受用户的输入 与路由建立对应关系 this.ctx可以获取到当前请求的上下文对象，通过此对象可以便捷的获取到请求与响应的属性与方法  123456789101112&#x27;use strict&#x27;;const Controller &#x3D; require(&#x27;egg&#x27;).Controller;class clazz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="egg.js基本使用">
+<meta property="og:url" content="http://example.com/2022/04/19/node/egg-js%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="控制器（controller） 直接响应数据或渲染模板 接受用户的输入 与路由建立对应关系 this.ctx可以获取到当前请求的上下文对象，通过此对象可以便捷的获取到请求与响应的属性与方法  123456789101112&#x27;use strict&#x27;;const Controller &#x3D; require(&#x27;egg&#x27;).Controller;class clazz">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-19T13:42:38.000Z">
+<meta property="article:modified_time" content="2022-04-23T13:14:07.125Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/04/19/node/egg-js%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>egg.js基本使用 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/19/node/egg-js%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          egg.js基本使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-19 21:42:38" itemprop="dateCreated datePublished" datetime="2022-04-19T21:42:38+08:00">2022-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-23 21:14:07" itemprop="dateModified" datetime="2022-04-23T21:14:07+08:00">2022-04-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="控制器（controller）"><a href="#控制器（controller）" class="headerlink" title="控制器（controller）"></a>控制器（controller）</h1><ol>
+<li>直接响应数据或渲染模板</li>
+<li>接受用户的输入</li>
+<li>与路由建立对应关系</li>
+<li>this.ctx可以获取到当前请求的上下文对象，通过此对象可以便捷的获取到请求与响应的属性与方法</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Controller</span> = <span class="built_in">require</span>(<span class="string">&#x27;egg&#x27;</span>).<span class="property">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">clazzController</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Controller</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">index</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = <span class="string">&#x27;clazz的body信息&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = clazzController;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><h2 id="通过路由传参"><a href="#通过路由传参" class="headerlink" title="通过路由传参"></a>通过路由传参</h2><ol>
+<li>获取query参数</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	http://127.0.0.1:7001/clazz?index=100</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">index</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> query = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">query</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(query);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = <span class="string">`query传递的参数index是<span class="subst">$&#123;query.index&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>获取params参数</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://127.0.0.1:7001/clazz/100</span></span><br><span class="line"><span class="comment">// router.get(&#x27;/clazz/:id&#x27;, controller.clazz.getId);</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">getId</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> id = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">params</span>.<span class="property">id</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = <span class="string">`params传递的参数id是<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>post请求提交数据<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先进行设置</span></span><br><span class="line">  config.<span class="property">security</span> = &#123;</span><br><span class="line">    <span class="attr">csrf</span>: &#123;</span><br><span class="line">      <span class="attr">enable</span>: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+post请求刷新页面相当于再次提交表单</li>
+<li>使用restful接口<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">index</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = clazzList;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">new</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = <span class="string">`</span></span><br><span class="line"><span class="string">      &lt;form method=&#x27;post&#x27; action=&#x27;/clazz&#x27;&gt;</span></span><br><span class="line"><span class="string">      &lt;input name=&#x27;classname&#x27;&gt;</span></span><br><span class="line"><span class="string">      &lt;button&gt;添加&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;/form&gt;</span></span><br><span class="line"><span class="string">      `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">create</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> val = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">body</span>;</span><br><span class="line">    clazzList.<span class="title function_">push</span>(val.<span class="property">classname</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = val;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="title function_">redirect</span>(<span class="string">&#x27;/clazz&#x27;</span>); <span class="comment">// 添加完成后重定向</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h1><ol>
+<li><code>npm install --save egg-view-nunjucks</code></li>
+<li>在plugin.js文件中引入插件，在config.default,js中配置插件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// plugin.js</span></span><br><span class="line">	<span class="attr">nunjucks</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">package</span>: <span class="string">&#x27;egg-view-nunjucks&#x27;</span>,</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// config.default.js</span></span><br><span class="line">	config.<span class="property">view</span> = &#123;</span><br><span class="line">    <span class="attr">defaultViewEngine</span>: <span class="string">&#x27;nunjucks&#x27;</span>,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在view中创建模板文件，并在控制器中使用render方法渲染模板</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">index</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// this.ctx.body = clazzList;</span></span><br><span class="line">    <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="title function_">render</span>(<span class="string">&#x27;index&#x27;</span>, &#123; <span class="attr">clazzList</span>: [ <span class="string">&#x27;1班&#x27;</span>, <span class="string">&#x27;2班&#x27;</span> ] &#125;); <span class="comment">// app/view下的页面</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><ol>
+<li>使用egg-cors <code>npm install --save egg-cors</code></li>
+<li>在plugin.js文件中引入插件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cors</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">package</span>: <span class="string">&#x27;egg-cors&#x27;</span>,</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在config.default.js文件中配置egg-cors插件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">config.<span class="property">cors</span> = &#123;</span><br><span class="line">    <span class="attr">origin</span>: <span class="string">&#x27;*&#x27;</span>,</span><br><span class="line">    <span class="attr">allowMethods</span>: <span class="string">&#x27;GET,HEAD,PUT,POST,DELETE,PATCH&#x27;</span>,</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="用户登录状态"><a href="#用户登录状态" class="headerlink" title="用户登录状态"></a>用户登录状态</h1><ol>
+<li>使用cookie与session识别用户</li>
+<li>使用JWT(json web token)识别用户</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简单代码</span></span><br><span class="line"><span class="comment">// 方法配置</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">login</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// const &#123; ctx &#125; = this;</span></span><br><span class="line">    <span class="comment">// ctx.body = &#x27;&lt;h1&gt;&lt;/h1&gt;hi, egg&#x27;;</span></span><br><span class="line">    <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="title function_">render</span>(<span class="string">&#x27;login&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">doLogin</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> username = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">body</span>.<span class="property">username</span>;</span><br><span class="line">    <span class="keyword">const</span> password = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">body</span>.<span class="property">password</span>;</span><br><span class="line">    <span class="keyword">if</span> (username === <span class="string">&#x27;aa&#x27;</span> &amp;&amp; password === <span class="string">&#x27;123&#x27;</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">session</span>.<span class="property">user</span> = username;</span><br><span class="line">      <span class="comment">// 通过session实现保持用户登录状态</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="title function_">redirect</span>(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="title function_">redirect</span>(<span class="string">&#x27;/login&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">logout</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">session</span>.<span class="property">user</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="title function_">redirect</span>(<span class="string">&#x27;/login&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 路由配置</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, controller.<span class="property">home</span>.<span class="property">index</span>);</span><br><span class="line">  router.<span class="title function_">get</span>(<span class="string">&#x27;/login&#x27;</span>, controller.<span class="property">home</span>.<span class="property">login</span>);</span><br><span class="line">  router.<span class="title function_">post</span>(<span class="string">&#x27;/login&#x27;</span>, controller.<span class="property">home</span>.<span class="property">doLogin</span>);</span><br><span class="line">  router.<span class="title function_">post</span>(<span class="string">&#x27;/logout&#x27;</span>, controller.<span class="property">home</span>.<span class="property">logout</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">首页代码</span><br><span class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/logout&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span>&gt;</span>注销<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">登录页代码</span><br><span class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/login&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> &gt;</span>登录<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h1><h2 id="生成token"><a href="#生成token" class="headerlink" title="生成token"></a>生成token</h2><ol>
+<li>安装egg-jwt插件：<code>npm install --save egg-jwt</code></li>
+<li>在plugin.js中引入插件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jwt</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">package</span>: <span class="string">&#x27;egg-jwt&#x27;</span>,</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>配置config.default.js文件，设置secret；注意，secret不能泄露</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">config.<span class="property">jwt</span> = &#123;</span><br><span class="line">    <span class="attr">secret</span>: <span class="string">&#x27;miyaobuyaoxielou&#x27;</span>,</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="验证过程"><a href="#验证过程" class="headerlink" title="验证过程"></a>验证过程</h2><ol>
+<li>根据用户信息，生成token，并响应给客户端</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">doLogin</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> user = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">body</span>.<span class="property">user</span>;</span><br><span class="line">    <span class="keyword">if</span> (user.<span class="property">username</span> === <span class="string">&#x27;aa&#x27;</span> &amp;&amp; user.<span class="property">password</span> === <span class="string">&#x27;123&#x27;</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> user_jwt = &#123; <span class="attr">username</span>: user.<span class="property">username</span> &#125;;</span><br><span class="line">      <span class="keyword">const</span> token = <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">jwt</span>.<span class="title function_">sign</span>(user_jwt, <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">config</span>.<span class="property">jwt</span>.<span class="property">secret</span>);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = &#123;</span><br><span class="line">        <span class="attr">code</span>: <span class="string">&#x27;200&#x27;</span>,</span><br><span class="line">        token,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = &#123;</span><br><span class="line">        <span class="attr">code</span>: <span class="string">&#x27;400&#x27;</span>,</span><br><span class="line">        <span class="attr">msg</span>: <span class="string">&#x27;用户名或者密码错误&#x27;</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>客户端存储在localstorage中</li>
+<li>客户端每次请求数据，请求头携带token</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getMessage</span> () &#123;</span><br><span class="line">      axios.<span class="title function_">get</span>(<span class="string">&#x27;http://127.0.0.1:7001/jwtmessage&#x27;</span>, &#123;<span class="attr">headers</span>: &#123;<span class="attr">token</span>: <span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;token&#x27;</span>)&#125;&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>服务器接收请求，验证请求头的token，验证成功则响应数据</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">getMessage</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> token = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">header</span>.<span class="property">token</span>;</span><br><span class="line">    <span class="comment">// // console.log(token);</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> decode = <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">jwt</span>.<span class="title function_">verify</span>(token, <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">config</span>.<span class="property">jwt</span>.<span class="property">secret</span>);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = <span class="string">&#x27;验证成功&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = <span class="string">&#x27;token失效&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// this.ctx.body = &#x27;message&#x27;;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 签发和校验token</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">index</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> user = &#123;</span><br><span class="line">      <span class="attr">username</span>: <span class="string">&#x27;aa&#x27;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 利用egg-jwt插件加密</span></span><br><span class="line">    <span class="comment">// sign() 签发token ，登录时</span></span><br><span class="line">    <span class="keyword">const</span> token = <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">jwt</span>.<span class="title function_">sign</span>(user, <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">config</span>.<span class="property">jwt</span>.<span class="property">secret</span>);</span><br><span class="line">    <span class="comment">// this.ctx.body = token;</span></span><br><span class="line">    <span class="comment">// verify()</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> decode = <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">jwt</span>.<span class="title function_">verify</span>(token, <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">config</span>.<span class="property">jwt</span>.<span class="property">secret</span>);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = decode;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = <span class="string">&#x27;token失效&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际项目中token请求应当是封装好的，每次调用接口自动携带</p>
+<h1 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h1><ol>
+<li>在app目录下创建middleware目录</li>
+<li>在middleware中创建js文件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以checkToken为例</span></span><br><span class="line"><span class="meta">&#x27;use strict&#x27;</span>; <span class="comment">// 严格模式</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">checktoken</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> <span class="keyword">function</span>(<span class="params">ctx, next</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;test middleware&#x27;</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> token = ctx.<span class="property">request</span>.<span class="property">header</span>.<span class="property">token</span>;</span><br><span class="line">      <span class="comment">// console.log(token);</span></span><br><span class="line">      <span class="keyword">const</span> decode = ctx.<span class="property">app</span>.<span class="property">jwt</span>.<span class="title function_">verify</span>(token, ctx.<span class="property">app</span>.<span class="property">config</span>.<span class="property">jwt</span>.<span class="property">secret</span>);</span><br><span class="line">      <span class="keyword">if</span> (decode.<span class="property">username</span>) &#123;</span><br><span class="line">        <span class="keyword">await</span> <span class="title function_">next</span>();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        ctx.<span class="property">body</span> = &#123;</span><br><span class="line">          <span class="attr">code</span>: <span class="string">&#x27;400&#x27;</span>,</span><br><span class="line">          <span class="attr">msg</span>: <span class="string">&#x27;用户名或者密码错误&#x27;</span>,</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      ctx.<span class="property">body</span> = &#123;</span><br><span class="line">        <span class="attr">code</span>: <span class="string">&#x27;400&#x27;</span>,</span><br><span class="line">        <span class="attr">msg</span>: <span class="string">&#x27;token未通过验证&#x27;</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = checktoken;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>中间件的使用<ul>
+<li>写在router文件中，要使用的接口的接口名称和controller中间</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/jwtmessage&#x27;</span>, app.<span class="property">middleware</span>.<span class="title function_">checktoken</span>(), controller.<span class="property">jwt</span>.<span class="property">getMessage</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="数据持久化"><a href="#数据持久化" class="headerlink" title="数据持久化"></a>数据持久化</h1><h2 id="sequelize"><a href="#sequelize" class="headerlink" title="sequelize"></a>sequelize</h2><ol>
+<li><p>下载egg-sequelize： npm install –save egg-sequelize mysql2</p>
+</li>
+<li><p>在plugin.js中引入插件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sequelize</span>: &#123;</span><br><span class="line">    <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">package</span>: <span class="string">&#x27;egg-sequelize&#x27;</span>,</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在config.default.js文件中配置数据库连接</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">config.<span class="property">sequelize</span> = &#123;</span><br><span class="line">    <span class="attr">dialect</span>: <span class="string">&#x27;mysql&#x27;</span>,</span><br><span class="line">    <span class="attr">database</span>: <span class="string">&#x27;lwtest&#x27;</span>,</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">    <span class="attr">port</span>: <span class="number">3306</span>,</span><br><span class="line">    <span class="attr">username</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">    <span class="attr">password</span>: <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">    <span class="attr">timezone</span>: <span class="string">&#x27;+08:00&#x27;</span>,</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure></li>
+<li><p>在app&#x2F;model文件中创建数据模型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>; <span class="comment">// 严格模式</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="function"><span class="params">app</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="variable constant_">STRING</span> &#125; = app.<span class="property">Sequelize</span>;</span><br><span class="line"><span class="comment">//   默认情况下，sequelize将自动将所有传递的模型名称（define的第一个参数）转换为复数</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">Clazz</span> = app.<span class="property">model</span>.<span class="title function_">define</span>(<span class="string">&#x27;clazz&#x27;</span>, &#123;</span><br><span class="line">    <span class="comment">//   id:</span></span><br><span class="line">    <span class="attr">name</span>: <span class="variable constant_">STRING</span>,</span><br><span class="line">    <span class="comment">// id: INT,</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Clazz</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><p>添加app.js文件，初始化数据库（app.js文件在最外层）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>; <span class="comment">// 严格模式</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="function"><span class="params">app</span> =&gt;</span> &#123;</span><br><span class="line">  app.<span class="title function_">beforeStart</span>(<span class="keyword">async</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//   开始前自动创建表</span></span><br><span class="line">    <span class="comment">//   sync方法会根据模型去创建表</span></span><br><span class="line">    <span class="comment">// await app.model.sync(&#123; force: true &#125;); // 开发环境使用，会删除数据表</span></span><br><span class="line">    <span class="keyword">await</span> app.<span class="property">model</span>.<span class="title function_">sync</span>(&#123;&#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h2><p>在controller中实现数据的增删改查，在真实项目中，controller和操作数据的逻辑要分离，以便于项目的维护和扩展</p>
+<ol>
+<li>this.app.model.Clazz.findAll() &#x2F;&#x2F; 查询数据</li>
+<li>this.app.model.Clazz.findAll({where:{id:1}}) &#x2F;&#x2F; 通过where设置条件查询数据<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">index</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//   查询数据</span></span><br><span class="line">    <span class="keyword">const</span> name = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">query</span>.<span class="property">name</span>;</span><br><span class="line">    <span class="comment">// const pageSize = this.ctx.request.query.pageSize;</span></span><br><span class="line">    <span class="comment">// const pageIndex = this.ctx.request.query.pageIndex;</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">query</span>,<span class="string">&#x27;this.ctx.request.query&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> page = <span class="built_in">parseInt</span>(<span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">query</span>.<span class="property">pageIndex</span>) || <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">const</span> count = <span class="built_in">parseInt</span>(<span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">query</span>.<span class="property">pageSize</span>) || <span class="number">999</span>;</span><br><span class="line">    <span class="keyword">const</span> where = &#123;&#125;;</span><br><span class="line">    <span class="keyword">if</span> (name) &#123;</span><br><span class="line">      <span class="comment">//   where.name = name;</span></span><br><span class="line">      where.<span class="property">name</span> = &#123;</span><br><span class="line">        <span class="comment">// 模糊查询</span></span><br><span class="line">        [<span class="title class_">Op</span>.<span class="property">like</span>]: <span class="string">&#x27;%&#x27;</span> + name + <span class="string">&#x27;%&#x27;</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> classList = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">model</span>.<span class="property">Clazz</span>.<span class="title function_">findAndCountAll</span>(&#123;</span><br><span class="line">      <span class="attr">order</span>: [</span><br><span class="line">        [ <span class="string">&#x27;createdAt&#x27;</span>, <span class="string">&#x27;DESC&#x27;</span> ], <span class="comment">// 排序</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">offset</span>: (page - <span class="number">1</span>) * count, <span class="comment">// 分页查询</span></span><br><span class="line">      <span class="attr">limit</span>: count,</span><br><span class="line">      where,</span><br><span class="line">    <span class="comment">//   limit: pageSize,</span></span><br><span class="line">    <span class="comment">//   offset: (pageIndex - 1) * pageSize,</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 通过where设置查询条件</span></span><br><span class="line">    <span class="comment">// const id = this.ctx.request.query.id;</span></span><br><span class="line">    <span class="comment">// const classList = await this.app.model.Clazz.findAll(&#123; where: &#123; id &#125; &#125;);</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = &#123;</span><br><span class="line">      <span class="attr">code</span>: <span class="number">200</span>,</span><br><span class="line">      <span class="attr">data</span>: classList,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// this.ctx.body = classList;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li>this.app.model.Clazz.create({name: “xx”}) &#x2F;&#x2F; 添加数据<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">create</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//   添加数据</span></span><br><span class="line">    <span class="keyword">const</span> name = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">body</span>.<span class="property">name</span>;</span><br><span class="line">    <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">model</span>.<span class="property">Clazz</span>.<span class="title function_">create</span>(&#123; name &#125;);</span><br><span class="line">    <span class="comment">// this.ctx.body = &#x27;添加成功&#x27;;</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = &#123;</span><br><span class="line">      <span class="attr">code</span>: <span class="number">200</span>,</span><br><span class="line">      <span class="attr">msg</span>: <span class="string">&#x27;添加成功&#x27;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li>this.app.model.Clazz.update({name: “xx”},{where:{id:1}}) &#x2F;&#x2F; 通过条件修改数据<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//   通过条件修改数据</span></span><br><span class="line">    <span class="keyword">const</span> name = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">body</span>.<span class="property">name</span>;</span><br><span class="line">    <span class="keyword">const</span> id = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">params</span>.<span class="property">id</span>;</span><br><span class="line">    <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">model</span>.<span class="property">Clazz</span>.<span class="title function_">update</span>(&#123; name &#125;, &#123; <span class="attr">where</span>: &#123; id &#125; &#125;);</span><br><span class="line">    <span class="comment">// this.ctx.body = &#x27;修改成功&#x27;;</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = &#123;</span><br><span class="line">      <span class="attr">code</span>: <span class="number">200</span>,</span><br><span class="line">      <span class="attr">msg</span>: <span class="string">&#x27;修改成功&#x27;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li>this.app.model.Clazz.destory({where:{id:1}}) &#x2F;&#x2F; 通过条件删除数据<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">destroy</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//   通过条件删除数据</span></span><br><span class="line">    <span class="keyword">const</span> id = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">params</span>.<span class="property">id</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">model</span>.<span class="property">Clazz</span>.<span class="title function_">destroy</span>(&#123; <span class="attr">where</span>: &#123; id &#125; &#125;);</span><br><span class="line">    <span class="comment">// this.ctx.body = &#x27;删除成功&#x27;;</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = &#123;</span><br><span class="line">      <span class="attr">code</span>: <span class="number">200</span>,</span><br><span class="line">      <span class="attr">msg</span>: <span class="string">&#x27;删除成功&#x27;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li>添加外键<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="function"><span class="params">app</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="variable constant_">STRING</span>, <span class="variable constant_">DOUBLE</span> &#125; = app.<span class="property">Sequelize</span>;</span><br><span class="line">  <span class="comment">//   默认情况下，sequelize将自动将所有传递的模型名称（define的第一个参数）转换为复数</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">Student</span> = app.<span class="property">model</span>.<span class="title function_">define</span>(<span class="string">&#x27;student&#x27;</span>, &#123;</span><br><span class="line">    <span class="comment">//   id:</span></span><br><span class="line">    <span class="attr">name</span>: <span class="variable constant_">STRING</span>,</span><br><span class="line">    <span class="attr">score</span>: <span class="variable constant_">DOUBLE</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="title class_">Student</span>.<span class="property">associate</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="comment">// 所属哪个班级，指向班级主键</span></span><br><span class="line">    app.<span class="property">model</span>.<span class="property">Student</span>.<span class="title function_">belongsTo</span>(app.<span class="property">model</span>.<span class="property">Clazz</span>, &#123;</span><br><span class="line">      <span class="attr">foreignKey</span>: <span class="string">&#x27;clazz_id&#x27;</span>, <span class="comment">// 外键</span></span><br><span class="line">      <span class="attr">as</span>: <span class="string">&#x27;clazz&#x27;</span>, <span class="comment">// 别名</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Student</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="service"><a href="#service" class="headerlink" title="service"></a>service</h1><p>service就是在复杂业务场景下用于做业务逻辑封装的一个抽象层，提供这个抽象层，有以下优点：</p>
+<ol>
+<li>可以保持controller中逻辑的简洁，controller只起接受数据和返回数据处理的作用</li>
+<li>保持业务逻辑的独立性，抽象出来的service可以被多个controller重复调用</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以更新数据为例</span></span><br><span class="line"><span class="comment">// controller中代码</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//   通过条件修改数据</span></span><br><span class="line">    <span class="keyword">const</span> name = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">body</span>.<span class="property">name</span>;</span><br><span class="line">    <span class="keyword">const</span> score = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">request</span>.<span class="property">body</span>.<span class="property">score</span>;</span><br><span class="line">    <span class="keyword">const</span> id = <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">params</span>.<span class="property">id</span>;</span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">service</span>.<span class="property">student</span>.<span class="title function_">updateStudent</span>(id, name, score);</span><br><span class="line">    <span class="keyword">if</span> (result) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = &#123;</span><br><span class="line">        <span class="attr">code</span>: <span class="number">200</span>,</span><br><span class="line">        <span class="attr">msg</span>: <span class="string">&#x27;修改成功&#x27;</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">ctx</span>.<span class="property">body</span> = &#123;</span><br><span class="line">        <span class="attr">code</span>: <span class="number">500</span>,</span><br><span class="line">        <span class="attr">msg</span>: <span class="string">&#x27;服务异常&#x27;</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// await this.app.model.Student.update(&#123; name &#125;, &#123; where: &#123; id &#125; &#125;);</span></span><br><span class="line">    <span class="comment">// this.ctx.body = &#x27;修改成功&#x27;;</span></span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// service中代码</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">updateStudent</span>(<span class="params">id, name, score</span>) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">app</span>.<span class="property">model</span>.<span class="property">Student</span>.<span class="title function_">update</span>(&#123; name, score &#125;, &#123; <span class="attr">where</span>: &#123; id &#125; &#125;);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/18/%E5%B7%A5%E7%A8%8B%E5%8C%96/wekpack%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7/" rel="prev" title="wekpack常见属性">
+      <i class="fa fa-chevron-left"></i> wekpack常见属性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" rel="next" title="数据库基础操作">
+      数据库基础操作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88controller%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">控制器（controller）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1"><span class="nav-number">2.</span> <span class="nav-text">路由</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82"><span class="nav-number">2.1.</span> <span class="nav-text">通过路由传参</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="nav-number">3.</span> <span class="nav-text">模板引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">跨域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E7%8A%B6%E6%80%81"><span class="nav-number">5.</span> <span class="nav-text">用户登录状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT"><span class="nav-number">6.</span> <span class="nav-text">JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90token"><span class="nav-number">6.1.</span> <span class="nav-text">生成token</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E8%BF%87%E7%A8%8B"><span class="nav-number">6.2.</span> <span class="nav-text">验证过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">中间件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">8.</span> <span class="nav-text">数据持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sequelize"><span class="nav-number">8.1.</span> <span class="nav-text">sequelize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">8.2.</span> <span class="nav-text">数据操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#service"><span class="nav-number">9.</span> <span class="nav-text">service</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
