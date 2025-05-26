@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="vue原理篇——双向绑定原理 - liuwei                                                                                                                                  liuwei">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/26/2022/03/01/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/index/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="vue原理篇——双向绑定原理 - liuwei                                                                                                                                  liuwei">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-26T15:45:23.843Z">
+<meta property="article:modified_time" content="2025-05-26T15:29:03.264Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2022/03/01/vue/vue原理/vue原理篇——双向绑定原理/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/03/01/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.843Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>vue原理篇——双向绑定原理 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="双向绑定基础
+vue采用的是数据劫持和发布订阅相结合的方式
+数据劫持主要是通过object.defineProperty实现的
+
+数据劫持
+object.defineProperty内部有get和s,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="vue原理篇——双向绑定原理 - liuwei"/>
+    <meta name="twitter:description" content="双向绑定基础
+vue采用的是数据劫持和发布订阅相结合的方式
+数据劫持主要是通过object.defineProperty实现的
+
+数据劫持
+object.defineProperty内部有get和s,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="vue原理篇——双向绑定原理 - liuwei"/>
+    <meta property="og:description" content="双向绑定基础
+vue采用的是数据劫持和发布订阅相结合的方式
+数据劫持主要是通过object.defineProperty实现的
+
+数据劫持
+object.defineProperty内部有get和s,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">vue原理篇——双向绑定原理</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">vue原理篇——双向绑定原理</h1>
+        <div class="stuff">
+            <span>三月 01, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8E%9F%E7%90%86/" rel="tag">原理</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h3><h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><ol>
+<li>vue采用的是数据劫持和发布订阅相结合的方式</li>
+<li>数据劫持主要是通过object.defineProperty实现的</li>
+</ol>
+<h4 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h4><ol>
+<li>object.defineProperty内部有get和set属性，当访问属性时，会自动调用get函数，设置属性时，会自动执行set函数</li>
+<li>MVVM模式在于数据与视图保持同步，数据改变时自动更新视图，视图发生变化时更新数据</li>
+<li>因此，需要做到数据改变时自动更新视图，则需要使用object.defineProperty，属性变化时，自动触发set去更新视图</li>
+</ol>
+<h4 id="observer-dep-watcher"><a href="#observer-dep-watcher" class="headerlink" title="observer-dep-watcher"></a>observer-dep-watcher</h4><ol>
+<li>数据劫持是通过 Object.defineProperty 方法，需要一个监听器observer来监听属性的变化</li>
+<li>属性发生变化时，需要一个watcher订阅者来更新视图</li>
+<li>在通知watcher订阅者执行更新函数去取更新视图的过程中，可能会有多个订阅者，所以要创建一个容器Dep做统一的管理<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">observer</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!data || <span class="keyword">typeof</span> data !== <span class="string">&quot;object&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    defineReactive(data, key, data[key]);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data, key, value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//递归调用，监听所有属性</span></span><br><span class="line">  observer(value);</span><br><span class="line">  <span class="keyword">var</span> dep = <span class="keyword">new</span> Dep();</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(data, key, &#123;</span><br><span class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (Dep.target) &#123;</span><br><span class="line">        <span class="comment">// 有新增属性时，在get中把属性添加到dep容器中</span></span><br><span class="line">        dep.addSub(Dep.target);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> value;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newVal</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (value !== newVal) &#123;</span><br><span class="line">        value = newVal;</span><br><span class="line">        dep.notify(); <span class="comment">//通知订阅器</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// dep容器，用来存放watcher</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dep</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.subs = [];</span><br><span class="line">&#125;</span><br><span class="line">Dep.prototype.addSub = <span class="function"><span class="keyword">function</span> (<span class="params">sub</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.subs.push(sub);</span><br><span class="line">&#125;</span><br><span class="line">Dep.prototype.notify = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;属性变化通知 Watcher 执行更新视图函数&#x27;</span>);</span><br><span class="line">  <span class="built_in">this</span>.subs.forEach(<span class="function"><span class="params">sub</span> =&gt;</span> &#123;</span><br><span class="line">    sub.update(); <span class="comment">// 执行更新函数</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">Dep.target = <span class="literal">null</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="watcher"><a href="#watcher" class="headerlink" title="watcher"></a>watcher</h4><ol>
+<li>watcher主要是接收属性变化的通知，然后执行更新函数去更新视图<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Watcher</span>(<span class="params">vm, prop, callback</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.vm = vm;</span><br><span class="line">  <span class="built_in">this</span>.prop = prop;</span><br><span class="line">  <span class="built_in">this</span>.callback = callback;</span><br><span class="line">  <span class="built_in">this</span>.value = <span class="built_in">this</span>.get();</span><br><span class="line">&#125;</span><br><span class="line">Watcher.prototype = &#123;</span><br><span class="line">  <span class="attr">update</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> value = <span class="built_in">this</span>.vm.$data[<span class="built_in">this</span>.prop];</span><br><span class="line">    <span class="keyword">const</span> oldVal = <span class="built_in">this</span>.value;</span><br><span class="line">    <span class="keyword">if</span> (value !== oldVal) &#123;</span><br><span class="line">      <span class="built_in">this</span>.value = value;</span><br><span class="line">      <span class="built_in">this</span>.callback(value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    Dep.target = <span class="built_in">this</span>; <span class="comment">//储存订阅器</span></span><br><span class="line">    <span class="keyword">const</span> value = <span class="built_in">this</span>.vm.$data[<span class="built_in">this</span>.prop]; <span class="comment">//因为属性被监听，这一步会执行监听器里的 get方法</span></span><br><span class="line">    Dep.target = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="Compile解析器"><a href="#Compile解析器" class="headerlink" title="Compile解析器"></a>Compile解析器</h4><ol>
+<li>compile的主要作用一个是用来解析指令初始化模板，一个是用来添加订阅者，绑定更新函数</li>
+<li>然后对整个节点和指令进行处理编译，根据不同的节点去调用不同的渲染函数，绑定更新函数，编译完成之后，再把DOM片段添加到页面中</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/03/01/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/index/" data-id="cmb59g40n006rqovdfskx4zvg" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/26/2022/03/01/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B/index/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/26/2022/01/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/websocket/index/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/26/sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/manifest/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/custom/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/tags/%E8%B7%A8%E5%9F%9F/index/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

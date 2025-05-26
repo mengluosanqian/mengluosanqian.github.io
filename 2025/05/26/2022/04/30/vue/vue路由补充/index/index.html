@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="vue路由补充 - liuwei                                                                                                                                  liuwei">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/26/2022/04/30/vue/vue%E8%B7%AF%E7%94%B1%E8%A1%A5%E5%85%85/index/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="vue路由补充 - liuwei                                                                                                                                  liuwei">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-26T15:45:23.963Z">
+<meta property="article:modified_time" content="2025-05-26T15:29:03.276Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2022/04/30/vue/vue路由补充/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/04/30/vue/vue%E8%B7%AF%E7%94%B1%E8%A1%A5%E5%85%85/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.963Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>vue路由补充 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="导航钩子全局钩子
+beforeEach
+afterEach 全局后置钩子
+beforeResolve 全局解析守卫路由独享的守卫
+beforeEnter组件内的守卫
+beforeRouteEnter,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="vue路由补充 - liuwei"/>
+    <meta name="twitter:description" content="导航钩子全局钩子
+beforeEach
+afterEach 全局后置钩子
+beforeResolve 全局解析守卫路由独享的守卫
+beforeEnter组件内的守卫
+beforeRouteEnter,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="vue路由补充 - liuwei"/>
+    <meta property="og:description" content="导航钩子全局钩子
+beforeEach
+afterEach 全局后置钩子
+beforeResolve 全局解析守卫路由独享的守卫
+beforeEnter组件内的守卫
+beforeRouteEnter,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">vue路由补充</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">vue路由补充</h1>
+        <div class="stuff">
+            <span>四月 30, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue-router/" rel="tag">vue-router</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="导航钩子"><a href="#导航钩子" class="headerlink" title="导航钩子"></a>导航钩子</h1><h2 id="全局钩子"><a href="#全局钩子" class="headerlink" title="全局钩子"></a>全局钩子</h2><ol>
+<li>beforeEach</li>
+<li>afterEach 全局后置钩子</li>
+<li>beforeResolve 全局解析守卫<h2 id="路由独享的守卫"><a href="#路由独享的守卫" class="headerlink" title="路由独享的守卫"></a>路由独享的守卫</h2></li>
+<li>beforeEnter<h2 id="组件内的守卫"><a href="#组件内的守卫" class="headerlink" title="组件内的守卫"></a>组件内的守卫</h2></li>
+<li>beforeRouteEnter 在进入对应路由的组件创建钱调用</li>
+<li>beforeRouteUpdate 在重用的组件里 调用</li>
+<li>beforeRouteLeave 在失活的组件调用离开守卫</li>
+</ol>
+<h1 id="路由守卫流程"><a href="#路由守卫流程" class="headerlink" title="路由守卫流程"></a>路由守卫流程</h1><ol>
+<li>导航被触发</li>
+<li>在失活组件里调用离开守卫beforeRouteLeave(to,from,next)</li>
+<li>调用全局前置守卫beforeEach((to,from,next) =&gt; {})</li>
+<li>在重用的组件里调用beforeRouteUpdate(to,from,next)守卫</li>
+<li>在路由配置里调用beforeEnter(to,from,next)路由独享守卫</li>
+<li>解析异步路由组件</li>
+<li>在被激活的组件里调用beforeRouteEnter(to,from,next)</li>
+<li>在所有组件内守卫和异步路由组件被解析之后调用全局的beforeResolve((to,from,next) =&gt; {})</li>
+<li>导航被确认</li>
+<li>调用全局的afterEach((to,from) =&gt; {}) 钩子</li>
+<li>触发DOM更新</li>
+<li>用创建好的实例调用beforeRouteEnter守卫中传给next的回调函数</li>
+</ol>
+<h1 id="vue-router常见问题"><a href="#vue-router常见问题" class="headerlink" title="vue-router常见问题"></a>vue-router常见问题</h1><h2 id="vue-router响应路由参数的变化"><a href="#vue-router响应路由参数的变化" class="headerlink" title="vue-router响应路由参数的变化"></a>vue-router响应路由参数的变化</h2><ol>
+<li>watch检测</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    $route(to, <span class="keyword">from</span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>组件内导航钩子函数</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">beforeRouteUpdate</span>(<span class="params">to,<span class="keyword">from</span>,next</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="vue-router传参"><a href="#vue-router传参" class="headerlink" title="vue-router传参"></a>vue-router传参</h2><ol>
+<li>声明式导航<ul>
+<li>path不能使用params参数</li>
+<li>params参数不会显示在路径上</li>
+<li>浏览器强制刷新会清空params参数</li>
+<li>query不会显示在路径上，刷新不会被清空</li>
+</ul>
+</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=<span class="string">&quot;&#123;name:&#x27;detail&#x27;,params:&#123;id:111&#125;&#125;&quot;</span>&gt;详情&lt;/router-link&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;&#123;name:&#x27;detail&#x27;,query:&#123;id:111&#125;&#125;&quot;</span>&gt;</span>详情<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;&#123;path:&#x27;detail&#x27;,query:&#123;id:111&#125;&#125;&quot;</span>&gt;</span>详情<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>编程式导航</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// query参数以?形式显示在地址栏</span></span><br><span class="line"><span class="comment">// 地址设置</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;people&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;people&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/egglearning/view/people&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 跳转</span></span><br><span class="line"><span class="built_in">this</span>.$router.push(&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;people&#x27;</span>,</span><br><span class="line">    <span class="attr">query</span>: &#123;</span><br><span class="line">        <span class="attr">id</span>:<span class="number">2000</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 地址栏</span></span><br><span class="line"><span class="attr">http</span>:<span class="comment">//localhost:8080/#/egglearning/testTeam/people?id=2000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// params以/显示在地址栏</span></span><br><span class="line"><span class="comment">// 地址设置</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;people/:id&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;people&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/egglearning/view/people&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 跳转</span></span><br><span class="line"><span class="built_in">this</span>.$router.push(&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;people&#x27;</span>,</span><br><span class="line">    <span class="attr">params</span>: &#123;</span><br><span class="line">        <span class="attr">id</span>:<span class="number">2000</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 地址栏</span></span><br><span class="line"><span class="attr">http</span>:<span class="comment">//localhost:8080/#/egglearning/testTeam/people/2000</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>路由元信息</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;team&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;team&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/egglearning/view/team&#x27;</span>),</span><br><span class="line">    <span class="attr">meta</span>: &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;首页&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 取值</span></span><br><span class="line"><span class="built_in">this</span>.$route.meta.title</span><br></pre></td></tr></table></figure>
+
+<h1 id="路由模式"><a href="#路由模式" class="headerlink" title="路由模式"></a>路由模式</h1><ol>
+<li>hash<ul>
+<li>原理是onhashchange事件，可以在window对象上监听这个事件<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event,oldURL,event.newURL)</span><br><span class="line">    <span class="keyword">let</span> hash = location.hash.slice(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>history<ul>
+<li>原理是pushState()和replaceState()</li>
+<li>需要后台配置支持，如果刷新时，服务器没有响应的资源，会刷出404</li>
+<li>部署时要注意什么<ul>
+<li>注意404的问题，在history模式下，只是动态的通过js操作window.history来改变地址栏的路径，并没有发起http请求，当直接在浏览器输入这个地址的时候，就一定要对服务器发起http请求，但是这个目标在服务器上又不存在，所以会返回404<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span> / &#123;</span><br><span class="line">    <span class="attribute">try_files</span>  $uri $uri/ @router index index.html;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span> @router &#123;</span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^.*$</span> /index.html <span class="literal">last</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>abstract<ul>
+<li>支持所有JavaScript运行环境，如node.js服务器端，如果发现没有浏览器的API，路由会自动强制进入这个模式       </li>
+</ul>
+</li>
+</ol>
+<h1 id="router-link"><a href="#router-link" class="headerlink" title="router-link"></a>router-link</h1><p>八个props</p>
+<ol>
+<li>to 必填，表示目标路由的链接，当被点击后，内部会立刻把to的值传到router。push()，所以这个值可以是一个字符串或者是描述目标位置的对象</li>
+<li>replace 默认值为false，若设置的话，当点击时，会调用router.replace()而不是router.push()，于是导航后不会留下history记录</li>
+<li>append 设置append属性后，则在当前（相对）路径钱添加基路径</li>
+<li>tag 让router-link渲染成tag设置的标签，如tag:’li’，渲染结果为<code>&lt;li&gt;&lt;/li&gt;</code></li>
+<li>active-class 默认值为router-link-active，设置链接激活时使用的css类名。默认值可以通过路由的构造选项linkActiveClass来全局配置</li>
+<li>exact-active-class 默认值为router-link-exact-active，设置链接被精确匹配时使用的css类名。默认值可以通过路由的构造选项linkExactActiveClass来全局配置</li>
+<li>exact 是否精确匹配，默认为false</li>
+<li>event 声明可以用来触发导航的事件。可以是一个字符串或者是一个包含字符串的数组，默认是click</li>
+</ol>
+<h1 id="命名视图"><a href="#命名视图" class="headerlink" title="命名视图"></a>命名视图</h1><p>不同路由组件在同一页面展示</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router.js设置</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;testComponents&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/egglearning/view/testComponents&#x27;</span>),</span><br><span class="line">    <span class="attr">children</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;testComponents&#x27;</span>,</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;testComponents&#x27;</span>,</span><br><span class="line">        <span class="attr">components</span>: &#123;</span><br><span class="line">          <span class="attr">student</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/egglearning/view/student.vue&#x27;</span>),</span><br><span class="line">          <span class="attr">team</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/egglearning/view/team.vue&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 导航文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;outer&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">name</span>=<span class="string">&quot;student&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">name</span>=<span class="string">&quot;team&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 地址栏 --&gt;</span></span><br><span class="line">http://localhost:8080/#/egglearning/testComponents/testComponents</span><br></pre></td></tr></table></figure>
+<h1 id="路由模块化"><a href="#路由模块化" class="headerlink" title="路由模块化"></a>路由模块化</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router.js文件</span></span><br><span class="line"><span class="comment">// 引入对应模块分路由</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> vuexRouter <span class="keyword">from</span> <span class="string">&#x27;../vuex/router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> zujianRouter <span class="keyword">from</span> <span class="string">&#x27;../zujian/router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> login <span class="keyword">from</span> <span class="string">&#x27;@/login/login&#x27;</span></span><br><span class="line"><span class="keyword">import</span> egglearningRouter <span class="keyword">from</span> <span class="string">&#x27;../egglearning/router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> vueTest <span class="keyword">from</span> <span class="string">&#x27;../vuelearning/router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> shoppingTest <span class="keyword">from</span> <span class="string">&#x27;../shoppingTest/router&#x27;</span></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">  <span class="comment">// mode: &#x27;history&#x27;,</span></span><br><span class="line">  <span class="attr">routes</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&#x27;/login&#x27;</span>,</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;login&#x27;</span>,</span><br><span class="line">      <span class="attr">component</span>: login,</span><br><span class="line">      <span class="attr">meta</span>: &#123;</span><br><span class="line">        <span class="attr">isAuth</span>: <span class="literal">false</span>, <span class="comment">// 是否需要鉴权</span></span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;登录&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 独享路由守卫（只有前置没有后置）</span></span><br><span class="line">      <span class="attr">beforeEnter</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 解构子路由</span></span><br><span class="line">    ...vuexRouter,</span><br><span class="line">    ...zujianRouter,</span><br><span class="line">    ...egglearningRouter,</span><br><span class="line">    ...vueTest,</span><br><span class="line">    ...shoppingTest</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子路由模块，children为一个对象，里面包含路由设置</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> [&#123;</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&#x27;/egglearning&#x27;</span>,</span><br><span class="line">  <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/egglearning&#x27;</span>),</span><br><span class="line">  children</span><br><span class="line">&#125;]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> children = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;fruit&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/egglearning/view/fruit.vue&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/04/30/vue/vue%E8%B7%AF%E7%94%B1%E8%A1%A5%E5%85%85/index/" data-id="cmb59g40i005oqovdaw8ogufn" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/26/2022/05/08/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/index/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/26/2022/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/index/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/26/sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/manifest/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/custom/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/tags/%E8%B7%A8%E5%9F%9F/index/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

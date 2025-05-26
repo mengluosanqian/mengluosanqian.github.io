@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="vue原理篇——异步更新原理 - liuwei                                                                                                                                  liuwei">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/26/2022/05/14/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86/index/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="vue原理篇——异步更新原理 - liuwei                                                                                                                                  liuwei">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-26T15:45:24.004Z">
+<meta property="article:modified_time" content="2025-05-26T15:29:03.279Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2022/05/14/vue/vue原理/vue原理篇——异步更新原理/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/05/14/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:24.004Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>vue原理篇——异步更新原理 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="异步更新原理1234567891011121314151617181920// Vue实例化let vm = new Vue(&amp;#123;  el: &amp;quot;#app&amp;quot;,  data(,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="vue原理篇——异步更新原理 - liuwei"/>
+    <meta name="twitter:description" content="异步更新原理1234567891011121314151617181920// Vue实例化let vm = new Vue(&amp;#123;  el: &amp;quot;#app&amp;quot;,  data(,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="vue原理篇——异步更新原理 - liuwei"/>
+    <meta property="og:description" content="异步更新原理1234567891011121314151617181920// Vue实例化let vm = new Vue(&amp;#123;  el: &amp;quot;#app&amp;quot;,  data(,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">vue原理篇——异步更新原理</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">vue原理篇——异步更新原理</h1>
+        <div class="stuff">
+            <span>五月 14, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8E%9F%E7%90%86/" rel="tag">原理</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="异步更新原理"><a href="#异步更新原理" class="headerlink" title="异步更新原理"></a>异步更新原理</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vue实例化</span></span><br><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="attr">el</span>: <span class="string">&quot;#app&quot;</span>,</span><br><span class="line">  <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">a</span>: <span class="number">123</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// render(h) &#123;</span></span><br><span class="line">  <span class="comment">//   return h(&#x27;div&#x27;,&#123;id:&#x27;a&#x27;&#125;,&#x27;hello&#x27;)</span></span><br><span class="line">  <span class="comment">// &#125;,</span></span><br><span class="line">  <span class="attr">template</span>: <span class="string">`&lt;div id=&quot;a&quot;&gt;hello &#123;&#123;a&#125;&#125;&lt;/div&gt;`</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当我们每一次改变数据的时候  渲染watcher都会执行一次 这个是影响性能的</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  vm.a = <span class="number">1</span>;</span><br><span class="line">  vm.a = <span class="number">2</span>;</span><br><span class="line">  vm.a = <span class="number">3</span>;</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>每次我们改变数据的时候都会触发相应的 watcher 进行更新,如果是渲染 watcher就意味着数据变动一次，就会重新渲染一次，这样其实是很浪费性能的，所以需要更好的方法，让数据变动完毕后统一去更新视图</p>
+<h1 id="改写watcher更新方法"><a href="#改写watcher更新方法" class="headerlink" title="改写watcher更新方法"></a>改写watcher更新方法</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/observer/watcher.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; queueWatcher &#125; <span class="keyword">from</span> <span class="string">&quot;./scheduler&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">update</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 每次watcher进行更新的时候  是否可以让他们先缓存起来  之后再一起调用</span></span><br><span class="line">    <span class="comment">// 异步队列机制</span></span><br><span class="line">    queueWatcher(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">run</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 真正的触发更新</span></span><br><span class="line">    <span class="built_in">this</span>.get();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="队列机制"><a href="#队列机制" class="headerlink" title="队列机制"></a>队列机制</h1><p>新建一个scheduler.js文件，表示和调度有关，先同步把watcher都放到队列里面取，执行完队列的事件之后再清空队列，主要用nextTick来执行watcher队列</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/observer/scheduler.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; nextTick &#125; <span class="keyword">from</span> <span class="string">&quot;../util/next-tick&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> queue = [];</span><br><span class="line"><span class="keyword">let</span> has = &#123;&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flushSchedulerQueue</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; queue.length; index++) &#123;</span><br><span class="line">    <span class="comment">//   调用watcher的run方法 执行真正的更新操作</span></span><br><span class="line">    queue[index].run();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 执行完之后清空队列</span></span><br><span class="line">  queue = [];</span><br><span class="line">  has = &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现异步队列机制</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">queueWatcher</span>(<span class="params">watcher</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> id = watcher.id;</span><br><span class="line">  <span class="comment">//   watcher去重</span></span><br><span class="line">  <span class="keyword">if</span> (has[id] === <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="comment">//  同步代码执行 把全部的watcher都放到队列里面去</span></span><br><span class="line">    queue.push(watcher);</span><br><span class="line">    has[id] = <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">// 进行异步调用</span></span><br><span class="line">    nextTick(flushSchedulerQueue);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick"></a>nextTick</h1><ol>
+<li>回调函数是一个数组，遍历数组依次执行</li>
+<li>定义一个异步方法，采用降级处理的方法，依次判断，执行<code>flushCallbacks</code>方法<ul>
+<li>Promise</li>
+<li>MutationObserver 监听dom变化</li>
+<li>setImmediate</li>
+<li>setTimeout</li>
+</ul>
+</li>
+<li>除了渲染watcher  还有用户自己手动调用的nextTick 一起被收集到数组<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/util/next-tick.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> callbacks = [];</span><br><span class="line"><span class="keyword">let</span> pending = <span class="literal">false</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flushCallbacks</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  pending = <span class="literal">false</span>; <span class="comment">//把标志还原为false</span></span><br><span class="line">  <span class="comment">// 依次执行回调</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; callbacks.length; i++) &#123;</span><br><span class="line">    callbacks[i]();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> timerFunc; <span class="comment">//定义异步方法  采用优雅降级</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Promise</span> !== <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">  <span class="comment">// 如果支持promise</span></span><br><span class="line">  <span class="keyword">const</span> p = <span class="built_in">Promise</span>.resolve();</span><br><span class="line">  timerFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    p.then(flushCallbacks);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> MutationObserver !== <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">  <span class="comment">// MutationObserver 主要是监听dom变化 也是一个异步方法</span></span><br><span class="line">  <span class="keyword">let</span> counter = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">const</span> observer = <span class="keyword">new</span> MutationObserver(flushCallbacks);</span><br><span class="line">  <span class="keyword">const</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="built_in">String</span>(counter));</span><br><span class="line">  observer.observe(textNode, &#123;</span><br><span class="line">    <span class="attr">characterData</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">  timerFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    counter = (counter + <span class="number">1</span>) % <span class="number">2</span>;</span><br><span class="line">    textNode.data = <span class="built_in">String</span>(counter);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> setImmediate !== <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">  <span class="comment">// 如果前面都不支持 判断setImmediate</span></span><br><span class="line">  timerFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    setImmediate(flushCallbacks);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// 最后降级采用setTimeout</span></span><br><span class="line">  timerFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(flushCallbacks, <span class="number">0</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">nextTick</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 除了渲染watcher  还有用户自己手动调用的nextTick 一起被收集到数组</span></span><br><span class="line">  callbacks.push(cb);</span><br><span class="line">  <span class="keyword">if</span> (!pending) &#123;</span><br><span class="line">    <span class="comment">// 如果多次调用nextTick  只会执行一次异步 等异步队列清空之后再把标志变为false</span></span><br><span class="line">    pending = <span class="literal">true</span>;</span><br><span class="line">    timerFunc();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="nextTick-挂载原型"><a href="#nextTick-挂载原型" class="headerlink" title="$nextTick 挂载原型"></a>$nextTick 挂载原型</h1><p>在vue原型上挂载一个$nextTick方法，使用户可以手动调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/render.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; nextTick &#125; <span class="keyword">from</span> <span class="string">&quot;./util/next-tick&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">renderMixin</span>(<span class="params">Vue</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 挂载在原型的nextTick方法 可供用户手动调用</span></span><br><span class="line">  Vue.prototype.$nextTick = nextTick;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/05/14/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86/index/" data-id="cmb59g40o0070qovdca9a53su" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/26/2022/05/15/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94mixin%E6%B7%B7%E5%85%A5%E5%8E%9F%E7%90%86/index/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/26/2022/05/12/vue/vue%E5%8E%9F%E7%90%86/vue%E5%8E%9F%E7%90%86%E7%AF%87%E2%80%94%E2%80%94%E6%B8%B2%E6%9F%93%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86/index/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/26/sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/manifest/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/custom/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/tags/%E8%B7%A8%E5%9F%9F/index/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

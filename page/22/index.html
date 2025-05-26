@@ -1,0 +1,2795 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/22/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2022/01/12/vue/虚拟DOM和diff/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/12/vue/%E8%99%9A%E6%8B%9FDOM%E5%92%8Cdiff/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.812Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>虚拟DOM和diff - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="虚拟DOM如何理解虚拟DOM
+从本质上来说，virtual DOM是一个JavaScript对象，通过对象的方式来表示DOM结构，将页面的状态抽象成JS对象的形式，配合不同的渲染工具，使跨平台渲染成,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="虚拟DOM和diff - liuwei"/>
+    <meta name="twitter:description" content="虚拟DOM如何理解虚拟DOM
+从本质上来说，virtual DOM是一个JavaScript对象，通过对象的方式来表示DOM结构，将页面的状态抽象成JS对象的形式，配合不同的渲染工具，使跨平台渲染成,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="虚拟DOM和diff - liuwei"/>
+    <meta property="og:description" content="虚拟DOM如何理解虚拟DOM
+从本质上来说，virtual DOM是一个JavaScript对象，通过对象的方式来表示DOM结构，将页面的状态抽象成JS对象的形式，配合不同的渲染工具，使跨平台渲染成,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">虚拟DOM和diff</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">虚拟DOM和diff</h1>
+        <div class="stuff">
+            <span>一月 12, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h3><h4 id="如何理解虚拟DOM"><a href="#如何理解虚拟DOM" class="headerlink" title="如何理解虚拟DOM"></a>如何理解虚拟DOM</h4><ol>
+<li>从本质上来说，virtual DOM是一个JavaScript对象，通过对象的方式来表示DOM结构，将页面的状态抽象成JS对象的形式，配合不同的渲染工具，使跨平台渲染成为可能。</li>
+<li>通过事务处理机制，将多次DOM修改的结果一次性的更新到页面上，从而减少页面渲染的次数，减少修改DOM的重绘重排次数，提高渲染性能。</li>
+<li>虚拟DOM是对DOM的抽象，这个对象是更加轻量级的对 DOM的描述。它设计的最初目的，就是更好的跨平台，比如Node.js就没有DOM，如果想实现SSR，那么一个方式就是借助虚拟DOM，因为虚拟DOM本身是js对象。 在代码渲染到页面之前，vue会把代码转换成一个对象（虚拟 DOM）。以对象的形式来描述真实DOM结构，最终渲染到页面。在每次数据发生变化前，虚拟DOM都会缓存一份，变化之时，现在的虚拟DOM会与缓存的虚拟DOM进行比较。在vue内部封装了diff算法，通过这个算法来进行比较，渲染时修改改变的变化，原先没有发生改变的通过原先的数据进行渲染。</li>
+</ol>
+<h4 id="虚拟DOM解析过程"><a href="#虚拟DOM解析过程" class="headerlink" title="虚拟DOM解析过程"></a>虚拟DOM解析过程</h4><ol>
+<li>首先对将要插入到文档中的DOM树结构进行分析，使用js对象将其表示出来，比如一个元素对象，包含TagName、props和children这些属性。然后将这个js对象树给保存下来，最后再将DOM片段插入到文档中</li>
+<li>当页面的状态发生改变，需要对页面的DOM的结构进行调整的时候，首先根据变更的状态，重新构建起一棵对象树，然后将这棵新的对象树和旧的对象树进行比较，记录下两棵树的差异</li>
+<li>最后将记录的有差异的地方应用 到真正的DOM树中，这样视图就更新了</li>
+</ol>
+<h4 id="为什么要使用虚拟DOM"><a href="#为什么要使用虚拟DOM" class="headerlink" title="为什么要使用虚拟DOM"></a>为什么要使用虚拟DOM</h4><ol>
+<li>保证性能下限，在不进行手动优化的情况下，提供过得去的性能</li>
+<li>页面渲染过程：解析HTML -&gt; 生成DOM -&gt; 生成CSSOM -&gt; Layout -&gt; Paint -&gt; Compiler</li>
+<li>真实DOM：生成HTML字符串 + 重建所有的DOM元素</li>
+<li>虚拟DOM：生成vNode + DOMdiff + 必要的DOM更新</li>
+<li>另外一个重要的作用是跨平台，虚拟DOM的本质上还是JavaScript的对象，可以很方便的进行跨平台操作，比如服务端渲染、uniapp等</li>
+</ol>
+<h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h3><h4 id="DIFF的原理"><a href="#DIFF的原理" class="headerlink" title="DIFF的原理"></a>DIFF的原理</h4><ol>
+<li>首先，对比节点本身，判断是否为同一节点，如果不为相同节点，则删除该节点重新创建节点进行替换</li>
+<li>如果为相同节点，进行patchVnode，判断如何对该节点的子节点进行处理，先判断一方有子节点一方没有子节点的情况（如果新的children没有子节点，将旧的子节点删除）</li>
+<li>如果都有子节点，则进行updateChildren，判断如何对这些老节点的子节点进行操作（diff核心）</li>
+<li>匹配时，找到相同的子节点，递归比较子节点</li>
+</ol>
+<p>在diff中，只对同层的子节点进行比较，放弃跨级的节点比较，使得时间复杂从O(n3)降低值O(n)，也就是说，只有当新旧children都为多个子节点时才需要用核心的Diff算法进行同层级比较。</p>
+<h4 id="简单描述"><a href="#简单描述" class="headerlink" title="简单描述"></a>简单描述</h4><ol>
+<li>虚拟dom就是一个特殊的JavaScript对象，是把真实DOM存为一个包括tagName、props、children的对象树，当页面发生变化时，会重新构建一个对象树，之后会对比新生成的树，将差异记录在真实的dom树上，对比差异的算法就是diff算法。</li>
+<li>diff算法的原理是深度优先算法，当数据改变的时候，会触发setter，通过Dep.notify去通知所有订阅者watcher，订阅者就会调用patch方法。patch方法就是对比同层的虚拟节点是否为同一类型的标签，如果是的话就调用patchVnode进行深层比较，如果不是的话，就把节点替换为新虚拟节点。</li>
+<li>patch方法通过sameVnode判断是否为同一节点，只有当key、tagName、isComment、data以及标签为input时type相同才认为是同一节点</li>
+<li>patchVnode方法找到对应的真实DOM，称为el，判断newVnode和oldVnode是否相等，如果相等直接return。如果不相等，判断是否有文本节点，如果都有文本节点并且不相等，则将el的文本设置成newVnode的文本，如果oldVnode有子节点而newVnode没有子节点，则直接删除el的子节点，如果newVnode有子节点和oldVnode没有子节点，则直接将el的子节点设置成newVnode的子节点，如果都有子节点，则调用updateChildren函数对比子节点。</li>
+<li>updateChildren函数内部采用了首尾指针法，(即头头、头尾、尾头、尾尾)</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/12/vue/%E8%99%9A%E6%8B%9FDOM%E5%92%8Cdiff/index/" data-id="cmb59g40f0051qovd685kdkk9" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022/01/10/计算机网络/SPA及白屏优化方法/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SPA%E5%8F%8A%E7%99%BD%E5%B1%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.807Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SPA及白屏优化方法 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="SPA对SPA的理解spa仅在web页面初始化加载相应的HTML、JavaScript和CSS，一旦页面加载完成，SPA不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用机制实现HTML,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="SPA及白屏优化方法 - liuwei"/>
+    <meta name="twitter:description" content="SPA对SPA的理解spa仅在web页面初始化加载相应的HTML、JavaScript和CSS，一旦页面加载完成，SPA不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用机制实现HTML,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="SPA及白屏优化方法 - liuwei"/>
+    <meta property="og:description" content="SPA对SPA的理解spa仅在web页面初始化加载相应的HTML、JavaScript和CSS，一旦页面加载完成，SPA不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用机制实现HTML,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">SPA及白屏优化方法</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">SPA及白屏优化方法</h1>
+        <div class="stuff">
+            <span>一月 10, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h3><h4 id="对SPA的理解"><a href="#对SPA的理解" class="headerlink" title="对SPA的理解"></a>对SPA的理解</h4><p>spa仅在web页面初始化加载相应的HTML、JavaScript和CSS，一旦页面加载完成，SPA不会因为用户的操作而进行页面的重新加载或跳转；<br>取而代之的是利用机制实现HTML内容的变换，UI与用户的交互，避免页面的重新加载。</p>
+<h4 id="SPA优点"><a href="#SPA优点" class="headerlink" title="SPA优点"></a>SPA优点</h4><ol>
+<li>用户体验好、快、内容的改变不需要重新加载整个页面，避免了不必要的跳转和重复渲染</li>
+<li>SPA相对于MPA，对服务器的压力相对较小</li>
+<li>前后端职责分离，架构清晰，前端进行交互逻辑，后端负责数据处理</li>
+</ol>
+<h4 id="SPA缺点"><a href="#SPA缺点" class="headerlink" title="SPA缺点"></a>SPA缺点</h4><ol>
+<li>初次加载耗时多，为实现单页web应用功能及显示效果，需要在加载页面的时候将JavaScript、css统一加载，部分页面按需加载</li>
+<li>前进后退路由管理：由于单页应用在一个页面显示所有的内容，所以不能使用浏览器的前进后退功能，所有页面切换需要自己建立堆栈管理</li>
+<li>SEO难度较大，由于所有的内容都在一个页面中动态替换显示，所以在SEO上有着天然的弱势</li>
+</ol>
+<h3 id="首屏加载白屏"><a href="#首屏加载白屏" class="headerlink" title="首屏加载白屏"></a>首屏加载白屏</h3><h4 id="首屏加载白屏产生原因"><a href="#首屏加载白屏产生原因" class="headerlink" title="首屏加载白屏产生原因"></a>首屏加载白屏产生原因</h4><ol>
+<li><p>首先是html，也就是FP阶段</p>
+<ul>
+<li>FP（First Paint ，“首次绘制”）是时间线上的第一个时间点，他代表浏览器第一次向屏幕传输像素的时间，也就是页面在屏幕上首次发生视觉变化的时间</li>
+<li>FP不包含默认背景绘制，但包含非默认的背景绘制</li>
+</ul>
+</li>
+<li><p>然后是静态资源css、js，之后解析js，生成HTML，也就是FCP阶段，css、js资源加载完成，进行首次的内容绘制</p>
+<ul>
+<li>FCP（First Contentful Paint，“首次内容绘制”），浏览器第一次向屏幕绘制内容</li>
+<li>只有首次绘制文本、图片（包含背景图）、非白色的canvas或svg时才算FCP</li>
+<li>FP是当浏览器开始绘制内容到屏幕上的时候，只要在视觉上开始发生变化，无论是什么内容触发的视觉变化，在这一刻，这个时间点，叫做FP。相比之下，FCP指的是浏览器首次绘制来自DOM的内容。例如：文本，图片，SVG，canvas元素等，这个时间点叫FCP。</li>
+</ul>
+</li>
+<li><p>ajax请求数据后，首次有效绘制，即FMP，就是页面加载的差不多了，但是可能图片还没加载出来</p>
+<ul>
+<li>FMP（First Meaningful Paint，“首次有效绘制”），页面的主要内容开始出现在屏幕上的时间点</li>
+</ul>
+</li>
+<li><p>从FP到FMP这个过程全是白屏</p>
+</li>
+</ol>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ol>
+<li>预渲染</li>
+<li>同构<ul>
+<li>同构渲染，就是一套代码多端使用</li>
+<li>现在有一些框架，Next，Nuxt，类似于渲染就是vue -&gt;json -&gt;vue-server-renderer -&gt;html</li>
+</ul>
+</li>
+<li>SSR<ul>
+<li>服务端渲染也可以解决首屏加载慢这个问题，因为服务端会把所有数据全部渲染完成再返回给客户端</li>
+<li>ssr =&gt;请求-&gt;node-&gt;解析 -&gt;吐回给客户端(带请求数据)</li>
+<li>但是有一个大问题，重要的是node层，高并发的解决</li>
+</ul>
+</li>
+<li>路由懒加载<ul>
+<li>通过箭头函数实现路由懒加载</li>
+</ul>
+</li>
+<li>quicklink<ul>
+<li>quicklink就是在浏览器空闲的时候去指定需要加载的数据</li>
+<li>预加载对应的英文是 prefetch。提到 prefetch 自然会想到使用浏览器的 Resource Hints，通过提示浏览器做一些“预操作”（例如 DNS 解析、资源下载等）来加快后续的访问。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> link = <span class="built_in">document</span>.createElement(<span class="string">`link`</span>);</span><br><span class="line">link.rel = <span class="string">`prefetch`</span>;</span><br><span class="line">link.href = url;</span><br><span class="line"><span class="built_in">document</span>.head.appendChild(link);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>使用Gzip压缩<ul>
+<li>使用Gzip压缩，减少文件体积,加快首屏页面打开速度</li>
+<li>前提是服务器那边得开启gzip<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改vue.config.js</span></span><br><span class="line"><span class="keyword">const</span> CompressionPlugin = <span class="built_in">require</span>(<span class="string">&quot;compression-webpack-plugin&quot;</span>)</span><br><span class="line">​<span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">configureWebpack</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">plugins</span>: [</span><br><span class="line">          <span class="keyword">new</span> CompressionPlugin(&#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/.js$|.html$|.css$|.jpg$|.jpeg$|.png/</span>, <span class="comment">// 需要压缩的文件类型</span></span><br><span class="line">            threshold: <span class="number">10240</span>, <span class="comment">// 归档需要进行压缩的文件大小最小值，我这个是10K以上的进行压缩</span></span><br><span class="line">            <span class="attr">deleteOriginalAssets</span>: <span class="literal">false</span>, <span class="comment">// 是否删除原文件</span></span><br><span class="line">            <span class="attr">minRatio</span>: <span class="number">0.8</span></span><br><span class="line">          &#125;)</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>外链CSS,js文件<ul>
+<li>很多时候我们在main.js中直接import一些ui库或者css文件啥的，以后可以在index.html，通过script外链引入，这样就不会通过我们的webpack打包</li>
+</ul>
+</li>
+<li>webpack entry<ul>
+<li>这个就是将单页改成多页应用,比如一些组件中，vue.js vue-router等插件已经在某个页面使用了，然后给它缓存起来，下次就无需加载</li>
+</ul>
+</li>
+<li>骨架屏<ul>
+<li>骨架屏就是在进入项目的FP阶段，给它来一个类似轮廓的东西，当我们的页面加载完成之后就消失</li>
+</ul>
+</li>
+<li>loading<ul>
+<li>首页加一个loading或许是最原始的方法了，在index.html里加一个loadingcss效果，当页面加载完成消失</li>
+</ul>
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SPA%E5%8F%8A%E7%99%BD%E5%B1%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/index/" data-id="cmb59g40e004yqovdddmd0cu5" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022/01/05/JavaScript/tree和list相互转化/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/05/JavaScript/tree%E5%92%8Clist%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.801Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>tree和list相互转化 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="tree和list相互转化list转化为tree12345678910111213141516function listToTree(list,&amp;#123; pIdKey = &amp;#x27;pId&amp;#,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="tree和list相互转化 - liuwei"/>
+    <meta name="twitter:description" content="tree和list相互转化list转化为tree12345678910111213141516function listToTree(list,&amp;#123; pIdKey = &amp;#x27;pId&amp;#,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="tree和list相互转化 - liuwei"/>
+    <meta property="og:description" content="tree和list相互转化list转化为tree12345678910111213141516function listToTree(list,&amp;#123; pIdKey = &amp;#x27;pId&amp;#,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">tree和list相互转化</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">tree和list相互转化</h1>
+        <div class="stuff">
+            <span>一月 05, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="tree和list相互转化"><a href="#tree和list相互转化" class="headerlink" title="tree和list相互转化"></a>tree和list相互转化</h3><h4 id="list转化为tree"><a href="#list转化为tree" class="headerlink" title="list转化为tree"></a>list转化为tree</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">listToTree</span>(<span class="params">list,&#123; pIdKey = <span class="string">&#x27;pId&#x27;</span>, idKey = <span class="string">&#x27;id&#x27;</span>, childrenKey = <span class="string">&#x27;children&#x27;</span> &#125; = &#123;&#125;,id = <span class="number">0</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> list.reduce(<span class="function">(<span class="params">res, value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!value[pIdKey]) &#123;</span><br><span class="line">      value[pIdKey] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (value[pIdKey] === id) &#123;</span><br><span class="line">      <span class="keyword">const</span> node = &#123; ...value &#125;;</span><br><span class="line">      node[childrenKey] = listToTree(list.filter(<span class="function"><span class="params">el</span> =&gt;</span> id !== el[idKey]),&#123; pIdKey, idKey, childrenKey &#125;,node[idKey]</span><br><span class="line">      );</span><br><span class="line">      res.push(node);</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, []);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="tree转化为list"><a href="#tree转化为list" class="headerlink" title="tree转化为list"></a>tree转化为list</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">treeToList</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  tree = [],</span></span></span><br><span class="line"><span class="params"><span class="function">  &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">    pIdKey = <span class="string">&#x27;pId&#x27;</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    idKey = <span class="string">&#x27;id&#x27;</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    childrenKey = <span class="string">&#x27;children&#x27;</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    treeToListLevel = <span class="number">0</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    vId = <span class="number">0</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">  &#125; = &#123;&#125;,</span></span></span><br><span class="line"><span class="params"><span class="function">  pId = <span class="number">0</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">  list = []</span></span></span><br><span class="line"><span class="params"><span class="function"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> leaf <span class="keyword">of</span> tree) &#123;</span><br><span class="line">    leaf[idKey] = leaf[idKey] || nanoid(<span class="number">5</span>); <span class="comment">// 无id，造</span></span><br><span class="line">    <span class="keyword">const</span> &#123; [childrenKey]: children, ...rest &#125; = leaf;</span><br><span class="line">    <span class="keyword">let</span> hasChildren = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(children) &amp;&amp; !isEmpty(children)) &#123;</span><br><span class="line">      hasChildren = <span class="literal">true</span>;</span><br><span class="line">      treeToList(</span><br><span class="line">        children,</span><br><span class="line">        &#123; pIdKey, idKey, childrenKey, <span class="attr">treeToListLevel</span>: treeToListLevel + <span class="number">1</span>, vId &#125;,</span><br><span class="line">        leaf[idKey],</span><br><span class="line">        list</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    list.push(&#123;</span><br><span class="line">      [pIdKey]: pId,</span><br><span class="line">      treeToListLevel,</span><br><span class="line">      [childrenKey]: hasChildren,</span><br><span class="line">      vId,</span><br><span class="line">      ...rest,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/05/JavaScript/tree%E5%92%8Clist%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/index/" data-id="cmb59g40e0050qovd76tnc870" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022/01/04/JavaScript/闭包/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/04/JavaScript/%E9%97%AD%E5%8C%85/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.796Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>闭包 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="闭包什么是闭包
+一个函数和对其周围状态的引用捆绑在一起（或者说函数被引用包围），这样的组合就是闭包。
+也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域。
+在JavaScript中，每当,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="闭包 - liuwei"/>
+    <meta name="twitter:description" content="闭包什么是闭包
+一个函数和对其周围状态的引用捆绑在一起（或者说函数被引用包围），这样的组合就是闭包。
+也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域。
+在JavaScript中，每当,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="闭包 - liuwei"/>
+    <meta property="og:description" content="闭包什么是闭包
+一个函数和对其周围状态的引用捆绑在一起（或者说函数被引用包围），这样的组合就是闭包。
+也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域。
+在JavaScript中，每当,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">闭包</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">闭包</h1>
+        <div class="stuff">
+            <span>一月 04, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><h4 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h4><ol>
+<li>一个函数和对其周围状态的引用捆绑在一起（或者说函数被引用包围），这样的组合就是闭包。</li>
+<li>也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域。</li>
+<li>在JavaScript中，每当创建一个函数，闭包就会在函数创建的同时被创建出来</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">var</span> b = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">24</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;function内部&quot;</span>)</span><br><span class="line"><span class="comment">// 执行到这里都没有产生闭包</span></span><br><span class="line"></span><br><span class="line">fn() <span class="comment">// 执行fn()时创建闭包，包含变量a和b</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行完后销毁实例，闭包也随之消失</span></span><br></pre></td></tr></table></figure>
+<h4 id="函数引用外部变量后的闭包"><a href="#函数引用外部变量后的闭包" class="headerlink" title="函数引用外部变量后的闭包"></a>函数引用外部变量后的闭包</h4><ol>
+<li>在全局作用域中创建的函数创建闭包，但是由于这些函数是在全局作用域中创建的，所以他们可以访问全局作用域中的所有变量</li>
+<li>当函数返回函数时，返回的函数可以访问不属于全局作用域的变量，但他们仅存在于其闭包中<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeAdder</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">    sum += y;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 前面定义一个函数，并将函数定义存储在内存中</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add1 = makeAdder();</span><br><span class="line"><span class="keyword">var</span> add2 = makeAdder();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add1(<span class="number">1</span>));  <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(add1(<span class="number">1</span>));  <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// add1() add2() 会分别产生一个闭包，闭包中包含了一个变量sum，两个闭包中的sum互相不干扰</span></span><br><span class="line"><span class="built_in">console</span>.log(add2(<span class="number">2</span>));  <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(add2(<span class="number">2</span>));  <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+<h4 id="循环中的闭包"><a href="#循环中的闭包" class="headerlink" title="循环中的闭包"></a>循环中的闭包</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">starfunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> tipText = [</span><br><span class="line">      <span class="string">&#x27;hello tom&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;hello jerry&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;hello jack&#x27;</span></span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tipText.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> item = tipText[i];</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(item);</span><br><span class="line">    &#125;, <span class="number">100</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">starfunc();</span><br></pre></td></tr></table></figure>
+var声明的变量会提前到函数的顶部</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ol>
+<li>闭包是在函数创建的时候创建的，即有函数创建就会生成闭包</li>
+<li>闭包及其函数在同一上下文中</li>
+<li>闭包包含该作用域下的所有变量/引用地址</li>
+<li>定义函数不会创建闭包，只有创建、执行函数的同时才会创建闭包</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/04/JavaScript/%E9%97%AD%E5%8C%85/index/" data-id="cmb59g40e004zqovdflcm79g8" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022/01/02/计算机网络/缓存/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BC%93%E5%AD%98/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.790Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>缓存 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="缓存缓存分类优先级从上到下，找到就直接返回
+
+service worker
+运行在浏览器背后的独立线程
+
+
+
+
+传输协议必须为https
+可以让我们自由控制缓存哪些文件、如何匹配缓存、如何读取缓存，,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="缓存 - liuwei"/>
+    <meta name="twitter:description" content="缓存缓存分类优先级从上到下，找到就直接返回
+
+service worker
+运行在浏览器背后的独立线程
+
+
+
+
+传输协议必须为https
+可以让我们自由控制缓存哪些文件、如何匹配缓存、如何读取缓存，,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="缓存 - liuwei"/>
+    <meta property="og:description" content="缓存缓存分类优先级从上到下，找到就直接返回
+
+service worker
+运行在浏览器背后的独立线程
+
+
+
+
+传输协议必须为https
+可以让我们自由控制缓存哪些文件、如何匹配缓存、如何读取缓存，,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">缓存</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">缓存</h1>
+        <div class="stuff">
+            <span>一月 02, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h2 id="缓存分类"><a href="#缓存分类" class="headerlink" title="缓存分类"></a>缓存分类</h2><p>优先级从上到下，找到就直接返回</p>
+<ol>
+<li>service worker<ul>
+<li>运行在浏览器背后的独立线程</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>传输协议必须为https</li>
+<li>可以让我们自由控制缓存哪些文件、如何匹配缓存、如何读取缓存，并且缓存是持续性的</li>
+</ul>
+<ol start="2">
+<li>memory cache 内存缓存<ul>
+<li>读取速度快，持续时间短</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>一旦我们关闭了tab页面，内存中的缓存也就被释放了 </li>
+<li>访问页面过后，再次刷新页面，很多数据都来自于内存缓存</li>
+<li>几乎所有的请求资源都能进入memory cache，细分来说主要分为<code>preloader</code>和<code>preload</code><ul>
+<li>preloader：页面优化的常见手段之一，主要作用用于在浏览器打开一个网页的时候，能够一<code>边解析执行js、css，一边去请求下一个资源 </code>，而这些被preloader请求来的资源就会被放入memory cache中，供之后的解析执行操作使用</li>
+<li>preload：显示指定预加载的资源，这些资源也会被放进memory cache中</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>disk cache 硬盘缓存<ul>
+<li>存储在硬盘中的缓存</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>缓存在硬盘中，容量大</li>
+<li>读取速度慢</li>
+<li>强缓存、协商缓存都属于disk cache的范畴</li>
+<li>在所有浏览器缓存中，disk cache是覆盖面最大的，它会根据前面我们提到的HTTP header中的缓存字段来判断哪些资源需要缓存, 哪些资源不需要请求而直接使用, 哪些已经过期了需要重新请求获取.</li>
+</ul>
+<ol start="4">
+<li>push cache 推送缓存<ul>
+<li>http/2中的内容，当以上三种缓存都没有命中时，才会被利用</li>
+<li>只在会话(session)中存在，一旦会话结束就被释放，并且缓存时间也很短暂</li>
+</ul>
+</li>
+</ol>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><ol>
+<li><p>服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行比较缓存策略</p>
+</li>
+<li><p>cache-control（相对值）/ expries（绝对值）</p>
+</li>
+<li><p>expries是http1.0的标准</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> nowTime = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">nowTime.setTime(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime() + <span class="number">3600</span>*<span class="number">1000</span>)</span><br><span class="line">ctx.set(<span class="string">&quot;Expires&quot;</span>,nowTime.toUTCString())</span><br></pre></td></tr></table></figure></li>
+<li><p>到了http/1.1 expries已经被cache-control替代</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.set(<span class="string">&quot;cache-control&quot;</span>,<span class="string">&quot;max-age=3600&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>max-age 和 s-maxage<br>两者是 cache-control 的主要字段，它们是一个数字，表示资源过了多少秒之后变为无效。在浏览器中，max-age 和 s-maxage 都起作用，而且 s-maxage 的优先级高于 max-age。在代理服务器中，只有 s-maxage 起作用。 可以通过设置 max-age 为 0 表示立马过期来向服务器请求资源。</p>
+</li>
+<li><p>public 和 private<br>public 表示该资源可以被所有客户端和代理服务器缓存，而 private 表示该资源仅能客户端缓存。默认值是 private，当设置了 s-maxage 的时候表示允许代理服务器缓存，相当于 public。</p>
+</li>
+<li><p>no-cache 和 no-store<br>no-cache 表示的是不直接询问浏览器缓存情况，而是去向服务器验证当前资源是否更新（即协商缓存）。no-store 则更狠，完全不使用缓存策略，不缓存请求或响应的任何内容，直接向服务器请求最新。由于两者都不考虑缓存情况而是直接与服务器交互，所以当 no-cache 和 no-store 存在时会直接忽略 max-age 等</p>
+</li>
+</ol>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><ol>
+<li>让客户端和服务器之间能实现缓存文件是否更新的验证，提升缓存的复用率，将缓存信息中的etag和lastModified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存，出现from disk、from memory的策略是强缓存</li>
+<li>控制协商缓存的字段分别有：Last-Modified / If-Modified-Since 和 Etag / If-None-Match，其中Etag / If-None-Match的优先级比Last-Modified / If-Modified-Since高。协商缓存主要有以下两种情况：<h3 id="强缓存优于协商缓存"><a href="#强缓存优于协商缓存" class="headerlink" title="强缓存优于协商缓存"></a>强缓存优于协商缓存</h3></li>
+</ol>
+<h4 id="请求过程"><a href="#请求过程" class="headerlink" title="请求过程"></a>请求过程</h4><ol>
+<li>首先通过Cache-Control验证强缓存是否可用，如果强缓存可用，那么直接读取缓存</li>
+<li>如果不可以，那么进入协商缓存阶段，发起HTTP请求，服务器通过请求头上是否带有if-Modified-Since和If-None-Match这些条件请求字段检查资源是否更新<ul>
+<li>如果资源更新，那么返回资源和200状态码</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>如果资源未更新，那么告诉浏览器直接使用缓存获取资源</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BC%93%E5%AD%98/index/" data-id="cmb59g40e004wqovd2g866ope" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022/01/02/计算机网络/ajax/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ajax/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.788Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ajax - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="ajaxajax流程
+创建对象
+
+1const xhr = new xmlHttpRequest()
+
+初始化
+
+get请求的参数拼接在url后面
+1xhr.open(&amp;#x27;method&amp;#x,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="ajax - liuwei"/>
+    <meta name="twitter:description" content="ajaxajax流程
+创建对象
+
+1const xhr = new xmlHttpRequest()
+
+初始化
+
+get请求的参数拼接在url后面
+1xhr.open(&amp;#x27;method&amp;#x,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="ajax - liuwei"/>
+    <meta property="og:description" content="ajaxajax流程
+创建对象
+
+1const xhr = new xmlHttpRequest()
+
+初始化
+
+get请求的参数拼接在url后面
+1xhr.open(&amp;#x27;method&amp;#x,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ajax</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">ajax</h1>
+        <div class="stuff">
+            <span>一月 02, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h3><h4 id="ajax流程"><a href="#ajax流程" class="headerlink" title="ajax流程"></a>ajax流程</h4><ol>
+<li>创建对象</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> xmlHttpRequest()</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>初始化</li>
+</ol>
+<p>get请求的参数拼接在url后面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(<span class="string">&#x27;method&#x27;</span>,<span class="string">&#x27;url&#x27;</span>,<span class="keyword">async</span>)</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>发送</li>
+</ol>
+<p>post请求的参数写在send里面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.send()</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>处理响应结果</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">   		<span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt;= <span class="number">300</span>) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="readyState"><a href="#readyState" class="headerlink" title="readyState"></a>readyState</h4><ol>
+<li>0 未初始化，尚未调用open()</li>
+<li>1 启动，已经调用open()，尚未调用send()</li>
+<li>2 发送，已经调用send()方法，但尚未接收到响应</li>
+<li>3 接收，已经接收到部分响应的数据</li>
+<li>4 完成，已经接收到全部响应数据，可以在客户端使用</li>
+</ol>
+<h4 id="status"><a href="#status" class="headerlink" title="status"></a>status</h4><ol>
+<li>1** 信息</li>
+<li>2** 成功</li>
+<li>3** 重定向</li>
+<li>4** 客户端错误</li>
+<li>5** 服务端错误</li>
+</ol>
+<h3 id="get和post"><a href="#get和post" class="headerlink" title="get和post"></a>get和post</h3><h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><ol>
+<li>get请求的参数在里面，post请求的参数在请求体里面</li>
+<li>get请求的参数大小有限制（1024字节），post请求的参数大小没有限制</li>
+<li>get请求的安全性相对较低，会被缓存，post请求的安全性相对较高</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/ajax/index/" data-id="cmb59g40e004xqovd8la7gv4e" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022/01/01/计算机网络/跨域/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%B7%A8%E5%9F%9F/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.783Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>跨域 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="什么是跨域跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，这里跨域是广义的。
+
+资源跳转： A链接、重定向、表单提交
+资源嵌入： 等dom标签，还有样式中background:url()、@,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="跨域 - liuwei"/>
+    <meta name="twitter:description" content="什么是跨域跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，这里跨域是广义的。
+
+资源跳转： A链接、重定向、表单提交
+资源嵌入： 等dom标签，还有样式中background:url()、@,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="跨域 - liuwei"/>
+    <meta property="og:description" content="什么是跨域跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，这里跨域是广义的。
+
+资源跳转： A链接、重定向、表单提交
+资源嵌入： 等dom标签，还有样式中background:url()、@,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">跨域</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">跨域</h1>
+        <div class="stuff">
+            <span>一月 01, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h4 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h4><p>跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，这里跨域是广义的。</p>
+<ol>
+<li>资源跳转： A链接、重定向、表单提交</li>
+<li>资源嵌入： 等dom标签，还有样式中background:url()、@font-face()等文件外链</li>
+<li>脚本请求： js发起的ajax请求、dom和js对象的跨域操作等</li>
+<li>协议、端口、域名有一个不同则会造成非同源，引起跨域<ul>
+<li>浏览器阻止跨域是出于网络安全</li>
+<li>跨域是浏览器出于安全策略阻止非同源请求，但是每一次跨域请求都是正常发送，服务端也会正常返回，只是被浏览器拦截下来</li>
+<li>每次跨域请求都会到达服务端</li>
+</ul>
+</li>
+</ol>
+<h4 id="同源策略-SOP"><a href="#同源策略-SOP" class="headerlink" title="同源策略/SOP"></a>同源策略/SOP</h4><p>浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。所谓同源是指”协议+域名+端口”三者相同，即便两个不同的域名指向同一个ip地址，也非同源。</p>
+<h4 id="常见跨域场景"><a href="#常见跨域场景" class="headerlink" title="常见跨域场景"></a>常见跨域场景</h4><table>
+<thead>
+<tr>
+<th align="center">URL</th>
+<th align="center">说明</th>
+<th align="center">是否允许通信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://www.domain.com/a.js">http://www.domain.com/a.js</a> <a target="_blank" rel="noopener" href="http://www.domain.com/b.js">http://www.domain.com/b.js</a> <a target="_blank" rel="noopener" href="http://www.domain.com/lab/c.js">http://www.domain.com/lab/c.js</a></td>
+<td align="center">同一域名，不同文件或路径</td>
+<td align="center">允许</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://www.domain.com:8000/a.js">http://www.domain.com:8000/a.js</a> <a target="_blank" rel="noopener" href="http://www.domain.com/b.js">http://www.domain.com/b.js</a></td>
+<td align="center">同一域名，不同端口</td>
+<td align="center">不允许</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://www.domain.com/a.js">http://www.domain.com/a.js</a> <a target="_blank" rel="noopener" href="https://www.domain.com/b.js">https://www.domain.com/b.js</a></td>
+<td align="center">同一域名，不同协议</td>
+<td align="center">不允许</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://www.domain.com/a.js">http://www.domain.com/a.js</a> <a target="_blank" rel="noopener" href="http://192.168.4.12/b.js">http://192.168.4.12/b.js</a></td>
+<td align="center">域名和域名对应相同ip</td>
+<td align="center">不允许</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://www.domain.com/a.js">http://www.domain.com/a.js</a> <a target="_blank" rel="noopener" href="http://x.domain.com/b.js">http://x.domain.com/b.js</a>  <a target="_blank" rel="noopener" href="http://domain.com/c.js">http://domain.com/c.js</a></td>
+<td align="center">主域相同，子域不同</td>
+<td align="center">不允许</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://www.domain1.com/a.js">http://www.domain1.com/a.js</a> <a target="_blank" rel="noopener" href="http://www.domain2.com/b.js">http://www.domain2.com/b.js</a></td>
+<td align="center">不同域名</td>
+<td align="center">不允许</td>
+</tr>
+</tbody></table>
+<h4 id="跨域解决方案"><a href="#跨域解决方案" class="headerlink" title="跨域解决方案"></a>跨域解决方案</h4><ol>
+<li>通过jsonp跨域</li>
+<li>document.domain + iframe跨域</li>
+<li>location.hash + iframe</li>
+<li>window.name + iframe跨域</li>
+<li>postMessage跨域</li>
+<li>跨域资源共享（CORS）</li>
+<li>nginx代理跨域</li>
+<li>nodejs中间件代理跨域</li>
+<li>WebSocket协议跨域</li>
+</ol>
+<h4 id="非同源的影响？"><a href="#非同源的影响？" class="headerlink" title="非同源的影响？"></a>非同源的影响？</h4><ol>
+<li>无法获取cookie、localstorage、indexedDB</li>
+<li>无法访问网页中的dom</li>
+<li>无法发送网络请求</li>
+</ol>
+<h3 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h3><h4 id="什么是cors"><a href="#什么是cors" class="headerlink" title="什么是cors"></a>什么是cors</h4><p>跨域资源共享  cross-origin resource sharing</p>
+<h4 id="cors的作用"><a href="#cors的作用" class="headerlink" title="cors的作用"></a>cors的作用</h4><p>允许浏览器向跨源服务器发送XMLHttpRequest请求，从而客服ajax只能同源使用的限制</p>
+<h4 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h4><ol>
+<li><p>qq方式是以下三种方式之一</p>
+<ul>
+<li>HEAD</li>
+<li>GET</li>
+<li>POST</li>
+</ul>
+</li>
+<li><p>HTTP的头信息不超出一下几种字段</p>
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Last-Event-ID</li>
+<li>Content-Type 只限于application/x-www-form-urlencoded、multipart/form-data、text/plain</li>
+</ul>
+</li>
+<li><p>对于简单请求来说，浏览器之间发送cors请求，具体来说就是在头信息中，增加一个origin字段</p>
+<ul>
+<li>origin用于说明本次请求来自哪个源</li>
+<li>如果Origin指定的源不在允许范围之内,服务器就会返回一个正常的HTTP回应,然后浏览器发现头信息中没有包含Access-Control-Allow-Origin 字段,就知道出错啦,然后抛出错误,反之则会出现这个字段</li>
+</ul>
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%B7%A8%E5%9F%9F/index/" data-id="cmb59g40e004vqovd5t094cjo" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022/01/01/计算机网络/浏览器前置和内核/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%89%8D%E7%BD%AE%E5%92%8C%E5%86%85%E6%A0%B8/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.780Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>浏览器前置和内核 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="浏览器内核Trident内核
+代表产品Internet Explorer，又称其为IE内核。Trident（又称为MSHTML），是微软开发的一种排版引擎。
+使用Trident渲染引擎的浏览器包括：,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="浏览器前置和内核 - liuwei"/>
+    <meta name="twitter:description" content="浏览器内核Trident内核
+代表产品Internet Explorer，又称其为IE内核。Trident（又称为MSHTML），是微软开发的一种排版引擎。
+使用Trident渲染引擎的浏览器包括：,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="浏览器前置和内核 - liuwei"/>
+    <meta property="og:description" content="浏览器内核Trident内核
+代表产品Internet Explorer，又称其为IE内核。Trident（又称为MSHTML），是微软开发的一种排版引擎。
+使用Trident渲染引擎的浏览器包括：,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">浏览器前置和内核</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">浏览器前置和内核</h1>
+        <div class="stuff">
+            <span>一月 01, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="浏览器内核"><a href="#浏览器内核" class="headerlink" title="浏览器内核"></a>浏览器内核</h3><h4 id="Trident内核"><a href="#Trident内核" class="headerlink" title="Trident内核"></a>Trident内核</h4><ul>
+<li>代表产品Internet Explorer，又称其为IE内核。Trident（又称为MSHTML），是微软开发的一种排版引擎。</li>
+<li>使用Trident渲染引擎的浏览器包括：IE、傲游、世界之窗浏览器、Avant、腾讯TT、Netscape 8、NetCaptor、Sleipnir、GOSURF、GreenBrowser和KKman等。</li>
+</ul>
+<h4 id="Gecko内核"><a href="#Gecko内核" class="headerlink" title="Gecko内核"></a>Gecko内核</h4><ul>
+<li>代表作品Mozilla FirefoxGecko是一套开放源代码的、以C++编写的网页排版引擎。Gecko是最流行的排版引擎之一，仅次于Trident。</li>
+<li>使用它的最著名浏览器有Firefox、Netscape 6至9。</li>
+</ul>
+<h4 id="WebKit内核"><a href="#WebKit内核" class="headerlink" title="WebKit内核"></a>WebKit内核</h4><ul>
+<li>代表作品Safari、Chromewebkit 是一个开源项目，包含了来自KDE项目和苹果公司的一些组件，主要用于Mac OS系统</li>
+<li>它的特点在于源码结构清晰、渲染速度极快。缺点是对网页代码的兼容性不高，导致一些编写不标准的网页无法正常显示。</li>
+<li>主要代表作品有Safari和Google的浏览器Chrome。</li>
+</ul>
+<h4 id="Presto内核"><a href="#Presto内核" class="headerlink" title="Presto内核"></a>Presto内核</h4><ul>
+<li>代表作品OperaPresto是由Opera Software开发的浏览器排版引擎，供Opera 7.0及以上使用。它取代了旧版Opera 4至6版本使用的Elektra排版引擎，包括加入动态功能，例如网页或其部分可随着DOM及Script语法的事件而重新排版。</li>
+<li>主要代表作品：Opera</li>
+</ul>
+<h4 id="blink内核"><a href="#blink内核" class="headerlink" title="blink内核"></a>blink内核</h4><ul>
+<li>本质上是google对于webkit的二次开发，现在opera和大部分国内浏览器都用的 是blink</li>
+</ul>
+<h3 id="浏览器内核的理解"><a href="#浏览器内核的理解" class="headerlink" title="浏览器内核的理解"></a>浏览器内核的理解</h3><ol>
+<li>主要分为两部分：渲染引擎和JS引擎</li>
+<li>渲染引擎：负责取得网页的内容(HTML、XML、图像等)、整理讯息(例如加入CSS等)，以及计算网页的显示方式，然后会输出到显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同</li>
+<li>js引擎：解析和执行JavaScript来实现网页的动态效果</li>
+</ol>
+<h3 id="浏览器私有前缀"><a href="#浏览器私有前缀" class="headerlink" title="浏览器私有前缀"></a>浏览器私有前缀</h3><ul>
+<li>浏览器私有前缀是为了兼容老版本的写法，比较新版本的浏览器无需添加<h4 id="私有前缀"><a href="#私有前缀" class="headerlink" title="私有前缀"></a>私有前缀</h4></li>
+</ul>
+<ol>
+<li>-moz-：代表Firefox浏览器私有属性</li>
+<li>-ms-： 代表IE浏览器私有属性</li>
+<li>-webkit: 带阿标Safari、Chrome私有属性</li>
+<li>-o-： 代表Opera 私有属性<h4 id="提倡写法"><a href="#提倡写法" class="headerlink" title="提倡写法"></a>提倡写法</h4></li>
+<li>-moz-border-radius: 10px;</li>
+<li>-webkit-border-radius: 10px;</li>
+<li>-o-border-radius: 10px;</li>
+<li>border-radius: 10px;</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%89%8D%E7%BD%AE%E5%92%8C%E5%86%85%E6%A0%B8/index/" data-id="cmb59g40d004uqovdfhmq2qm0" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022/01/01/计算机网络/cookie和storage/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/cookie%E5%92%8Cstorage/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.778Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>cookie和storage - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="cookies
+数据大小不能超过4k
+设置的cookie过期时间前一直有效，即使窗口或者浏览器关闭
+cookie的数据会自动传递到服务器，服务器也可以写cookie到客户端
+安全性
+
+
+
+
+属性
+作,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="cookie和storage - liuwei"/>
+    <meta name="twitter:description" content="cookies
+数据大小不能超过4k
+设置的cookie过期时间前一直有效，即使窗口或者浏览器关闭
+cookie的数据会自动传递到服务器，服务器也可以写cookie到客户端
+安全性
+
+
+
+
+属性
+作,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="cookie和storage - liuwei"/>
+    <meta property="og:description" content="cookies
+数据大小不能超过4k
+设置的cookie过期时间前一直有效，即使窗口或者浏览器关闭
+cookie的数据会自动传递到服务器，服务器也可以写cookie到客户端
+安全性
+
+
+
+
+属性
+作,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">cookie和storage</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">cookie和storage</h1>
+        <div class="stuff">
+            <span>一月 01, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="cookies"><a href="#cookies" class="headerlink" title="cookies"></a>cookies</h3><ol>
+<li>数据大小不能超过4k</li>
+<li>设置的cookie过期时间前一直有效，即使窗口或者浏览器关闭</li>
+<li>cookie的数据会自动传递到服务器，服务器也可以写cookie到客户端</li>
+<li>安全性</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">value</td>
+<td align="center">如果用于保存用户登录态，应该将该值加密，不能使用明文的用户标识</td>
+</tr>
+<tr>
+<td align="center">http-only</td>
+<td align="center">不能通过js访问cookie，减少XSS攻击</td>
+</tr>
+<tr>
+<td align="center">secure</td>
+<td align="center">只能在谢艺伟HTTPS的请求中携带</td>
+</tr>
+<tr>
+<td align="center">same-site</td>
+<td align="center">规定浏览器不能在跨域请求中携带cookie，减少CSRF攻击</td>
+</tr>
+</tbody></table>
+<h3 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage"></a>sessionStorage</h3><ol>
+<li>数据大小可以达到5M或更大</li>
+<li>当前浏览器窗口关闭后自动删除</li>
+<li>不会自动把数据发给服务端，仅本地保存</li>
+</ol>
+<h3 id="localStorage"><a href="#localStorage" class="headerlink" title="localStorage"></a>localStorage</h3><ol>
+<li>数据大小可以达到5M或更大</li>
+<li>存储持久数据，浏览器关闭后数据不丢失除非主动删除数据</li>
+<li>不会自动把数据发给服务端，仅本地保存</li>
+</ol>
+<h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><ol>
+<li>都存储在客户端</li>
+</ol>
+<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><ol>
+<li>存储大小限制</li>
+<li>有效时间限制</li>
+<li>与服务器交互限制</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/cookie%E5%92%8Cstorage/index/" data-id="cmb59g40d004tqovd2nth55jt" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2021/12/22/vue/vue自定义指令/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2021/12/22/vue/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.769Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>vue自定义指令 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="自定义指令钩子函数
+bind： 只调用一次，指令第一次绑定到元素时调用，在这里可以进行一次性的初始化设置
+inSerted：被绑定元素插入父节点时调用（仅保证父节点存在，但不一定已被插入文档中）
+u,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="vue自定义指令 - liuwei"/>
+    <meta name="twitter:description" content="自定义指令钩子函数
+bind： 只调用一次，指令第一次绑定到元素时调用，在这里可以进行一次性的初始化设置
+inSerted：被绑定元素插入父节点时调用（仅保证父节点存在，但不一定已被插入文档中）
+u,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="vue自定义指令 - liuwei"/>
+    <meta property="og:description" content="自定义指令钩子函数
+bind： 只调用一次，指令第一次绑定到元素时调用，在这里可以进行一次性的初始化设置
+inSerted：被绑定元素插入父节点时调用（仅保证父节点存在，但不一定已被插入文档中）
+u,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">vue自定义指令</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">vue自定义指令</h1>
+        <div class="stuff">
+            <span>十二月 22, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h2><h3 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h3><ol>
+<li>bind： 只调用一次，指令第一次绑定到元素时调用，在这里可以进行一次性的初始化设置</li>
+<li>inSerted：被绑定元素插入父节点时调用（仅保证父节点存在，但不一定已被插入文档中）</li>
+<li>update：所在组件的VNode更新时调用，但是可能发生在其子VNode更新之前调用。指令的值可能发生了改变，也可能没有。但是可以通过比较更新前后的值来忽略不必要的额模板更新。</li>
+<li>componentUpdate：指令所在组件的VNode及其子VNode全部更新后调用</li>
+<li>unbind：只调用一次，指令与元素解绑时调用</li>
+</ol>
+<h3 id="钩子函数的参数"><a href="#钩子函数的参数" class="headerlink" title="钩子函数的参数"></a>钩子函数的参数</h3><ol>
+<li>el：指令所绑定的元素，可以用来直接操作DOM</li>
+<li>binding：一个对象<ul>
+<li>name：指令名，不包括v-前缀</li>
+<li>value：指令的绑定值。例如：v-my-directive=”1 + 1” 中，绑定值为 2。</li>
+<li>oldValue：指令 绑定的前一个值，仅在update和componentUpdated钩子中可用。无论值是否改变都可用。</li>
+<li>expression：字符串形式的表达式。例如 v-my-directive=”1 + 1” 中，表达式为 “1 + 1”。</li>
+<li>arg：传给指令的参数。例如 v-my-directive:foo 中，参数为 “foo”。</li>
+<li>modifiers：一个包含修饰符的对象。例如：v-my-directive.foo.bar 中，修饰符对象为 { foo: true, bar: true }。</li>
+</ul>
+</li>
+<li>vnode：vue编译生成的虚拟节点</li>
+<li>oldVnode：上一个虚拟节点，仅在update和componentUpdated钩子中可用</li>
+</ol>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li>普通DOM元素进行底层操作的时候，可以使用自定义指令</li>
+<li>自定义指令是用来操作DOM的。尽管Vue推崇数据驱动视图的理念，但并非所有情况都适合数据驱动。自定义指令就是一种有效的补充和扩展，不仅可用于定义任何的DOM操作，并且是可复用的。<h3 id="常用自定义指令"><a href="#常用自定义指令" class="headerlink" title="常用自定义指令"></a>常用自定义指令</h3></li>
+<li>鼠标聚焦</li>
+<li>下拉菜单</li>
+<li>相对时间转换</li>
+<li>滚动动画</li>
+</ol>
+<h3 id="自定义指令高级应用"><a href="#自定义指令高级应用" class="headerlink" title="自定义指令高级应用"></a>自定义指令高级应用</h3><ol>
+<li>自定义指令实现图片懒加载</li>
+<li>自定义指令集成第三方插件</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2021/12/22/vue/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/index/" data-id="cmb59g40k0066qovde716by7u" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/21/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/23/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/26/sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/manifest/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/custom/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/tags/%E8%B7%A8%E5%9F%9F/index/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

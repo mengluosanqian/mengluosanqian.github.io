@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="SPA及白屏优化方法 - liuwei                                                                                                                                  liuwei">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/26/2022/01/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SPA%E5%8F%8A%E7%99%BD%E5%B1%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/index/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SPA及白屏优化方法 - liuwei                                                                                                                                  liuwei">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-26T15:45:23.807Z">
+<meta property="article:modified_time" content="2025-05-26T15:29:03.261Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2022/01/10/计算机网络/SPA及白屏优化方法/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/26/2022/01/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SPA%E5%8F%8A%E7%99%BD%E5%B1%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/index/" class="article-date">
+  <time class="dt-published" datetime="2025-05-26T15:45:23.807Z" itemprop="datePublished">2025-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SPA及白屏优化方法 - liuwei</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="SPA对SPA的理解spa仅在web页面初始化加载相应的HTML、JavaScript和CSS，一旦页面加载完成，SPA不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用机制实现HTML,"> 
+    <meta name="author" content="liu wei"> 
+    <link rel="alternative" href="atom.xml" title="liuwei" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="SPA及白屏优化方法 - liuwei"/>
+    <meta name="twitter:description" content="SPA对SPA的理解spa仅在web页面初始化加载相应的HTML、JavaScript和CSS，一旦页面加载完成，SPA不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用机制实现HTML,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="liuwei"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="SPA及白屏优化方法 - liuwei"/>
+    <meta property="og:description" content="SPA对SPA的理解spa仅在web页面初始化加载相应的HTML、JavaScript和CSS，一旦页面加载完成，SPA不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用机制实现HTML,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">liuwei</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://www.lwstruggle.cn"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">SPA及白屏优化方法</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">SPA及白屏优化方法</h1>
+        <div class="stuff">
+            <span>一月 10, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h3><h4 id="对SPA的理解"><a href="#对SPA的理解" class="headerlink" title="对SPA的理解"></a>对SPA的理解</h4><p>spa仅在web页面初始化加载相应的HTML、JavaScript和CSS，一旦页面加载完成，SPA不会因为用户的操作而进行页面的重新加载或跳转；<br>取而代之的是利用机制实现HTML内容的变换，UI与用户的交互，避免页面的重新加载。</p>
+<h4 id="SPA优点"><a href="#SPA优点" class="headerlink" title="SPA优点"></a>SPA优点</h4><ol>
+<li>用户体验好、快、内容的改变不需要重新加载整个页面，避免了不必要的跳转和重复渲染</li>
+<li>SPA相对于MPA，对服务器的压力相对较小</li>
+<li>前后端职责分离，架构清晰，前端进行交互逻辑，后端负责数据处理</li>
+</ol>
+<h4 id="SPA缺点"><a href="#SPA缺点" class="headerlink" title="SPA缺点"></a>SPA缺点</h4><ol>
+<li>初次加载耗时多，为实现单页web应用功能及显示效果，需要在加载页面的时候将JavaScript、css统一加载，部分页面按需加载</li>
+<li>前进后退路由管理：由于单页应用在一个页面显示所有的内容，所以不能使用浏览器的前进后退功能，所有页面切换需要自己建立堆栈管理</li>
+<li>SEO难度较大，由于所有的内容都在一个页面中动态替换显示，所以在SEO上有着天然的弱势</li>
+</ol>
+<h3 id="首屏加载白屏"><a href="#首屏加载白屏" class="headerlink" title="首屏加载白屏"></a>首屏加载白屏</h3><h4 id="首屏加载白屏产生原因"><a href="#首屏加载白屏产生原因" class="headerlink" title="首屏加载白屏产生原因"></a>首屏加载白屏产生原因</h4><ol>
+<li><p>首先是html，也就是FP阶段</p>
+<ul>
+<li>FP（First Paint ，“首次绘制”）是时间线上的第一个时间点，他代表浏览器第一次向屏幕传输像素的时间，也就是页面在屏幕上首次发生视觉变化的时间</li>
+<li>FP不包含默认背景绘制，但包含非默认的背景绘制</li>
+</ul>
+</li>
+<li><p>然后是静态资源css、js，之后解析js，生成HTML，也就是FCP阶段，css、js资源加载完成，进行首次的内容绘制</p>
+<ul>
+<li>FCP（First Contentful Paint，“首次内容绘制”），浏览器第一次向屏幕绘制内容</li>
+<li>只有首次绘制文本、图片（包含背景图）、非白色的canvas或svg时才算FCP</li>
+<li>FP是当浏览器开始绘制内容到屏幕上的时候，只要在视觉上开始发生变化，无论是什么内容触发的视觉变化，在这一刻，这个时间点，叫做FP。相比之下，FCP指的是浏览器首次绘制来自DOM的内容。例如：文本，图片，SVG，canvas元素等，这个时间点叫FCP。</li>
+</ul>
+</li>
+<li><p>ajax请求数据后，首次有效绘制，即FMP，就是页面加载的差不多了，但是可能图片还没加载出来</p>
+<ul>
+<li>FMP（First Meaningful Paint，“首次有效绘制”），页面的主要内容开始出现在屏幕上的时间点</li>
+</ul>
+</li>
+<li><p>从FP到FMP这个过程全是白屏</p>
+</li>
+</ol>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ol>
+<li>预渲染</li>
+<li>同构<ul>
+<li>同构渲染，就是一套代码多端使用</li>
+<li>现在有一些框架，Next，Nuxt，类似于渲染就是vue -&gt;json -&gt;vue-server-renderer -&gt;html</li>
+</ul>
+</li>
+<li>SSR<ul>
+<li>服务端渲染也可以解决首屏加载慢这个问题，因为服务端会把所有数据全部渲染完成再返回给客户端</li>
+<li>ssr =&gt;请求-&gt;node-&gt;解析 -&gt;吐回给客户端(带请求数据)</li>
+<li>但是有一个大问题，重要的是node层，高并发的解决</li>
+</ul>
+</li>
+<li>路由懒加载<ul>
+<li>通过箭头函数实现路由懒加载</li>
+</ul>
+</li>
+<li>quicklink<ul>
+<li>quicklink就是在浏览器空闲的时候去指定需要加载的数据</li>
+<li>预加载对应的英文是 prefetch。提到 prefetch 自然会想到使用浏览器的 Resource Hints，通过提示浏览器做一些“预操作”（例如 DNS 解析、资源下载等）来加快后续的访问。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> link = <span class="built_in">document</span>.createElement(<span class="string">`link`</span>);</span><br><span class="line">link.rel = <span class="string">`prefetch`</span>;</span><br><span class="line">link.href = url;</span><br><span class="line"><span class="built_in">document</span>.head.appendChild(link);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>使用Gzip压缩<ul>
+<li>使用Gzip压缩，减少文件体积,加快首屏页面打开速度</li>
+<li>前提是服务器那边得开启gzip<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改vue.config.js</span></span><br><span class="line"><span class="keyword">const</span> CompressionPlugin = <span class="built_in">require</span>(<span class="string">&quot;compression-webpack-plugin&quot;</span>)</span><br><span class="line">​<span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">configureWebpack</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">plugins</span>: [</span><br><span class="line">          <span class="keyword">new</span> CompressionPlugin(&#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/.js$|.html$|.css$|.jpg$|.jpeg$|.png/</span>, <span class="comment">// 需要压缩的文件类型</span></span><br><span class="line">            threshold: <span class="number">10240</span>, <span class="comment">// 归档需要进行压缩的文件大小最小值，我这个是10K以上的进行压缩</span></span><br><span class="line">            <span class="attr">deleteOriginalAssets</span>: <span class="literal">false</span>, <span class="comment">// 是否删除原文件</span></span><br><span class="line">            <span class="attr">minRatio</span>: <span class="number">0.8</span></span><br><span class="line">          &#125;)</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>外链CSS,js文件<ul>
+<li>很多时候我们在main.js中直接import一些ui库或者css文件啥的，以后可以在index.html，通过script外链引入，这样就不会通过我们的webpack打包</li>
+</ul>
+</li>
+<li>webpack entry<ul>
+<li>这个就是将单页改成多页应用,比如一些组件中，vue.js vue-router等插件已经在某个页面使用了，然后给它缓存起来，下次就无需加载</li>
+</ul>
+</li>
+<li>骨架屏<ul>
+<li>骨架屏就是在进入项目的FP阶段，给它来一个类似轮廓的东西，当我们的页面加载完成之后就消失</li>
+</ul>
+</li>
+<li>loading<ul>
+<li>首页加一个loading或许是最原始的方法了，在index.html里加一个loadingcss效果，当页面加载完成消失</li>
+</ul>
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/26/2022/01/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SPA%E5%8F%8A%E7%99%BD%E5%B1%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/index/" data-id="cmb59g40e004yqovdddmd0cu5" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/26/2022/01/12/vue/%E8%99%9A%E6%8B%9FDOM%E5%92%8Cdiff/index/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/26/2022/01/05/JavaScript/tree%E5%92%8Clist%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/index/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/26/sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/manifest/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/custom/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/26/tags/%E8%B7%A8%E5%9F%9F/index/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
