@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>npm install之后发生了什么 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="npm是什么npm （node package manager），是随同node.js一同安装的第三方包管理器。通过npm，可以安装、共享、分发代码，管理项目的依赖关系
+嵌套结构在npm的早期版本中,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="npm install之后发生了什么 - Hexo"/>
+    <meta name="twitter:description" content="npm是什么npm （node package manager），是随同node.js一同安装的第三方包管理器。通过npm，可以安装、共享、分发代码，管理项目的依赖关系
+嵌套结构在npm的早期版本中,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="npm install之后发生了什么 - Hexo"/>
+    <meta property="og:description" content="npm是什么npm （node package manager），是随同node.js一同安装的第三方包管理器。通过npm，可以安装、共享、分发代码，管理项目的依赖关系
+嵌套结构在npm的早期版本中,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">npm install之后发生了什么</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">npm install之后发生了什么</h1>
+        <div class="stuff">
+            <span>六月 05, 2025</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/2025%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">2025的学习笔记</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="npm是什么"><a href="#npm是什么" class="headerlink" title="npm是什么"></a>npm是什么</h2><p>npm （node package manager），是随同node.js一同安装的第三方包管理器。通过npm，可以安装、共享、分发代码，管理项目的依赖关系</p>
+<h3 id="嵌套结构"><a href="#嵌套结构" class="headerlink" title="嵌套结构"></a>嵌套结构</h3><p>在npm的早期版本中，npm以递归的方式去处理依赖，每个依赖包都会在自己的 node_modules 目录中安装其子依赖，直到没有子依赖为止。<br>这样的优点就是node_modules的结果和package.json的结果一一对应，层级结构明显，而且保证了每次安装目录结构都是相同的。<br>但也存在不容忽视的缺点：如果项目一旦变大，依赖变多，node_modules将变得非常庞大，特别是不同层级的依赖如果共用一个依赖，还会造成不必要的冗余，而且整个的嵌套层级也会非常深</p>
+<h3 id="扁平结构"><a href="#扁平结构" class="headerlink" title="扁平结构"></a>扁平结构</h3><p>为了解决以上的问题，npm3.x开始将嵌套结构改为了扁平结构，当安装模块时，不管是直接依赖还是子依赖，优先将其安装在node_modules根目录</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><p>一般来说，任何使用Node.js的项目都需要有一个package.json文件，该文件中包括项目名称、版本、描述和所依赖的包</p>
+<h3 id="package-lock-json"><a href="#package-lock-json" class="headerlink" title="package-lock.json"></a>package-lock.json</h3><p>为了解决 npm install 的不确定性问题，在 npm 5.x 版本新增了 package-lock.json 文件，而安装方式还沿用了 npm 3.x 的扁平化的方式。它描述了生成的确切树，以便后续安装能够生成相同的树，而不管中间依赖更新如何。</p>
+<h3 id="npmrc"><a href="#npmrc" class="headerlink" title=".npmrc"></a>.npmrc</h3><p>控制 npm 的行为，如注册表、代理、缓存路径等。<br>包下载源、私有仓库、缓存目录路径、http代理</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 包下载源</span></span><br><span class="line"><span class="attr">registry</span>=https://registry.npmmirror.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置作用域包的私有仓库（如公司内部包）</span></span><br><span class="line">@mycompany:<span class="attr">registry</span>=https://npm.mycompany.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置缓存目录路径（默认 ~/.npm）</span></span><br><span class="line"><span class="attr">cache</span>=~/.custom-npm-cache</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 HTTP 代理（根据实际情况替换）</span></span><br><span class="line"><span class="attr">proxy</span>=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8080</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="npm缓存"><a href="#npm缓存" class="headerlink" title="npm缓存"></a>npm缓存</h2><p>在执行 npm install 或 npm update 命令下载依赖后，除了将依赖包安装在 node_modules 目录下外，还会在本地的缓存目录缓存一份。我们可以通过以下命令获取缓存位置：<code>npm config get cache</code><br>content-v2存放的是依赖实际的内容，而index-v5则是存放依赖的索引信息</p>
+<h2 id="依赖完整性"><a href="#依赖完整性" class="headerlink" title="依赖完整性"></a>依赖完整性</h2><p>在下载依赖包之前，我们一般就能拿到 npm 对该依赖包计算的 hash 值，例如我们执行 npm info 命令，紧跟 tarball(下载链接) 的就是 shasum(hash)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">.tarball: https://registry.npmjs.org/vue/-/vue-3.5.16.tgz</span><br><span class="line">.shasum: f0cde88c2688354f00ff2d77eb295c26440f8c7a</span><br><span class="line">.integrity: sha512-rjOV2ecxMd5SiAmof2xzh2WxntRcigkX/He4YFJ6WdRvVUrbt6DxC1Iujh10XLl8xCDRDtGKMeO3D+pRQ1PP9w==</span><br><span class="line">.unpackedSize: 2.4 MB</span><br></pre></td></tr></table></figure>
+<p>在下载依赖包之前，npm 会获取其 shasum 哈希值。下载完成后，npm 会在本地重新计算哈希值，并与远程的哈希值对比。如果两者一致，则依赖包完整；否则，npm 会重新下载。</p>
+<h2 id="下载包"><a href="#下载包" class="headerlink" title="下载包"></a>下载包</h2><p>如果检查到本地缓存中不存在对应的依赖包,便会通过发送网络请求去下载包。具体是通过package-lock.json文件中的resolved字段,当我们尝试通过该字段中的值从浏览器中输入,发现会直接给我们下载了一个文件,</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;node_modules/@adobe/css-tools&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4.3.3&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;resolved&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://registry.npmjs.org/@adobe/css-tools/-/css-tools-4.3.3.tgz&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;integrity&quot;</span><span class="punctuation">:</span> <span class="string">&quot;sha512-rE0Pygv0sEZ4vBWHlAgJLGDU7Pm8xoO6p3wsEceb7GYAjScrOHpEo8KK/eVkAcnSM+slAEtXjA2JpdjLp4fJQQ==&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h2><ol>
+<li>首先，npm install 需要检查是否有附加的命令参数，如 –save、–save-dev，以决定依赖的类型（例如：生产依赖或开发依赖）。如果没有指定，则之后会安装 package.json 中列出的所有依赖。</li>
+<li>接着，npm install 会按优先级查找配置文件：项目级 .npmrc &gt; 用户级 .npmrc &gt; 全局级 .npmrc &gt; npm 内置 .npmrc，并根据配置调整安装行为。</li>
+<li>如果项目定义了 preinstall 钩子（例如：npm run preinstall），它会在依赖安装前被执行。可以在此步骤进行一些初始化操作，如检查版本、清理缓存等。</li>
+<li>然后检查是否有lock文件，有的话会检查package.json中的依赖版本是否和package-lock.json中的依赖有冲突。如果没有冲突，直接在缓存中查找包信息。如果没有lock文件，会先从npm远程仓库去获取包信息，之后根据package.json构建依赖树，具体过程：</li>
+<li>构建依赖树时，不管其是直接依赖还是子依赖的依赖，优先将其放置在 node_modules 根目录。当遇到相同模块时，判断已放置在依赖树的模块版本是否符合新模块的版本范围，如果符合则跳过，不符合则在当前模块的 node_modules 下放置该模块。</li>
+<li>之后再在缓存中依次查找依赖树的每个包：不存在缓存：从npm远程仓库下载包，检验包的完整性，检验不通过就重新下载，检验通过会将下载的包复制到npm缓存目录并按照扁平化的依赖结构解压到node-modules中.存在依赖：将缓存按照扁平化的依赖结构解压到node-modules中</li>
+<li>生成lock文件</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

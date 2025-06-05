@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>前端监测 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="前端监控和前端埋点
+前端埋点是为了做前端监控
+前端监控的目的是获取用户行为以及跟踪产品在用户端的使用情况，并以监控数据为基础，指明产品优化方向
+
+前端埋点
+前端埋点的方法有三种：手动埋点、可视化埋点,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="前端监测 - Hexo"/>
+    <meta name="twitter:description" content="前端监控和前端埋点
+前端埋点是为了做前端监控
+前端监控的目的是获取用户行为以及跟踪产品在用户端的使用情况，并以监控数据为基础，指明产品优化方向
+
+前端埋点
+前端埋点的方法有三种：手动埋点、可视化埋点,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="前端监测 - Hexo"/>
+    <meta property="og:description" content="前端监控和前端埋点
+前端埋点是为了做前端监控
+前端监控的目的是获取用户行为以及跟踪产品在用户端的使用情况，并以监控数据为基础，指明产品优化方向
+
+前端埋点
+前端埋点的方法有三种：手动埋点、可视化埋点,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">前端监测</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">前端监测</h1>
+        <div class="stuff">
+            <span>六月 25, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="前端监控和前端埋点"><a href="#前端监控和前端埋点" class="headerlink" title="前端监控和前端埋点"></a>前端监控和前端埋点</h1><ol>
+<li>前端埋点是为了做前端监控</li>
+<li>前端监控的目的是获取用户行为以及跟踪产品在用户端的使用情况，并以监控数据为基础，指明产品优化方向</li>
+</ol>
+<h2 id="前端埋点"><a href="#前端埋点" class="headerlink" title="前端埋点"></a>前端埋点</h2><ol>
+<li>前端埋点的方法有三种：手动埋点、可视化埋点、无埋点</li>
+</ol>
+<h3 id="手动埋点"><a href="#手动埋点" class="headerlink" title="手动埋点"></a>手动埋点</h3><ol>
+<li>纯手动写代码，调用埋点SDK的函数，在需要埋点的业务逻辑功能位置调用接口，上报埋点数据</li>
+<li>可以让使用者方便的设置自定义属性、自定义事件，当需要深入下钻，并金细化自定义分析时，比较适合手动埋点</li>
+<li>项目工程量大，需要埋点的位置多，容易3出现误差，收集埋点成本高，效率低</li>
+</ol>
+<h3 id="可视化埋点"><a href="#可视化埋点" class="headerlink" title="可视化埋点"></a>可视化埋点</h3><ol>
+<li>业务代码和埋点代码分离，提供一个可视化交互的页面，输入为业务代码，通过这个可视化系统，可以在业务代码中自定义的增加埋点事件</li>
+</ol>
+<h3 id="无埋点"><a href="#无埋点" class="headerlink" title="无埋点"></a>无埋点</h3><ol>
+<li>前端自动采集全部事件，上报埋点数据，由后端来过滤和计算出有用的数据</li>
+<li>前端只需要一次加载埋点脚本</li>
+<li>流量和采集的数据过于庞大，服务器性能压力会很大</li>
+</ol>
+<h2 id="前端监控"><a href="#前端监控" class="headerlink" title="前端监控"></a>前端监控</h2><ol>
+<li>前端监控分为三类：数据监控、性能监控、异常监控</li>
+</ol>
+<h3 id="数据监控"><a href="#数据监控" class="headerlink" title="数据监控"></a>数据监控</h3><ol>
+<li>PV（page view，页面浏览量）&#x2F;UV（访问某个站点或点击某条新闻的不同IP地址人数）</li>
+<li>用户在每一个页面的停留时间</li>
+<li>用户通过什么入口来访问该网页</li>
+<li>用户在相应的页面中触发的行为</li>
+</ol>
+<h3 id="性能监控"><a href="#性能监控" class="headerlink" title="性能监控"></a>性能监控</h3><ol>
+<li>首屏加载时间</li>
+<li>白屏时间</li>
+<li>http等请求的响应时间</li>
+<li>页面渲染时间</li>
+<li>页面交互动画完成时间</li>
+</ol>
+<h3 id="异常监控"><a href="#异常监控" class="headerlink" title="异常监控"></a>异常监控</h3><ol>
+<li>JavaScript的异常监控</li>
+<li>样式丢失的异常监控</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
