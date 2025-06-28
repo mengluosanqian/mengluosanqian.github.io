@@ -15,12 +15,7 @@ indexdb
 cookie隔离
 websocket
 xpath等元素定位
-浏览器和插件间的通讯
-获取截图
-并发执行
-登录账号密码加密
-浏览器打开插件并且开始执行
-iframe,"> 
+浏览器和插件间的通讯123456789101112chrome.tabs.sendMessagech,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -34,12 +29,7 @@ indexdb
 cookie隔离
 websocket
 xpath等元素定位
-浏览器和插件间的通讯
-获取截图
-并发执行
-登录账号密码加密
-浏览器打开插件并且开始执行
-iframe,"/>
+浏览器和插件间的通讯123456789101112chrome.tabs.sendMessagech,"/>
     
     
     
@@ -52,12 +42,7 @@ indexdb
 cookie隔离
 websocket
 xpath等元素定位
-浏览器和插件间的通讯
-获取截图
-并发执行
-登录账号密码加密
-浏览器打开插件并且开始执行
-iframe,"/>
+浏览器和插件间的通讯123456789101112chrome.tabs.sendMessagech,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -100,14 +85,33 @@ iframe,"/>
 <li>cookie隔离</li>
 <li>websocket</li>
 <li>xpath等元素定位</li>
-<li>浏览器和插件间的通讯</li>
-<li>获取截图</li>
+<li>浏览器和插件间的通讯<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">tabs</span>.<span class="property">sendMessage</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onMessage</span>.<span class="title function_">addListener</span>(<span class="function">(<span class="params">message, sender, sendResponse</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 处理收到的消息</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;收到消息:&#x27;</span>, message);</span><br><span class="line">  <span class="comment">// 可以根据 message 内容做不同处理</span></span><br><span class="line">  <span class="keyword">if</span> (message.<span class="property">type</span> === <span class="string">&#x27;test&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 回复消息</span></span><br><span class="line">    <span class="title function_">sendResponse</span>(&#123; <span class="attr">status</span>: <span class="string">&#x27;ok&#x27;</span>, <span class="attr">data</span>: <span class="string">&#x27;已收到&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 如果需要异步回复，返回 true</span></span><br><span class="line">  <span class="comment">// return true;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>获取截图<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">tabs</span>.<span class="title function_">captureVisibleTab</span>()</span><br></pre></td></tr></table></figure></li>
 <li>并发执行</li>
 <li>登录账号密码加密</li>
 <li>浏览器打开插件并且开始执行</li>
 <li>iframe和window的识别</li>
 <li>上传文件</li>
-<li>对于文件的重构生成</li>
+<li>对于文件的重构生成<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// XLSX生成表格文件</span></span><br><span class="line"><span class="keyword">const</span> data = [</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Alice&quot;</span>, <span class="attr">age</span>: <span class="number">25</span>, <span class="attr">city</span>: <span class="string">&quot;New York&quot;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&quot;Bob&quot;</span>, <span class="attr">age</span>: <span class="number">30</span>, <span class="attr">city</span>: <span class="string">&quot;Los Angeles&quot;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&quot;Charlie&quot;</span>, <span class="attr">age</span>: <span class="number">35</span>, <span class="attr">city</span>: <span class="string">&quot;Chicago&quot;</span> &#125;</span><br><span class="line">]; </span><br><span class="line"><span class="keyword">const</span> ws = <span class="variable constant_">XLSX</span>.<span class="property">utils</span>.<span class="title function_">json_to_sheet</span>(data);</span><br><span class="line"><span class="keyword">const</span> wb = <span class="variable constant_">XLSX</span>.<span class="property">utils</span>.<span class="title function_">book_new</span>();</span><br><span class="line"><span class="variable constant_">XLSX</span>.<span class="property">utils</span>.<span class="title function_">book_append_sheet</span>(wb, ws, <span class="string">&quot;Sheet1&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> wbout = <span class="variable constant_">XLSX</span>.<span class="title function_">write</span>(wb, &#123;<span class="attr">type</span>:<span class="string">&quot;array&quot;</span>&#125;);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">s2ab</span>(<span class="params">s</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> buffer = <span class="keyword">new</span> <span class="title class_">ArrayBuffer</span>(s.<span class="property">length</span>);</span><br><span class="line">    <span class="keyword">const</span> view = <span class="keyword">new</span> <span class="title class_">Uint8Array</span>(buffer);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.<span class="property">length</span>; i++) view[i] = s.<span class="title function_">charCodeAt</span>(i) &amp; <span class="number">0xFF</span>;</span><br><span class="line">    <span class="keyword">return</span> buffer;</span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">const</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([<span class="title function_">s2ab</span>(wbout)],&#123;<span class="attr">type</span>:<span class="string">&quot;application/octet-stream&quot;</span>&#125;);</span><br><span class="line"><span class="keyword">const</span> url= <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob);</span><br><span class="line"><span class="keyword">const</span> a = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">a.<span class="property">href</span> = url;</span><br><span class="line">a.<span class="property">download</span> = <span class="string">&#x27;output.xlsx&#x27;</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(a);</span><br><span class="line">a.<span class="title function_">click</span>();</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(a);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><ol>
+<li>ag-grid</li>
+<li>创建接口数量限制</li>
+<li>大数据量列表加载</li>
+<li>sql表达式解析器</li>
+<li></li>
+</ol>
+<h3 id="安全相关"><a href="#安全相关" class="headerlink" title="安全相关"></a>安全相关</h3><ol>
+<li>sql校验，变量参数需要使用安全发放校验</li>
+<li>模型属性建议不要超过200</li>
+<li>不要使用原生方法去修改元素，如$、document、jQuery，如果必须要修改，需要保证修改内容安全</li>
+</ol>
+<h3 id="代码限制相关"><a href="#代码限制相关" class="headerlink" title="代码限制相关"></a>代码限制相关</h3><ol>
+<li>单个方法不超过100行</li>
+<li>圈复杂度不超过20</li>
+<li>单个js文件不超过1000行</li>
+<li>不要用内层变量覆盖外层变量</li>
+<li></li>
 </ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
